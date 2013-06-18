@@ -15,11 +15,14 @@
           = render 'layouts/navigation'
     #main{:role => "main"}
       .container
-        .content
-          .row
-            .span12
-              = render 'layouts/messages'
-              = yield
+        .notification-area{ :style => "height: 45px" }
+          = render 'layouts/messages'
+        .span12
+          = yield
+        -# .content
+        -#   .row
+        -#     .span12
+        -#       = yield
           %footer
       / ! end of .container
     / ! end of #main
