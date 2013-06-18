@@ -10,7 +10,7 @@
   %form#api_form{ :style => "margin: 0px;", :action => "/key/save"}
     %h2.form-signin-heading
       Enter your API info
-    %input.input-block-level{ :required => true, :minlength => 7, :maxlength => 7, :id => :key_id, :name => :key_id, :type => :text, :placeholder => 'API key ID'}
+    %input.input-block-level{ :required => true, :minlength => 7, :maxlength => 7, :id => :key, :name => :key, :type => :text, :placeholder => 'API key ID'}
     %textarea.input-block-level{ :required => true, :maxlength => 64, :id => :vcode, :name => :vcode, :type => :text, :placeholder => 'API key vCode'}
     %input{ :type => :hidden, :name => :char_id, :id => :char_id }
     %input{ :type => :hidden, :name => :name, :id => :name }

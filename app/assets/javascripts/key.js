@@ -16,7 +16,7 @@ function check_api (key, vcode) {
             $('#api_submit').show();
             $('#api_check').hide();
             $('.notification-area').html('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Success</div>');
-            $('#key_id').attr('readonly','true');
+            $('#key').attr('readonly','true');
             $('#vcode').attr('readonly','true');
             $('#name').val(character['name']);
             $('#char_id').val(character['char_id']);
@@ -30,6 +30,6 @@ function check_api (key, vcode) {
 $(document).ready(function(){
   $('#api_submit').hide();
   $('#api_check').click(function() {
-    check_api( $('#key_id').val(), $('#vcode').val() );
+    check_api( $('#key').val(), $('#vcode').val() );
   });
 });
