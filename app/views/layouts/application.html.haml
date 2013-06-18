@@ -1,28 +1,104 @@
 !!!
-%html
+%html{:lang => "en"}
   %head
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Evescore"
-      %meta{:content => content_for?(:description) ? yield(:description) : "Evescore", :name => "description"}
-        = stylesheet_link_tag "application", :media => "all"
-        = javascript_include_tag "application"
-        = csrf_meta_tags
-        = yield(:head)
-  %body{:class => "#{controller_name} #{action_name}"}
-    .navbar.navbar-fixed-top
-      %nav.navbar-inner
-        .container
-          = render 'layouts/navigation'
-    #main{:role => "main"}
-      .container
-        .notification-area{ :style => "height: 45px" }
-          = render 'layouts/messages'
-        .span12
-          = yield
-        -# .content
-        -#   .row
-        -#     .span12
-        -#       = yield
-          %footer
-      / ! end of .container
-    / ! end of #main
+    %meta{:charset => "utf-8"}/
+    %title EVE Rat Score (BETA)
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = yield(:head)
+    %script
+      $(document).ready(function(){
+      $('#ingame').tooltip({ placement: 'top', html: true, title: 'Click for ingame info'});
+      });
+    / Le styles
+    :css
+      td { vertical-align: middle; }
+      #nokills {
+        max-width: 940px;
+      }
+      .alert { 
+        max-width: 500px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+      }
+      .form-signin {
+        max-width: 500px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+      table {background-color: #ffffff;}
+      body {background-image:url('../assets/img/bg.jpg');}
+      td.isk { text-align: right }
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    /%link{:href => "../assets/css/bootstrap-responsive.css", :rel => "stylesheet"}/
+    / HTML5 shim, for IE6-8 support of HTML5 elements
+    /[if lt IE 9]
+      <script src="../assets/js/html5shiv.js"></script>
+    / Fav and touch 
+    %link{:href => "../assets/ico/apple-touch-icon-144-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "144x144"}/
+    %link{:href => "../assets/ico/apple-touch-icon-114-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "114x114"}/
+    %link{:href => "../assets/ico/apple-touch-icon-72-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "72x72"}/
+    %link{:href => "../assets/ico/apple-touch-icon-57-precomposed.png", :rel => "apple-touch-icon-precomposed"}/
+    %link{:href => "../assets/ico/favicon.png", :rel => "shortcut icon"}/
+  %body{ :onload => "CCPEVE.requestTrust('http://evescore.com')" }
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container{ :style => "width: 940px; margin-left: auto; margin-right: auto" }
+          .pull-right
+            %a{ :href => "/donate" }
+              %button.btn.btn-warning
+                %img{:src => "http://image.eveonline.com/Type/30768_32.png"}
+                DONATE
+          %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => "http://evescore.com/scores"} 
+            = image_tag "eve.png"
+            -# %img{ :src => "../assets/images/eve.png"}
+          .nav-collapse.collapse
+            %ul.nav
+              %li
+                %a{:href => "/scores"} Scores
+              %li
+                %a{:href => "/ladder"} Ladder
+              %li
+                %a{:href => "/badges"} Badges
+              %li
+                %a{:href => "/fifty"} 50/50
+              %li
+                %a{:href => "/add-api"} Add API 
+              %li
+                %a{:href => "/about"} About
+              -# %li
+              -#   %a{:href => "#contact"} Contact
+          / /.nav-collapse
+    .container
+      %br
+      %p
+        =yield
