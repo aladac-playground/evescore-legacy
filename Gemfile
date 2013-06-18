@@ -5,7 +5,10 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
-gem 'whenever'
+gem 'sidekiq'
+gem 'slim', '>= 1.1.0'
+gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sprockets'
 gem 'nokogiri'
 gem 'jquery-rails'
 gem "unicorn", ">= 4.3.1"
