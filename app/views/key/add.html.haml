@@ -1,19 +1,26 @@
--# - key="2143247"
--# - vcode="hbqW1GNvYuSWlXAnGzrd6sseZCR7AIwl6y5xefxMWx9fHUB5BQqh0Mz77hJGhEOU"
--# = api_check(key, vcode)
-.alert.alert-info
-  %p
-    In order to add your API key you need to generate a key with access to the Wallet Journal for a SINGLE character only.
-    To generate a predefined key click the button below (it will open a new page/tab), and on the API page choose a character from the Character select field.
-  %p
-    %a{:href => "https://support.eveonline.com/api/key/CreatePredefined/2097152", :target => "_blank"}
-      %button.btn.btn-info Generate Key
-%form.form
-  %h2.form-signin-heading
-    Enter your API info
-  %input.input-block-level{ :id => :key_id, :name => :key_id, :type => :text, :placeholder => 'API key ID'}
-  %input.input-block-level{ :id => :vcode, :name => :vcode, :type => :text, :placeholder => 'API key vCode'}
-  %button.btn.btn-large{ :type => :submit } Submit
-%button.btn.btn-large{ :type => :submit, :id => :check_api } Check API
-#out
+.row
+  .span6
+    .alert.alert-info
+      %p
+        In order to add your API key you need to generate a key with access to the Wallet Journal for a SINGLE character only.
+        To generate a predefined key click the button below (it will open a new page/tab), and on the API page choose a character from the Character select field.
+      %p
+        %a{:href => "https://support.eveonline.com/api/key/CreatePredefined/2097152", :target => "_blank"}
+          %button.btn.btn-info Generate Key
+    %form{ :style => "margin: 0px;"}
+      %h2.form-signin-heading
+        Enter your API info
+      .field
+        %input.input-block-level{ :id => :key_id, :name => :key_id, :type => :text, :placeholder => 'API key ID'}
+      .field
+        %textarea.input-block-level{ :id => :vcode, :name => :vcode, :type => :text, :placeholder => 'API key vCode'}
+      .field
+        %button#api_submit.btn.btn-large{ :type => :submit } Save
+    .field
+      %button#api_check.btn.btn-large Check API
+  .span6
+    #noti-area
+    #portrait
+    #name
+
 
