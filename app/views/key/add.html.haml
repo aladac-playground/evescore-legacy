@@ -7,7 +7,7 @@
 -#       %a{:href => "https://support.eveonline.com/api/key/CreatePredefined/2097152", :target => "_blank"}
 -#         %button.btn.btn-info Generate Key
 .form-signin
-  %form#api_form{ :style => "margin: 0px;", :action => "/key/save"}
+  %form#api_form{ :style => "margin: 0px;", :action => "/key/save", :method => :post }
     %h2.form-signin-heading
       Enter your API info
     %input.input-block-level{ :required => true, :minlength => 7, :maxlength => 7, :id => :key, :name => :key, :type => :text, :placeholder => 'API key ID'}
