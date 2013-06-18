@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  char_id: 1
+  name: MyString
+  key: MyString
+  vcode: MyString
+  last_visit: 2013-06-18 11:20:16
+
+two:
+  char_id: 1
+  name: MyString
+  key: MyString
+  vcode: MyString
+  last_visit: 2013-06-18 11:20:16
