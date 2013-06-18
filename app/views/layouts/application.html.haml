@@ -95,10 +95,8 @@
                 %a{:href => "/add-api"} Add API 
               %li
                 %a{:href => "/about"} About
-              -# %li
-              -#   %a{:href => "#contact"} Contact
-          / /.nav-collapse
     .container
       %br
+        = render 'layouts/messages'
       %p
         =yield
