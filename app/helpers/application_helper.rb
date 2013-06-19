@@ -17,6 +17,10 @@ module ApplicationHelper
     top = Bounty.collection.aggregate( { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
     return top
   end
+  def rat_bounty(id)
+    bounty = Rat.where(rat_id: id).first[:bounty]
+    return bounty
+  end
   def top_monthly(limit=4)
     top = Bounty.
       where(:ts.gt => Time.now.utc.at_beginning_of_month.utc ).

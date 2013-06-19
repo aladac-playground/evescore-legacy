@@ -5,6 +5,7 @@
       %th{ :colspan => 2 } Character  
       %th{ :colspan => 2 } Rat
       %th{ :colspan => 2 } Amount
+      %th{ :colspan => 2 } Bounty
   %tbody
   - @kill_log.each do |kill|
     %tr
@@ -20,4 +21,6 @@
         = rat_name( kill[:rat_id] )
       %td
         = kill[:rat_amount]
+      %td
+        = isk rat_bounty(kill[:rat_id]) 
 = will_paginate @kill_log, :inner_window => 3, :outer_window => 3
