@@ -26,22 +26,18 @@ class GetWalletData
           ref_id = row['refID']
           ts = row['date']
           begin
-            DB[:bounty].insert([:ts, :char_id, :bounty],[ts, owner_id, amount.to_f])
+            Bounty.create!(ts: ts, char_id: owner_id, bounty: amount.to_i)
           rescue Exception => e
-            if e.message !~ /Mysql2::Error: Duplicate entry/
-              p e.message
-            end
+            p e.message
           end
           reason.split(",").each do |entry|
             entry = entry.split(":")
             rat_id = entry[0]
             rat_amount = entry[1]
             begin
-              DB[:kills].insert([:ts, :ref_id, :char_id, :rat_id, :rat_amount, :bounty], [ts, ref_id, owner_id, rat_id, rat_amount, amount])
+              Kill.create!(ts: ts, char_id: owner_id, rat_id: rat_id, rat_amount: rat_amount)
             rescue Exception => e
-              if e.message !~ /Mysql2::Error: Duplicate entry/
-                p e.message
-              end
+              p e.message
             end
           end
         end
