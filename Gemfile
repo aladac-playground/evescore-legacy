@@ -9,9 +9,6 @@ gem 'will_paginate_mongoid'
 gem 'af'
 gem 'bootstrap-will_paginate'
 gem 'clockwork'
-gem 'slim', '>= 1.1.0'
-gem 'sinatra', '>= 1.3.0', :require => nil
-gem 'sprockets'
 gem 'nokogiri'
 gem 'jquery-rails'
 gem "unicorn", ">= 4.3.1"
