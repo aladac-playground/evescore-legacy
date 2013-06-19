@@ -1,7 +1,7 @@
 class GetWalletData
   include Sidekiq::Worker
 
-  def perform(name, count)
+  def perform
     Character.all.each do |character|
       puts "Getting data for: #{character[:name]}"
       vcode = character[:vcode]
