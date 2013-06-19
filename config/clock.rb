@@ -4,7 +4,7 @@ require_relative "../config/environment"
 require 'clockwork'
 
 class GetWalletData
-  def perform
+  def self.perform
     Character.all.each do |character|
       puts "Getting data for: #{character[:name]}"
       vcode = character[:vcode]
