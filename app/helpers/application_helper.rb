@@ -13,4 +13,12 @@ module ApplicationHelper
   def character_image(id)
     return "http://image.eveonline.com/Character/#{id}_32.jpg"
   end
+  def top_bounty(limit=4)
+    top = Bounty.collection.aggregate( { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
+    return top
+  end
+  def isk(amount)
+    isk = number_to_currency(amount, :unit => "ISK", :precision => 0, :delimiter => ",", :format => "%n %u")
+    return isk
+  end
 end
