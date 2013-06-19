@@ -1,18 +1,23 @@
-.well
-  %table.table.table-striped
+%table.table.table-condensed.table-striped.rounded.table-bordered#kill_log
+  %thead
     %tr
       %th.span3 Timestamp
       %th{ :colspan => 2 } Character  
       %th{ :colspan => 2 } Rat
       %th{ :colspan => 2 } Amount
-    - @kill_log.each do |kill|
-      %tr
-        %td= kill[:ts]
-        %td{ :style => "width: 32px" }
-          %img.img-rounded{ :src => character_image( kill[:char_id] ) }
-        %td= character_name( kill[:char_id] )
-        %td{ :style => "width: 32px" }
-          %img.img-rounded{ :src => rat_image( kill[:rat_id] ) }
-        %td= rat_name( kill[:rat_id] )
-        %td= kill[:rat_amount]
-  = will_paginate @kill_log
+  %tbody
+  - @kill_log.each do |kill|
+    %tr
+      %td
+        = kill[:ts]
+      %td{ :style => "width: 32px" }
+        %img.img-rounded{ :src => character_image( kill[:char_id] ) }
+      %td
+        = character_name( kill[:char_id] )
+      %td{ :style => "width: 32px" }
+        %img.img-rounded{ :src => rat_image( kill[:rat_id] ) }
+      %td
+        = rat_name( kill[:rat_id] )
+      %td
+        = kill[:rat_amount]
+= will_paginate @kill_log, :inner_window => 3, :outer_window => 3
