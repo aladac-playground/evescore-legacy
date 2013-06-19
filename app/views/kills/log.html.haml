@@ -1,0 +1,7 @@
+%table
+  - @kill_log.each do |kill|
+    %tr
+      %td= kill[:ts]
+      %td= character_name(kill[:char_id])
+      %td= kill[:rat_id]
+      %td= kill[:rat_amount]
