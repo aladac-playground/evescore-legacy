@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ts: 2013-06-19 10:46:30
+  char_id: 1
+  bounty: 1
+
+two:
+  ts: 2013-06-19 10:46:30
+  char_id: 1
+  bounty: 1
