@@ -68,7 +68,7 @@
   %body{ :onload => "CCPEVE.requestTrust('http://evescore.com')" }
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
-        .container{ :style => "width: 940px; margin-left: auto; margin-right: auto" }
+        .container
           .pull-right
             %a{ :href => "/donate" }
               %button.btn.btn-warning
@@ -82,21 +82,9 @@
             = image_tag "eve.png"
             -# %img{ :src => "../assets/images/eve.png"}
           .nav-collapse.collapse
-            %ul.nav
-              %li
-                %a{:href => "/scores"} Scores
-              %li
-                %a{:href => "/ladder"} Ladder
-              %li
-                %a{:href => "/badges"} Badges
-              %li
-                %a{:href => "/fifty"} 50/50
-              %li
-                %a{:href => "/add-api"} Add API 
-              %li
-                %a{:href => "/about"} About
+            = render 'layouts/navigation'
     .container
-      %br
-        = render 'layouts/messages'
       %p
+        %br
+        = render 'layouts/messages'
         =yield
