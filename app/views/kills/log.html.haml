@@ -1,7 +1,12 @@
-%table
-  - @kill_log.each do |kill|
-    %tr
-      %td= kill[:ts]
-      %td= character_name(kill[:char_id])
-      %td= kill[:rat_id]
-      %td= kill[:rat_amount]
+.span12
+  .row
+    %table.table.table-bordered.condensed
+      - @kill_log.each do |kill|
+        %tr
+          %td= kill[:ts]
+          %td= character_name(kill[:char_id])
+          %td= kill[:rat_id]
+          %td= kill[:rat_amount]
+
+  .row
+    = will_paginate @kill_log

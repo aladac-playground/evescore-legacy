@@ -34,6 +34,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
     builder (3.0.4)
     clockwork (0.5.2)
       activesupport
@@ -173,6 +175,10 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    will_paginate (3.0.4)
+    will_paginate_mongoid (1.1.0)
+      mongoid (>= 2.4)
+      will_paginate (~> 3.0)
 
 PLATFORMS
   ruby
@@ -180,6 +186,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors (>= 0.7.2)
   binding_of_caller (>= 0.7.1)
+  bootstrap-will_paginate
   clockwork
   coffee-rails (~> 3.2.1)
   figaro (>= 0.6.3)
@@ -201,3 +208,4 @@ DEPENDENCIES
   twitter-bootstrap-rails (>= 2.2.4)
   uglifier (>= 1.0.3)
   unicorn (>= 4.3.1)
+  will_paginate_mongoid
