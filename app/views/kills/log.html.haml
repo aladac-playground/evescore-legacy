@@ -3,7 +3,11 @@
     - @kill_log.each do |kill|
       %tr
         %td.span3= kill[:ts]
-        %td.span3= character_name(kill[:char_id])
-        %td= kill[:rat_id]
+        %td{ :style => "width: 32px" }
+          %img.img-rounded{ :src => character_image( kill[:char_id] ) }
+        %td.span3= character_name( kill[:char_id] )
+        %td{ :style => "width: 32px" }
+          %img.img-rounded{ :src => rat_image( kill[:rat_id] ) }
+        %td= rat_name( kill[:rat_id] )
         %td= kill[:rat_amount]
   = will_paginate @kill_log
