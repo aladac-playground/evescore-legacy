@@ -1,2 +1,16 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+.span5
+  %table.table.table-striped#kill_log
+    %thead
+      %tr
+        %th{ :colspan => 4 } Top 5 - All Time
+    %tbody
+      - i=0
+      - top_bounty.each do |top|
+        - i+=1
+        %tr
+          %td
+            %span.badge= i
+          %td
+            %img.img-rounded{ :src => character_image(top["_id"]) }
+          %td.span2= character_name top["_id"]
+          %td.span2#isk= isk top["sum"]
