@@ -17,6 +17,12 @@ module ApplicationHelper
     top = Bounty.collection.aggregate( { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
     return top
   end
+  def top_monthly(limit=4)
+    top = Bounty.
+      where(:ts.gt => Time.now.utc.at_beginning_of_month.utc ).
+      collection.aggregate( { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
+    return top
+  end
   def isk(amount)
     isk = number_to_currency(amount, :unit => "ISK", :precision => 0, :delimiter => ",", :format => "%n %u")
     return isk
