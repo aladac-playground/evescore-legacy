@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ts: 2013-06-19 10:49:40
+  char_id: 1
+  rat_id: 1
+  rat_amount: 1
+
+two:
+  ts: 2013-06-19 10:49:40
+  char_id: 1
+  rat_id: 1
+  rat_amount: 1
