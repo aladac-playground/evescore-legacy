@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  rat_id: 1
+  rat_name: MyString
+  rat_type: MyString
+
+two:
+  rat_id: 1
+  rat_name: MyString
+  rat_type: MyString
