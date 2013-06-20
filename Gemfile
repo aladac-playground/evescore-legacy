@@ -7,6 +7,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'will_paginate_mongoid'
+gem 'foreman'
 gem 'bootstrap-will_paginate'
 gem 'clockwork'
 gem 'nokogiri'
