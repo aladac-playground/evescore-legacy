@@ -1,5 +1,5 @@
 Evescore::Application.routes.draw do
-  get "donate/index"
+  match "/donate", :controller => :donate, :action => :index
 
   get "kills/log"
 
