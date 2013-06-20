@@ -36,9 +36,11 @@ class GetWalletData
           reason.split(",").each do |entry|
             entry = entry.split(":")
             rat_id = entry[0]
+            next if rat_id == "..."
             rat_amount = entry[1]
+            bounty = Rat.where(rat_id: rat_id).first[:bounty]
             begin
-              Kill.create!(ts: ts, char_id: owner_id, rat_id: rat_id, rat_amount: rat_amount)
+              Kill.create!(ts: ts, char_id: owner_id, rat_id: rat_id, rat_amount: rat_amount, bounty: bounty)
             rescue Exception => e
               p e.message
             end
