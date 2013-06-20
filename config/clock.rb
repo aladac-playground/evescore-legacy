@@ -2,6 +2,7 @@ require_relative "../config/boot"
 require_relative "../config/environment"
  
 require 'clockwork'
+require 'net/http'
 
 class GetWalletData
   def self.perform
@@ -53,6 +54,6 @@ end
  
 module Clockwork
   every 5.minutes, 'get_score' do
-    GetWalletData.perform
+    p GetWalletData.perform
   end
 end
