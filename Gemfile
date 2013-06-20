@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "1.9.3"
 gem 'rails', '3.2.13'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -6,7 +7,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'will_paginate_mongoid'
-gem 'af'
 gem 'bootstrap-will_paginate'
 gem 'clockwork'
 gem 'nokogiri'
