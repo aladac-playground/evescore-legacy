@@ -2,7 +2,6 @@ class ApiController < ApplicationController
   require 'net/http'
   def import
     if params[:vcode] && params[:key]
-      puts "Getting data for: #{character[:name]}"
       vcode = params[:vcode]
       key_id = params[:key]
       uri = URI.parse "https://api.eveonline.com/char/WalletJournal.xml.aspx?keyID=#{key_id}&vcode=#{vcode}&rowCount=1000"
