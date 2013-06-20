@@ -10,6 +10,6 @@ class KillsController < ApplicationController
         end
       end
     end
-    @kill_log = @kill_log.order_by(ts: 'desc').paginate(:page => params[:page], :per_page => 8)
+    @kill_log = @kill_log.order_by(ts: 'desc').paginate(:page => params[:page], :per_page => 12)
   end
 end
