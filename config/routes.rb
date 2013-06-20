@@ -1,4 +1,6 @@
 Evescore::Application.routes.draw do
+  get "donate/index"
+
   get "kills/log"
 
   get "api/verify"
