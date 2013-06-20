@@ -8,7 +8,7 @@
         %img.img-rounded{ :src => character_image(top["_id"])}
         %br
         %b
-          = link_to character_name(top["_id"]), "/character/#{top["_id"]}"
+          = link_to character_name(top["_id"]), kills_log_path(:filter => { :char_id => top["_id"]} )
   .span6#kill_box
     %h4 Highest bounty last 10 days
     - highest_bounty_10days.each do |top|
@@ -18,7 +18,7 @@
         %img.img-rounded{ :src => rat_image(top[:rat_id])}
         %br
         %b
-          = link_to rat_name(top[:rat_id]), "/kills/log?rat_id=#{top[:rat_id]}"
+          = link_to rat_name(top[:rat_id]), kills_log_path(:filter => { :char_id => top[:char_id]} )
 
 %br
 .row
@@ -31,7 +31,7 @@
         %img.img-rounded{ :src => character_image(top["_id"])}
         %br
         %b
-          = link_to character_name(top["_id"]), "/character/#{top["_id"]}"
+          = link_to character_name(top["_id"]), kills_log_path(:filter => { :char_id => top["_id"]} )
   .span6#kill_box
     %h4 Highest ticks last 10 days
     - highest_tick_10days.each do |top|
@@ -41,7 +41,7 @@
         %img.img-rounded{ :src => character_image(top[:char_id])}
         %br
         %b
-          = link_to character_name(top[:char_id]), "/character/#{top[:char_id]}"
+          = link_to character_name(top[:char_id]), kills_log_path(:filter => { :char_id => top[:char_id]} )
 %br
 .row
   .span6#kill_box
@@ -53,7 +53,7 @@
         %img.img-rounded{ :src => character_image(top["_id"])}
         %br
         %b
-          = link_to character_name(top["_id"]), "/character/#{top["_id"]}"
+          = link_to character_name(top["_id"]), kills_log_path(:filter => { :char_id => top["_id"]} )
   .span6#kill_box
     %h4 Highest bounty all time
     - highest_bounty.each do |top|
@@ -63,5 +63,5 @@
         %img.img-rounded{ :src => rat_image(top[:rat_id])}
         %br
         %b
-          = link_to rat_name(top[:rat_id]), "/kills/log?rat_id=#{top[:rat_id]}"
+          = link_to rat_name(top[:rat_id]), kills_log_path(:filter => { :rat_id => top[:rat_id] })
 
