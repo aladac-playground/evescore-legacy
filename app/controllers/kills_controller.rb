@@ -1,4 +1,5 @@
 class KillsController < ApplicationController
+  caches_page :log
   def log
     @kill_log = Kill.all
     if params[:filter]
