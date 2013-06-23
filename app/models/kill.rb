@@ -4,5 +4,5 @@ class Kill
   field :char_id, type: Integer
   field :rat_id, type: Integer
   field :rat_amount, type: Integer
-  index({ ts: 1, char_id: 1 }, { unique: true })
+  index({ ts: 1, char_id: 1, rat_id: 1 }, { unique: true })
 end
