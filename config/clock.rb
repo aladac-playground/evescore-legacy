@@ -54,6 +54,6 @@ end
  
 module Clockwork
   every 5.minutes, 'get_score' do
-    p GetWalletData.perform
+    GetWalletData.perform
   end
 end
