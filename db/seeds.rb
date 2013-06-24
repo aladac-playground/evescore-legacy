@@ -7,3 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # Environment variables (ENV['...']) are set in the file config/application.yml.
 # See http://railsapps.github.io/rails-environment-variables.html
+
+rats = YAML.load_file("rats.yml")
+rats.each do |rat|
+  b = Rat.new(rat)
+  b.save
+end
