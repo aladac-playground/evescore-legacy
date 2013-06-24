@@ -31,6 +31,10 @@ module ApplicationHelper
     top = Bounty.collection.aggregate( { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
     return top
   end
+  def daily_bounty(char_id, limit=9)
+    daily = Bounty.collection.aggregate( { "$group" => { "_id" => { "$char_id", "year" => { "$year" => "$ts" }, "month" => { "$month" => "$ts" }, "day" => { "$day" => "$ts" } },  
+                                        "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } }  )[0..limit]
+  end
   def rat_bounty(id)
     bounty = Rat.where(rat_id: id).first[:bounty]
     return bounty
