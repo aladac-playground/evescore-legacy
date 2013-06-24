@@ -1,7 +1,70 @@
-%h1 Character#profile
-- @daily = daily_bounty(params[:char_id].to_i)
-%table.table
-  - @daily.each do |day|
-    %tr
-      %td= build_date day["_id"]
-      %td= isk day["sum"]
+- cats = Array.new
+- vals = Array.new
+- @daily.each do |day|
+  - cats.push "\'" + build_date(day) + "\'"
+  - vals.push day["sum"]
+- p cats
+- s_cats = cats.join(",")
+- p s_cats
+- p vals
+- s_vals = vals.join(",")
+
+%script
+  $(function () {
+  $('#chart').highcharts({
+  title: {
+  text: 'Daily bounty',
+  x: -20 //center
+  },
+  subtitle: {
+  text: '',
+  x: -20
+  },
+  xAxis: {
+  type: 'datetime',
+  -# categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  -# 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  categories: [ #{s_cats}  ],
+  labels: {
+  step: 2
+  },
+  },
+  yAxis: {
+  type: 'logarithmic',
+  title: {
+  text: 'Bounty'
+  },
+  plotLines: [{
+  value: 0,
+  width: 1,
+  color: '#808080'
+  }]
+  },
+  tooltip: {
+  valueSuffix: 'ISK'
+  },
+  legend: {
+  layout: 'vertical',
+  align: 'right',
+  verticalAlign: 'middle',
+  borderWidth: 0
+  },
+  series: [{
+  name: '#{character_name(params[:char_id])}',
+  data: [ #{s_vals} ]
+  }]
+  });
+  }); 
+
+%script{ src: "http://code.highcharts.com/highcharts.js" }
+%script{ src: "http://code.highcharts.com/modules/exporting.js" }
+
+#chart{ style: "min-width: 400px; height: 400px; margin: 0 auto" }
+
+
+-# %h1 Character#profile
+-# %table.table
+-#   - @daily.each do |day|
+-#     %tr
+-#       %td= build_date day
+-#       %td= isk day["sum"]
