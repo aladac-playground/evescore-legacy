@@ -1,2 +1,7 @@
 %h1 Character#profile
-%p Find me in app/views/character/profile.html.haml
+- @daily = daily_bounty(params[:char_id].to_i)
+%table.table
+  - @daily.each do |day|
+    %tr
+      %td= build_date day["_id"]
+      %td= isk day["sum"]
