@@ -5,7 +5,7 @@ module ApplicationHelper
   end
   def character_name_link(id, len=15)
     character = Character.where(char_id: id).first
-    link_to truncate(character[:name], :length => len), kills_log_path(:filter => { :char_id => id } )
+    link_to truncate(character[:name], :length => len), character_profile_path( :char_id => id  )
   end
   def rat_name(id, len=18)
     rat = Rat.where(rat_id: id).first
@@ -32,8 +32,8 @@ module ApplicationHelper
     return top
   end
   def daily_bounty(char_id, limit=9)
-    daily = Bounty.collection.aggregate( { "$group" => { "_id" => { "$char_id", "year" => { "$year" => "$ts" }, "month" => { "$month" => "$ts" }, "day" => { "$day" => "$ts" } },  
-                                        "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } }  )[0..limit]
+    daily = Bounty.collection.aggregate( { "$match" => { "char_id" => char_id } }, { "$group" => { "_id" => { "char_id" => "$char_id", "year" => { "$year" => "$ts" }, "month" => { "$month" => "$ts" }, "day" => { "$dayOfMonth" => "$ts" } },  
+                                        "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "_id" => -1 } }  )[0..limit]
   end
   def rat_bounty(id)
     bounty = Rat.where(rat_id: id).first[:bounty]
