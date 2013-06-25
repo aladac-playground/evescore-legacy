@@ -16,7 +16,7 @@ module ApplicationHelper
     link_to truncate(rat[:rat_name], :length => len), kills_log_path(:filter => { :rat_id => id } )
   end
   def rat_image(id, size=64)
-    return "http://image.eveonline.com/Type/#{id}_#{size}.png"
+    image_tag "http://image.eveonline.com/Type/#{id}_#{size}.png", :class => "img-rounded ttp", :style => "margin: 2px", :title => Rat.rat_name(id) + "<br>" + Rat.rat_type(id)
   end
   def rat_image_link(id, size=64)
     link_to image_tag("http://image.eveonline.com/Type/#{id}_#{size}.png", :class => "img-rounded"), kills_log_path(:filter => { :rat_id => id } )
