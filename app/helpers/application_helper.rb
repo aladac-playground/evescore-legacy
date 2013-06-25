@@ -66,6 +66,7 @@ module ApplicationHelper
     isk = number_to_human(amount)
     isk.gsub!(/ Million/,"M ISK")
     isk.gsub!(/ Billion/,"b ISK")
+    isk.gsub!(/ Thousand/,"k ISK")
     return isk
   end
   def isk(amount)
