@@ -23,4 +23,19 @@ class Bounty
                              {"$sort" => { "_id" => -1 } }  
                         )[0..limit]
   end
+  def self.top_kills(limit=5)
+    limit -= 1
+    collection.aggregate( 
+                         {"$unwind" => "$kills"}, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$char_id", 
+                             "size" => { "$sum" => 1 } 
+                           } 
+                         }, 
+                         { "$sort" => 
+                           { "size" => -1 } 
+                         } 
+                        )[0..limit]
+  end
 end
