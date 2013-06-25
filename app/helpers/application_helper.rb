@@ -22,7 +22,7 @@ module ApplicationHelper
     link_to image_tag("http://image.eveonline.com/Type/#{id}_#{size}.png", :class => "img-rounded"), kills_log_path(:filter => { :rat_id => id } )
   end
   def character_image(id, size=64)
-    return "http://image.eveonline.com/Character/#{id}_#{size}.jpg"
+    image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded")
   end
   def character_image_link(id, size=64)
     link_to image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded"), kills_log_path(:filter => { :char_id => id } )
