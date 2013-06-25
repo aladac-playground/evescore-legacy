@@ -1,0 +1,24 @@
+%table.table.table-condensed.table-striped.rounded.table-bordered
+  %thead
+    %tr
+      %th.span2 Timestamp
+      %th{ :colspan => 2 } Rat
+      %th Amount
+      %th Bounty
+      %th Total Bounty
+  %tbody
+  - @kill_log.each do |kill|
+    %tr
+      %td
+        = kill[:ts].strftime("%Y-%m-%d %H:%M:%S")
+      %td{ :style => "width: 32px" }
+        = rat_image_link( kill[:rat_id] )
+      %td.span3
+        = rat_name_link( kill[:rat_id],50 )
+      %td.span1
+        = kill[:rat_amount]
+      %td.span2
+        = isk rat_bounty(kill[:rat_id]) 
+      %td.span2
+        = isk(kill[:rat_amount].to_i * rat_bounty(kill[:rat_id]))
+= will_paginate @kill_log
