@@ -10,16 +10,15 @@
         %b
           = character_name_link(top["_id"])
   .span6#kill_box
-    %h4 Highest bounty last 10 days
-    - highest_bounty_10days.each do |top|
+    %h4 Top bounty all time
+    - top_bounty.each do |top|
       .span1#kill
         %b
-          = isk_short(top[:bounty])
-        = rat_image_link top[:rat_id]
+          = isk_short top["sum"]
+        = character_image_link(top["_id"])
         %br
         %b
-          = rat_name_link top[:rat_id]
-
+          = character_name_link(top["_id"])
 %br
 .row
   .span6#kill_box
@@ -27,11 +26,23 @@
     - top_kills_10days.each do |top|
       .span1#kill
         %b
-          = top["sum"]
+          = top["kills"]
         = character_image_link(top["_id"])
         %br
         %b
           = character_name_link(top["_id"])
+  .span6#kill_box
+    %h4 Top kills all time
+    - top_kills.each do |top|
+      .span1#kill
+        %b
+          = top["kills"]
+        = character_image_link top["_id"]
+        %br
+        %b
+          = character_name_link top["_id"]
+%br
+.row
   .span6#kill_box
     %h4 Highest ticks last 10 days
     - highest_tick_10days.each do |top|
@@ -42,26 +53,13 @@
         %br
         %b
           = character_name_link(top[:char_id])
-%br
-.row
   .span6#kill_box
-    %h4 Top bounty all time
-    - top_bounty.each do |top|
+    %h4 Highest ticks all time
+    - highest_tick.each do |top|
       .span1#kill
         %b
-          = isk_short top["sum"]
-        = character_image_link(top["_id"])
+          = isk_short top[:bounty]
+        = character_image_link(top[:char_id])
         %br
         %b
-          = character_name_link(top["_id"])
-  .span6#kill_box
-    %h4 Highest bounty all time
-    - highest_bounty.each do |top|
-      .span1#kill
-        %b
-          = isk_short(top[:bounty])
-        = rat_image_link top[:rat_id]
-        %br
-        %b
-          = rat_name_link top[:rat_id]
-
+          = character_name_link(top[:char_id])
