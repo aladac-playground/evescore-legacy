@@ -13,3 +13,28 @@ rats.each do |rat|
   b = Rat.new(rat)
   b.save
 end
+
+# chars = YAML.load_file("characters.yml")
+# chars.each do |char|
+#   b = Character.new(char)
+#   b.save
+# end
+
+# kills = YAML.load_file("kills.yml")
+# i=0
+# kills.each do |kill|
+#   next if kill[:rat_id] == 0
+#   bounty = Rat.where(rat_id: kill[:rat_id]).first.bounty
+#   kill.merge!(:bounty => bounty)
+#   kill.merge!(:id => { :ts => kill[:ts], :rat_id => kill[:rat_id], :char_id => kill[:char_id] })
+#   p kill
+#   b = Kill.new(kill)
+#   b.save
+# end
+
+# bounties = YAML.load_file("bounties.yml")
+# bounties.each do |bounty|
+#   b = Bounty.new(bounty)
+#   p b
+#   b.save
+# end
