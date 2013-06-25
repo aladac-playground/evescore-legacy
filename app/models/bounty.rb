@@ -1,6 +1,8 @@
 class Bounty
   include Mongoid::Document
-  validates :ts, :char_id, :uniqueness => true
+  before_validation :generate_id
+  validates_uniqueness_of :ts, :scope => [ :char_id ]
+  validates_presence_of :ts, :char_id, :bounty
   field :ts, type: Time
   field :char_id, type: Integer
   field :bounty, type: Integer
@@ -20,5 +22,10 @@ class Bounty
                              "sum" => { "$sum" => "$bounty"} } }, 
                              {"$sort" => { "_id" => -1 } }  
                         )[0..limit]
+  end
+
+  private
+  def generate_id
+    self._id ||= ts.to_i + char_id
   end
 end
