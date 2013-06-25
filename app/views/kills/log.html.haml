@@ -13,13 +13,13 @@
       %td
         = kill[:ts].strftime("%Y-%m-%d %H:%M:%S")
       %td{ :style => "width: 32px" }
-        %img.img-rounded{ :src => character_image( kill[:char_id] ) }
+        = character_image_link( kill[:char_id] ) 
       %td.span2
-        = character_name( kill[:char_id], 20 )
+        = character_name_link( kill[:char_id], 20 )
       %td{ :style => "width: 32px" }
-        %img.img-rounded{ :src => rat_image( kill[:rat_id] ) }
+        = rat_image_link( kill[:rat_id] ) 
       %td.span3
-        = rat_name( kill[:rat_id],50 )
+        = rat_name_link( kill[:rat_id],50 )
       %td.span1
         = kill[:rat_amount]
       %td.span2
