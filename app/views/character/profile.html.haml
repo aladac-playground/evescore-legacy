@@ -2,11 +2,8 @@
 - vals = Array.new
 - @daily.each do |day|
   - cats.push "\'" + build_date(day) + "\'"
-  - vals.push day["sum"]
-- p cats
+  - vals.push day["sum"]/100
 - s_cats = cats.join(",")
-- p s_cats
-- p vals
 - s_vals = vals.join(",")
 
 %script
@@ -29,8 +26,6 @@
   },
   xAxis: {
   type: 'datetime',
-  -# categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  -# 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   categories: [ #{s_cats}  ],
   labels: {
   step: 5
@@ -38,7 +33,6 @@
   },
   yAxis: {
   endOnTick: true,
-  -# max: 1000000000,
   -# type: 'logarithmic',
   labels: {
   x: -20
