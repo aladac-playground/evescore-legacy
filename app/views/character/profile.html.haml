@@ -12,6 +12,13 @@
 %script
   $(function () {
   $('#chart').highcharts({
+  chart: { 
+  animation: false },
+  plotOptions: {
+  series: {
+  animation: false
+  }
+  },
   title: {
   text: 'Daily bounty',
   x: -20 //center
@@ -72,12 +79,9 @@
           %h2
             = character_name(@char_id)
   #profile_box.span7
-    #chart.span7{ style: "min-width: 400px; height: 250px; margin: 0 auto" }
+    #chart.span7{ style: "min-width: 400px; height: 170px; margin: 0 auto" }
+%p 
+%br
 
+= render :partial => "shared/log"
 
--# %h1 Character#profile
--# %table.table
--#   - @daily.each do |day|
--#     %tr
--#       %td= build_date day
--#       %td= isk day["sum"]
