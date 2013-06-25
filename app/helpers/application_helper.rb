@@ -27,40 +27,27 @@ module ApplicationHelper
   def character_image_link(id, size=64)
     link_to image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded"), character_profile_path( :char_id => id )
   end
-  def top_bounty(limit=4)
-    top = Bounty.collection.aggregate( { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
-    return top
+  def top_bounty(limit=5)
+    return Bounty.top_bounty(limit)
   end
   def rat_bounty(id)
     bounty = Rat.where(rat_id: id).first[:bounty]
     return bounty
   end
-  def top_kills_10days(limit=4)
-    top = Kill.
-      collection.aggregate(  { "$match" => { "ts" => { "$gt" => (Time.now.utc - 10.days) } } }, { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$rat_amount"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
-    return top
+  def top_bounty_10days(limit=5)
+    return Bounty.top_bounty_days(10, limit)
   end
-  def top_bounty_10days(limit=4)
-    top = Bounty.
-      collection.aggregate(  { "$match" => { "ts" => { "$gt" => (Time.now.utc - 10.days) } } }, { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
-    return top
+  def top_kills(limit=5)
+    return Bounty.top_kills(limit)
   end
-  def highest_bounty_10days(limit=5)
-    bounty = Kill.where(:ts.gt => (Time.now.utc - 10.days)).sort(:bounty.desc).limit(limit)
-    return bounty
-  end
-  def highest_bounty(limit=5)
-    bounty = Kill.all.sort(:bounty.desc).limit(limit)
-    return bounty
+  def top_kills_10days(limit=5)
+    return Bounty.top_kills_days(10, limit)
   end
   def highest_tick_10days(limit=5)
-    bounty = Bounty.where(:ts.gt => (Time.now.utc - 10.days)).sort(:bounty.desc).limit(limit)
-    return bounty
+    return Bounty.highest_tick_days(10, limit)
   end
-  def top_monthly(limit=4)
-    top = Bounty.
-      collection.aggregate(  { "$match" => { "ts" => { "$gt" => Time.now.utc.at_beginning_of_month.utc } } }, { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
-    return top
+  def highest_tick(limit=5)
+    return Bounty.highest_tick(limit)
   end
   def isk_short(amount)
     isk = number_to_human(amount/100)
