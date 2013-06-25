@@ -5,6 +5,8 @@ class CharacterController < ApplicationController
     else
       @char_id = params[:char_id]
     end
+    @kill_log = Kill.where(char_id: @char_id)
+    @kill_log = @kill_log.order_by(ts: 'desc').paginate(:page => params[:page], :per_page => 5)
     @daily = Bounty.daily(params[:char_id].to_i, 30)
   end
 end
