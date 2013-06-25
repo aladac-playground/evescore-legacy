@@ -10,6 +10,11 @@
 # http://github.com/RailsApps/rails-composer/issues
 #----------------------------------------------------------------------------
 
+# static data dumps
+/characters.yml
+/bounties.yml
+/kills.yml
+
 # bundler state
 /.bundle
 /vendor/bundle/
