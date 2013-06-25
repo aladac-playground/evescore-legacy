@@ -25,7 +25,7 @@ module ApplicationHelper
     image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded")
   end
   def character_image_link(id, size=64)
-    link_to image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded"), kills_log_path(:filter => { :char_id => id } )
+    link_to image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded"), character_profile_path( :char_id => id )
   end
   def top_bounty(limit=4)
     top = Bounty.collection.aggregate( { "$group" => { "_id" => "$char_id", "sum" => { "$sum" => "$bounty"}  } }, {"$sort" => { "sum" => -1 } } )[0..limit]
