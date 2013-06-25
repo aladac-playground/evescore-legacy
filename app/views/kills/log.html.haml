@@ -1,29 +1,47 @@
-%table.table.table-condensed.table-striped.rounded.table-bordered#kill_log
+-# %table.table.table-condensed.table-striped.rounded.table-bordered
+-#   %thead
+-#     %tr
+-#       %th.span2 Timestamp
+-#       %th{ :colspan => 2 } Character  
+-#       %th Bounty
+-#   %tbody
+-#   - @kill_log.each do |log|
+-#     %tr
+-#       %td
+-#         = log[:ts].strftime("%Y-%m-%d %H:%M:%S")
+-#       %td{ :style => "width: 32px" }
+-#         = character_image_link( log[:char_id] ) 
+-#       %td.span3
+-#         %table
+-#           %tr
+-#             %td
+-#               = character_name_link( log[:char_id], 20 )
+-#           %tr
+-#             %td
+-#               - log.kills.each do |kill|
+-#                 = rat_image(kill["rat_id"], 32)
+-#       %td.span1#isk
+-#         = isk log[:bounty] 
+
+%table.table.table-condensed.table-striped.rounded.table-bordered
   %thead
     %tr
-      %th.span2 Timestamp
-      %th{ :colspan => 2 } Character  
-      %th{ :colspan => 2 } Rat
-      %th Amount
-      %th Bounty
-      %th Total Bounty
+      %th Recent Kills
   %tbody
-  - @kill_log.each do |kill|
-    %tr
-      %td
-        = kill[:ts].strftime("%Y-%m-%d %H:%M:%S")
-      %td{ :style => "width: 32px" }
-        = character_image_link( kill[:char_id] ) 
-      %td.span2
-        = character_name_link( kill[:char_id], 20 )
-      %td{ :style => "width: 32px" }
-        = rat_image_link( kill[:rat_id] ) 
-      %td.span3
-        = rat_name_link( kill[:rat_id],50 )
-      %td.span1
-        = kill[:rat_amount]
-      %td.span2
-        = isk rat_bounty(kill[:rat_id]) 
-      %td.span2
-        = isk(kill[:rat_amount].to_i * rat_bounty(kill[:rat_id]))
-= will_paginate @kill_log, :inner_window => 3, :outer_window => 3
+    - @kill_log.each do |log|
+      %tr
+        %td
+          .span1{ :style => "margin: 7px" }
+            = character_image_link( log[:char_id] ) 
+          .span3
+            %b
+              = character_name_link( log[:char_id], 50 )
+            %br
+            = log[:ts].strftime("%Y-%m-%d %H:%M:%S")
+            %br
+            %b
+              = isk log[:bounty]/100
+          .span7
+            - log.kills.each do |kill|
+              = rat_image(kill["rat_id"], 32)
+= will_paginate @kill_log
