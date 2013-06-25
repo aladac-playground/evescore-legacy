@@ -17,7 +17,7 @@
   x: -20 //center
   },
   subtitle: {
-  text: '',
+  text: 'Last 30 days',
   x: -20
   },
   xAxis: {
@@ -26,11 +26,13 @@
   -# 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   categories: [ #{s_cats}  ],
   labels: {
-  step: 2
+  step: 5
   },
   },
   yAxis: {
-  type: 'logarithmic',
+  endOnTick: true,
+  -# max: 1000000000,
+  -# type: 'logarithmic',
   title: {
   text: 'Bounty'
   },
@@ -41,16 +43,17 @@
   }]
   },
   tooltip: {
-  valueSuffix: 'ISK'
+  valueSuffix: ' ISK'
   },
   legend: {
+  enabled: false,
   layout: 'vertical',
   align: 'right',
   verticalAlign: 'middle',
   borderWidth: 0
   },
   series: [{
-  name: '#{character_name(params[:char_id])}',
+  name: '#{@char_id ? character_name(@char_id) : "empty" }',
   data: [ #{s_vals} ]
   }]
   });
@@ -59,7 +62,17 @@
 %script{ src: "http://code.highcharts.com/highcharts.js" }
 %script{ src: "http://code.highcharts.com/modules/exporting.js" }
 
-#chart{ style: "min-width: 400px; height: 400px; margin: 0 auto" }
+.row
+  #profile_box.span5
+    .margin20
+      .row
+        .span2
+          = character_image(@char_id, 128)
+        .span2
+          %h2
+            = character_name(@char_id)
+  #profile_box.span7
+    #chart.span7{ style: "min-width: 400px; height: 250px; margin: 0 auto" }
 
 
 -# %h1 Character#profile
