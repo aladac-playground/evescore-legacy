@@ -63,7 +63,7 @@ module ApplicationHelper
     return top
   end
   def isk_short(amount)
-    isk = number_to_human(amount)
+    isk = number_to_human(amount/100)
     isk.gsub!(/ Million/,"M ISK")
     isk.gsub!(/ Billion/,"b ISK")
     isk.gsub!(/ Thousand/,"k ISK")
