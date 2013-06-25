@@ -12,7 +12,7 @@
     = yield(:head)
     %script
       $(document).ready(function(){
-      $('#ingame').tooltip({ placement: 'top', html: true, title: 'Click for ingame info'});
+      $('.ttp').tooltip({ placement: 'top', html: true});
       });
     / Le styles
     :css
@@ -26,6 +26,9 @@
         height: 180px;
         font-size: 12px;
         text-align: center;
+      }
+      #kill_record { background-color: #fff;
+        -webkit-border-radius: 5px;
       }
       .margin20 { margin: 20px; }
       div#kill { margin-left: 26px }
@@ -43,11 +46,11 @@
       #nokills {
         max-width: 940px;
       }
-      .alert { 
-        max-width: 500px;
-        padding: 19px 29px 29px;
-        margin: 0 auto 20px;
-      }
+      -# .alert { 
+      -#   max-width: 500px;
+      -#   padding: 19px 29px 29px;
+      -#   margin: 0 auto 20px;
+      -# }
       .form-signin {
         max-width: 500px;
         padding: 19px 29px 29px;
