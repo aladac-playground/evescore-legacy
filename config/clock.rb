@@ -30,7 +30,9 @@ class GetWalletData
           ref_id = row['refID']
           ts = row['date']
           begin
-            Bounty.create!(ts: ts, char_id: owner_id, bounty: amount.to_i)
+            b = Bounty.new(ts: ts, char_id: owner_id, bounty: ( amount * 100 ).to_i)
+            r = b.save
+            next if r == false
           rescue Exception => e
             p e.message
           end
@@ -39,9 +41,8 @@ class GetWalletData
             rat_id = entry[0]
             next if rat_id == "..."
             rat_amount = entry[1]
-            bounty = Rat.where(rat_id: rat_id).first[:bounty]
             begin
-              Kill.create!(ts: ts, char_id: owner_id, rat_id: rat_id, rat_amount: rat_amount, bounty: bounty)
+              b.kills.create!(rat_id: rat_id, rat_amount: rat_amount)
             rescue Exception => e
               p e.message
             end
