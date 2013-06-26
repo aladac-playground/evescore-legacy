@@ -1,3 +1,6 @@
+require "logger"
+Log=Logger.new(STDERR)
+
 require_relative "../config/boot"
 require_relative "../config/environment"
  
@@ -6,8 +9,9 @@ require 'net/http'
 
 class GetWalletData
   def self.perform
+    start = Time.now.to_i
     Character.all.each do |character|
-      puts "Getting data for: #{character[:name]}"
+      Log.info "STARTED Getting data for: #{character[:name]}"
       vcode = character[:vcode]
       key_id = character[:key]
       uri = URI.parse "https://api.eveonline.com/char/WalletJournal.xml.aspx?keyID=#{key_id}&vcode=#{vcode}&rowCount=1000"
@@ -49,7 +53,11 @@ class GetWalletData
           end
         end
       end
+      Log.info "FINISHED Getting data for: #{character[:name]}"  
     end
+    finish = Time.now.to_i
+    duration = finish - start
+    Log.info "COMPLETED Getting data for all, took: #{duration} seconds"
   end
 end
  
