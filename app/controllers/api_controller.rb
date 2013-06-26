@@ -108,10 +108,13 @@ class ApiController < ApplicationController
     request = Net::HTTP::Get.new(uri.request_uri)
 
     response = http.request(request)
-
+  
     xml = Nokogiri::XML(response.body)
 
     error_message = xml.xpath("//error").children.to_s
+    if response.code != "200"
+      error_message = "API Server Error: " + response.code.to_s + " " + response.body
+    end
     if error_message.empty?
       character = character_check(key, vcode)
       return { valid: true, message: error_message, character: character }
