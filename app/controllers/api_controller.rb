@@ -1,9 +1,10 @@
 class ApiController < ApplicationController
   require 'net/http'
   def import
-    if params[:vcode] && params[:key]
-      vcode = params[:vcode]
-      key_id = params[:key]
+    if params[:char_id]
+      char = Character.where(:char_id => params[:char_id]).first
+      vcode = char[:vcode]
+      key_id = char[:key]
       uri = URI.parse "https://api.eveonline.com/char/WalletJournal.xml.aspx?keyID=#{key_id}&vcode=#{vcode}&rowCount=1000"
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -43,6 +44,7 @@ class ApiController < ApplicationController
         end
       end
     end
+    redirect_to character_profile_path(:char_id => params[:char_id])
   end
   def import_all
     Character.all.each do |character|
