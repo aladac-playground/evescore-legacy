@@ -57,7 +57,7 @@
   borderWidth: 0
   },
   series: [{
-  name: '#{@char_id ? character_name(@char_id, 50) : "empty" }',
+  name: '#{@character[:name]}',
   data: [ #{s_vals} ]
   }]
   });
@@ -71,10 +71,10 @@
     .margin20
       .row
         .span2
-          = character_image(@char_id, 128)
+          = character_image(@character[:char_id], 128)
         .span2
           %h2
-            = character_name(@char_id, 50)
+            = character_name(@character[:char_id], 50)
   #profile_box.span7
     #chart.span7{ style: "min-width: 400px; height: 170px; margin: 0 auto" }
 
