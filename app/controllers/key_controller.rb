@@ -6,6 +6,7 @@ class KeyController < ApplicationController
     if char.valid?
       char.save
       flash[:notice] = "Character key successfuly stored"
+      redirect_to api_import_path(:char_id => params[:char_id])
     else
       error_alert = String.new
       char.errors.messages.each_pair do |field, message|
