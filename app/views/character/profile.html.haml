@@ -73,8 +73,22 @@
         .span2
           = character_image(@character[:char_id], 128)
         .span2
-          %h2
-            = character_name(@character[:char_id], 50)
+          %p
+            %b
+              = character_name(@character[:char_id],50)
+          %br
+          %div{:style => "position:relative;left:0;bottom:0"}
+            %b 
+              Ranking
+            %br
+            %span.badge.badge-success.ttp{:title => "Bounty Rank"}
+              = bounty_rank(@character[:char_id])
+            %span.badge.badge-warning.ttp{:title => "Kill Rank"}
+              = kill_rank(@character[:char_id])
+            %span.badge.badge-important.ttp{:title => "Tick Rank"}
+              = tick_rank(@character[:char_id])
+      .row
+        .span5
   #profile_box.span7
     #chart.span7{ style: "min-width: 400px; height: 170px; margin: 0 auto" }
 

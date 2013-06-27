@@ -49,6 +49,15 @@ module ApplicationHelper
   def highest_tick(limit=5)
     return Bounty.highest_tick(limit)
   end
+  def kill_rank(char_id)
+    Bounty.kill_rank(char_id)
+  end
+  def tick_rank(char_id)
+    Bounty.tick_rank(char_id)
+  end
+  def bounty_rank(char_id)
+    Bounty.bounty_rank(char_id)
+  end
   def isk_short(amount)
     isk = number_to_human(amount/100)
     isk.gsub!(/ Million/,"M ISK")

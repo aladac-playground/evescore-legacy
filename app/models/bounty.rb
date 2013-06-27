@@ -110,9 +110,9 @@ class Bounty
   end
   def self.tick_rank(char_id)
     rank=0
-    Bounty.highest_tick(0).each do |tick|
+    Bounty.highest_tick(0).to_a.each do |tick|
       rank+=1
-      if tick.char_id = char_id
+      if tick.char_id == char_id
         break
       end
     end
