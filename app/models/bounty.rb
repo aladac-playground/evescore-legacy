@@ -80,11 +80,42 @@ class Bounty
                          }, 
                          {"$sort" => { "sum" => -1 } } 
                         )[0..limit]
+  end  
+  def self.bounty_rank(char_id)
+    rank=0
+    Bounty.top_bounty(0).each do |entry|
+      rank+=1
+      if entry["_id"] == char_id
+        result = rank
+        break
+      end
+    end
+    return rank
+  end
+  def self.kill_rank(char_id)
+    rank=0    
+    Bounty.top_kills(0).each do |entry|
+      rank+=1
+      if entry["_id"] == char_id
+        break
+      end
+    end
+    return rank
   end
   def self.highest_tick_days(days=10, limit=5)
     where(:ts.gt => (Time.now.utc - days.days)).sort(:bounty.desc).limit(limit)
   end
   def self.highest_tick(limit=5)
     all.sort(:bounty.desc).limit(limit)
+  end
+  def self.tick_rank(char_id)
+    rank=0
+    Bounty.highest_tick(0).each do |tick|
+      rank+=1
+      if tick.char_id = char_id
+        break
+      end
+    end
+    return rank
   end
 end
