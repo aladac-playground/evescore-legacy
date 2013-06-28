@@ -27,6 +27,9 @@ module ApplicationHelper
   def character_image_link(id, size=64)
     link_to image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded"), character_profile_path( :char_id => id )
   end
+  def character_tick_link(id, tick, size=64)
+    link_to image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded"), kills_log_path(:filter => { :_id => tick } )
+  end
   def top_bounty(limit=5)
     return Bounty.top_bounty(limit)
   end
