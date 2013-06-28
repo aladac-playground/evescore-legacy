@@ -15,7 +15,7 @@ function check_api (key, vcode) {
             character = result['character'];
             $('#api_submit').show();
             $('#api_check').hide();
-            $('.notification-area').html('<div class="alert key alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Success</div>');
+            $('.notification-area').html('<div class="alert key alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Key successfuly verified, press <b>Save</b></div>');
             $('#key').attr('readonly','true');
             $('#vcode').attr('readonly','true');
             $('#name').val(character['name']);
