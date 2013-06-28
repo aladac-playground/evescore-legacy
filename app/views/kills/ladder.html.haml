@@ -5,14 +5,13 @@
       %th{ :colspan => 2 } Character
       %th Bounty
   %tbody
-    - i=0
     - @ladder.each do |pos|
-      - i += 1
       %tr
         %td.span1{ :style => "text-align: center"}
-          %h4= i
+          %h4= pos[:pos]
         %td{ :style => "width: 64px"}= character_image_link(pos["_id"])
         %td
           %h4= character_name_link(pos["_id"],50)
         %td#isk
           %h4= isk pos["sum"]/100
+= will_paginate @ladder

@@ -12,6 +12,12 @@ class KillsController < ApplicationController
     @kill_log = @kill_log.order_by(ts: 'desc').paginate(:page => params[:page], :per_page => 8)
   end
   def ladder
-    @ladder = Bounty.top_bounty(0)
+    i = 0
+    ladder_array = Bounty.top_bounty(0).each do |row|
+      i += 1
+      row.merge!({ :pos => i })
+    end
+    p ladder_array
+    @ladder = ladder_array.paginate(:page => params[:page], :per_page => 10)
   end
 end
