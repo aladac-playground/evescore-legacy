@@ -11,4 +11,7 @@ class KillsController < ApplicationController
     end
     @kill_log = @kill_log.order_by(ts: 'desc').paginate(:page => params[:page], :per_page => 8)
   end
+  def ladder
+    @ladder = Bounty.top_bounty(0)
+  end
 end
