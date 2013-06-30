@@ -1,5 +1,6 @@
 require "logger"
 Log=Logger.new(STDERR)
+DebugLog=Logger.new("./log/bounty.log")
 
 require_relative "../config/boot"
 require_relative "../config/environment"
@@ -37,6 +38,7 @@ class GetWalletData
             b = Bounty.new(ts: ts, char_id: owner_id, bounty: ( amount * 100 ).to_i)
             r = b.save
             next if r == false
+            DebugLog.info("Character: #{character[:name]}, ID: #{character[:char_id]}, Bounty: #{amount}")
           rescue Exception => e
             p e.message
           end
