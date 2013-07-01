@@ -14,12 +14,6 @@
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
-          = render 'layouts/search'
-          .pull-right
-            %a{ :href => "/donate" }
-              %button.btn.btn-warning
-                %img{:src => "http://image.eveonline.com/Type/30768_32.png"}
-                DONATE
           %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
             %span.icon-bar
             %span.icon-bar
@@ -29,6 +23,8 @@
             -# %img{ :src => "../assets/images/eve.png"}
           .nav-collapse.collapse
             = render 'layouts/navigation'
+          .pull-right
+            = render 'layouts/search'
     .container
       %p
         %br

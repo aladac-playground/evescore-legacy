@@ -1,6 +1,4 @@
-.span4
-  %form.form-inline
-    %fieldset
-      %input#search.btn-group.input-small.typeahead{ :type => :text, :autocomplete => :off }
-      %button.btn{ :type => :submit }
-        Search
+%form.form-search{ :action => character_profile_path }
+  %input#search.input-medium.search-query{ :required => true, :type => :text, :autocomplete => :off, :name => :char_name, :"data-provide" => :typeahead, :"data-source" => Character.json }
+  %button.btn{ :type => :submit }
+    Search

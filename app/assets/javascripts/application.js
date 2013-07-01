@@ -15,16 +15,20 @@
 //= require_tree .
 
 $(document).ready(function(){
-$('.ttp').tooltip({ placement: 'top', html: true});
-$('#search').typeahead({                              
-  name: 'character-search',                                                        
-  prefetch: '/character/all.json',                                             
-  template: [                                                                 
-    '<p class="character-name">{{name}}</p>',                              
-    '<p class="character-id">{{id}}</p>',                                      
-  ].join(''),                                                                 
-  engine: Hogan                                                               
-});
+	$('.ttp').tooltip({ placement: 'top', html: true});
+	$('.typeahead').typeahead();
+// $('#search').typeahead({                              
+//   name: 'character-search',                                                        
+//   prefetch: '/character/all.json',
+// 	valueKey: 'char_id',
+//   template: [
+// 		'<p><img src="http://image.eveonline.com/Character/{{id}}_64.jpg" style="margin-right: 20px" class="img-rounded">',
+// 		'{{name}}'
+//     // '<p class="character-name">{{name}}</p>',                              
+//     // '<p class="character-id">{{id}}</p>',                                      
+//   ].join(''),                                                                 
+//   engine: Hogan                                                               
+// });
 
 });
 

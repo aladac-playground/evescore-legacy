@@ -10,4 +10,11 @@ class Character
   field :vcode, type: String
   field :last_visit, type: Time
   index({  char_id: 1 }, { unique: true })
+  def self.json
+    @characters = Array.new
+    Character.all.each do |char|
+      @characters.push char.name
+    end
+    return @characters.to_json
+  end
 end
