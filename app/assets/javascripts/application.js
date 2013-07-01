@@ -13,3 +13,18 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function(){
+$('.ttp').tooltip({ placement: 'top', html: true});
+$('#search').typeahead({                              
+  name: 'character-search',                                                        
+  prefetch: '/character/all.json',                                             
+  template: [                                                                 
+    '<p class="character-name">{{name}}</p>',                              
+    '<p class="character-id">{{id}}</p>',                                      
+  ].join(''),                                                                 
+  engine: Hogan                                                               
+});
+
+});
+
