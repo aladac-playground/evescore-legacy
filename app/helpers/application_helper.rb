@@ -16,14 +16,14 @@ module ApplicationHelper
     link_to truncate(rat[:rat_name], :length => len), kills_log_path(:filter => { :rat_id => id } )
   end
   def rat_image(id, size=64)
-    src = "rats/#{id}_#{size}.jpg"
+    src = "rats/#{id}_#{size}.png"
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("rat", id, size)
     end
     image_tag src, :class => "img-rounded ttp", :style => "margin: 2px", :title => Rat.rat_name(id) + "<br>" + Rat.rat_type(id)
   end
   def rat_image_link(id, size=64)
-    src = "rats/#{id}_#{size}.jpg"
+    src = "rats/#{id}_#{size}.png"
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("rat", id, size)
     end
