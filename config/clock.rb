@@ -68,7 +68,7 @@ class GetCharacterImages
     start = Time.now.to_i
     Character.all.each do |character|
       [ "32", "64", "128", "256"].each do |size|
-        next if File.exist?("./public/images/characters/#{character[:char_id]}_#{size}.jpg")
+        next if Rails.application.assets.find_asset("characters/#{character[:char_id]}_#{size}.jpg")
         
         Log.info "STARTED Getting image size: #{size} for: #{character[:name]}"  
         Net::HTTP.start("image.eveonline.com") do |http|
@@ -91,7 +91,7 @@ class GetRatImages
     start = Time.now.to_i
     Bounty.unique_rats.each do |rat|
       [ "32", "64" ].each do |size|
-        next if File.exist?("./public/images/rats/#{rat["_id"]}_#{size}.png")
+        next if Rails.application.assets.find_asset("rats/#{rat["_id"]}_#{size}.png")
         Log.info "STARTED Getting image size: #{size} for: #{Rat.where(:rat_id => rat["_id"]).first.rat_name}"  
         Net::HTTP.start("image.eveonline.com") do |http|
             resp = http.get("/Type/#{rat["_id"]}_#{size}.png")
