@@ -111,7 +111,7 @@ end
 module Clockwork
   every 5.minutes, 'get_score' do
     GetWalletData.perform
-    GetCharacterImages.perform
-    GetRatImages.perform
+    # GetCharacterImages.perform
+    # GetRatImages.perform
   end
 end
