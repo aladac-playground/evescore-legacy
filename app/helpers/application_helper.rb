@@ -16,23 +16,38 @@ module ApplicationHelper
     link_to truncate(rat[:rat_name], :length => len), kills_log_path(:filter => { :rat_id => id } )
   end
   def rat_image(id, size=64)
-    File.exist?("./public/images/rats/#{id}_#{size}.png") ? src = "/images/rats/#{id}_#{size}.png" : "http://image.eveonline.com/Type/#{id}_#{size}.png"
+    src = "rats/#{id}_#{size}.jpg"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("rat", id, size)
+    end
     image_tag src, :class => "img-rounded ttp", :style => "margin: 2px", :title => Rat.rat_name(id) + "<br>" + Rat.rat_type(id)
   end
   def rat_image_link(id, size=64)
-    File.exist?("./public/images/rats/#{id}_#{size}.png") ? src = "/images/rats/#{id}_#{size}.png" : "http://image.eveonline.com/Type/#{id}_#{size}.png"
+    src = "rats/#{id}_#{size}.jpg"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("rat", id, size)
+    end
     link_to image_tag(src, :class => "img-rounded"), kills_log_path(:filter => { :rat_id => id } )
   end
   def character_image(id, size=64)
-    File.exist?("./public/images/characters/#{id}_#{size}.jpg") ? src = "/images/characters/#{id}_#{size}.jpg" : "http://image.eveonline.com/Character/#{id}_#{size}.jpg"
+    src = "characters/#{id}_#{size}.jpg"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("character", id, size)
+    end
     image_tag(src, :class => "img-rounded")
   end
   def character_image_link(id, size=64)
-    File.exist?("./public/images/characters/#{id}_#{size}.jpg") ? src = "/images/characters/#{id}_#{size}.jpg" : "http://image.eveonline.com/Character/#{id}_#{size}.jpg"
+    src = "characters/#{id}_#{size}.jpg"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("character", id, size)
+    end
     link_to image_tag(src, :class => "img-rounded"), character_profile_path( :char_id => id )
   end
   def character_tick_link(id, tick, size=64)
-    File.exist?("./public/images/characters/#{id}_#{size}.jpg") ? src = "/images/characters/#{id}_#{size}.jpg" : "http://image.eveonline.com/Character/#{id}_#{size}.jpg"
+    src = "characters/#{id}_#{size}.jpg"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("character", id, size)
+    end
     link_to image_tag(src, :class => "img-rounded"), kills_log_path(:filter => { :_id => tick } )
   end
   def top_bounty(limit=5)
@@ -76,5 +91,13 @@ module ApplicationHelper
   def isk(amount)
     isk = number_to_currency(amount, :unit => "ISK", :precision => 0, :delimiter => ",", :format => "%n %u")
     return isk
+  end
+  def ext_image(type, id, size)
+    require 'net/http'
+    dir = "Type" if type == "rat"
+    dir = "Character" if type == "character"
+    ext = "jpg" if type == "character"
+    ext = "png" if type == "rat"
+    return "http://image.eveonline.com/#{dir}/#{id}_#{size}.#{ext}"
   end
 end

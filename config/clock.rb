@@ -73,7 +73,7 @@ class GetCharacterImages
         Log.info "STARTED Getting image size: #{size} for: #{character[:name]}"  
         Net::HTTP.start("image.eveonline.com") do |http|
             resp = http.get("/Character/#{character[:char_id]}_#{size}.jpg")
-            open("./public/images/characters/#{character[:char_id]}_#{size}.jpg", "wb") do |file|
+            open("./app/assets/images/characters/#{character[:char_id]}_#{size}.jpg", "wb") do |file|
                 file.write(resp.body)
             end
         end
@@ -95,7 +95,7 @@ class GetRatImages
         Log.info "STARTED Getting image size: #{size} for: #{Rat.where(:rat_id => rat["_id"]).first.rat_name}"  
         Net::HTTP.start("image.eveonline.com") do |http|
             resp = http.get("/Type/#{rat["_id"]}_#{size}.png")
-            open("./public/images/rats/#{rat["_id"]}_#{size}.png", "wb") do |file|
+            open("./app/assets/images/rats/#{rat["_id"]}_#{size}.png", "wb") do |file|
                 file.write(resp.body)
             end
         end
