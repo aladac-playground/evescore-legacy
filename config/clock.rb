@@ -62,9 +62,56 @@ class GetWalletData
     Log.info "COMPLETED Getting data for all, took: #{duration} seconds"
   end
 end
+
+class GetCharacterImages
+  def self.perform
+    start = Time.now.to_i
+    Character.all.each do |character|
+      [ "32", "64", "128", "256"].each do |size|
+        next if File.exist?("./public/images/characters/#{character[:char_id]}_#{size}.jpg")
+        
+        Log.info "STARTED Getting image size: #{size} for: #{character[:name]}"  
+        Net::HTTP.start("image.eveonline.com") do |http|
+            resp = http.get("/Character/#{character[:char_id]}_#{size}.jpg")
+            open("./public/images/characters/#{character[:char_id]}_#{size}.jpg", "wb") do |file|
+                file.write(resp.body)
+            end
+        end
+        Log.info "FINISHED Getting image size: #{size} for: #{character[:name]}"  
+      end
+    end
+    finish = Time.now.to_i
+    duration = finish - start
+    Log.info "COMPLETED Getting images for all characters, took: #{duration} seconds"
+  end
+end
+
+class GetRatImages
+  def self.perform
+    start = Time.now.to_i
+    Bounty.unique_rats.each do |rat|
+      [ "32", "64" ].each do |size|
+        next if File.exist?("./public/images/rats/#{rat["_id"]}_#{size}.png")
+        Log.info "STARTED Getting image size: #{size} for: #{Rat.where(:rat_id => rat["_id"]).first.rat_name}"  
+        Net::HTTP.start("image.eveonline.com") do |http|
+            resp = http.get("/Type/#{rat["_id"]}_#{size}.png")
+            open("./public/images/rats/#{rat["_id"]}_#{size}.png", "wb") do |file|
+                file.write(resp.body)
+            end
+        end
+        Log.info "FINISHED Getting image size: #{size} for: #{Rat.where(:rat_id => rat["_id"]).first.rat_name}"  
+      end
+    end
+    finish = Time.now.to_i
+    duration = finish - start
+    Log.info "COMPLETED Getting images for all rats, took: #{duration} seconds"
+  end
+end
  
 module Clockwork
   every 5.minutes, 'get_score' do
     GetWalletData.perform
+    GetCharacterImages.perform
+    GetRatImages.perform
   end
 end

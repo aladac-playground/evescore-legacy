@@ -118,4 +118,7 @@ class Bounty
     end
     return rank
   end
+  def self.unique_rats
+    Bounty.collection.aggregate({ "$unwind" => "$kills" }, { "$group" => { "_id" => "$kills.rat_id" } } )
+  end
 end

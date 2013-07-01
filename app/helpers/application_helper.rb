@@ -16,19 +16,24 @@ module ApplicationHelper
     link_to truncate(rat[:rat_name], :length => len), kills_log_path(:filter => { :rat_id => id } )
   end
   def rat_image(id, size=64)
-    image_tag "http://image.eveonline.com/Type/#{id}_#{size}.png", :class => "img-rounded ttp", :style => "margin: 2px", :title => Rat.rat_name(id) + "<br>" + Rat.rat_type(id)
+    File.exist?("./public/images/rats/#{id}_#{size}.png") ? src = "/images/rats/#{id}_#{size}.png" : "http://image.eveonline.com/Type/#{id}_#{size}.png"
+    image_tag src, :class => "img-rounded ttp", :style => "margin: 2px", :title => Rat.rat_name(id) + "<br>" + Rat.rat_type(id)
   end
   def rat_image_link(id, size=64)
-    link_to image_tag("http://image.eveonline.com/Type/#{id}_#{size}.png", :class => "img-rounded"), kills_log_path(:filter => { :rat_id => id } )
+    File.exist?("./public/images/rats/#{id}_#{size}.png") ? src = "/images/rats/#{id}_#{size}.png" : "http://image.eveonline.com/Type/#{id}_#{size}.png"
+    link_to image_tag(src, :class => "img-rounded"), kills_log_path(:filter => { :rat_id => id } )
   end
   def character_image(id, size=64)
-    image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded")
+    File.exist?("./public/images/characters/#{id}_#{size}.jpg") ? src = "/images/characters/#{id}_#{size}.jpg" : "http://image.eveonline.com/Character/#{id}_#{size}.jpg"
+    image_tag(src, :class => "img-rounded")
   end
   def character_image_link(id, size=64)
-    link_to image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded"), character_profile_path( :char_id => id )
+    File.exist?("./public/images/characters/#{id}_#{size}.jpg") ? src = "/images/characters/#{id}_#{size}.jpg" : "http://image.eveonline.com/Character/#{id}_#{size}.jpg"
+    link_to image_tag(src, :class => "img-rounded"), character_profile_path( :char_id => id )
   end
   def character_tick_link(id, tick, size=64)
-    link_to image_tag("http://image.eveonline.com/Character/#{id}_#{size}.jpg", :class => "img-rounded"), kills_log_path(:filter => { :_id => tick } )
+    File.exist?("./public/images/characters/#{id}_#{size}.jpg") ? src = "/images/characters/#{id}_#{size}.jpg" : "http://image.eveonline.com/Character/#{id}_#{size}.jpg"
+    link_to image_tag(src, :class => "img-rounded"), kills_log_path(:filter => { :_id => tick } )
   end
   def top_bounty(limit=5)
     return Bounty.top_bounty(limit)
