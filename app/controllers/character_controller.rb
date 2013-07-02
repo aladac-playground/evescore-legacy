@@ -11,7 +11,12 @@ class CharacterController < ApplicationController
   private
   def name_to_id
     if params[:char_name] 
-      @char_id = Character.where(:name => params[:char_name]).first.char_id
+      char = Character.where(:name => params[:char_name]).first
+      if char
+        @char_id = char.char_id
+      else
+        redirect_to root_path
+      end
     end
   end
   def validate_char_id
