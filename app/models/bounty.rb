@@ -23,6 +23,22 @@ class Bounty
                              {"$sort" => { "_id" => -1 } }  
                         )[0..limit]
   end
+  def self.top_kills_this_month(limit=5)
+    limit -= 1
+    collection.aggregate( 
+                         { "$match" => { "ts" => { "$gt" => (Time.at_begining_of_month.utc) } } },
+                         {"$unwind" => "$kills"}, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$char_id", 
+                             "kills" => { "$sum" => 1 } 
+                           } 
+                         }, 
+                         { "$sort" => 
+                           { "kills" => -1 } 
+                         } 
+                        )[0..limit]
+  end
   def self.top_kills_days(days=10, limit=5)
     limit -= 1
     collection.aggregate( 
@@ -58,6 +74,22 @@ class Bounty
     limit -= 1
     collection.aggregate(  
                          { "$match" => { "ts" => { "$gt" => (Time.now.utc - days.days) } } }, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$char_id", 
+                             "sum" => 
+                              { "$sum" => "$bounty"}  
+                           } 
+                         }, 
+                         {"$sort" => 
+                           { "sum" => -1 } 
+                         } 
+                        )[0..limit]
+  end
+  def self.top_bounty_this_month(limit=5)
+    limit -= 1
+    collection.aggregate(  
+                         { "$match" => { "ts" => { "$gt" => (Time.at_begining_of_month.utc) } } }, 
                          { "$group" => 
                            { 
                              "_id" => "$char_id", 
