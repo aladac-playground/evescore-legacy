@@ -26,7 +26,7 @@ class Bounty
   def self.top_kills_this_month(limit=5)
     limit -= 1
     collection.aggregate( 
-                         { "$match" => { "ts" => { "$gt" => (Time.at_begining_of_month.utc) } } },
+                         { "$match" => { "ts" => { "$gt" => (Time.now.utc.at_beginning_of_month) } } },
                          {"$unwind" => "$kills"}, 
                          { "$group" => 
                            { 
@@ -89,7 +89,7 @@ class Bounty
   def self.top_bounty_this_month(limit=5)
     limit -= 1
     collection.aggregate(  
-                         { "$match" => { "ts" => { "$gt" => (Time.at_begining_of_month.utc) } } }, 
+                         { "$match" => { "ts" => { "$gt" => (Time.now.utc.at_beginning_of_month) } } }, 
                          { "$group" => 
                            { 
                              "_id" => "$char_id", 

@@ -57,6 +57,9 @@ module ApplicationHelper
     bounty = Rat.where(rat_id: id).first[:bounty]
     return bounty
   end
+  def top_bounty_this_month(limit=5)
+    return Bounty.top_bounty_this_month(limit)
+  end
   def top_bounty_10days(limit=5)
     return Bounty.top_bounty_days(10, limit)
   end
@@ -65,6 +68,9 @@ module ApplicationHelper
   end
   def top_kills_10days(limit=5)
     return Bounty.top_kills_days(10, limit)
+  end
+  def top_kills_this_month(limit=5)
+    return Bounty.top_kills_this_month(limit)
   end
   def highest_tick_10days(limit=5)
     return Bounty.highest_tick_days(10, limit)

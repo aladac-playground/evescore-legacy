@@ -1,5 +1,27 @@
 .row
   .span6#kill_box
+    %h4 Top bounty this month
+    - top_bounty_this_month.each do |top|
+      .span1#kill
+        %b
+          = isk_short top["sum"]
+        = character_image_link(top["_id"])
+        %br
+        %b
+          = character_name_link(top["_id"])
+  .span6#kill_box
+    %h4 Top kills this month
+    - top_kills_this_month.each do |top|
+      .span1#kill
+        %b
+          = top["kills"]
+        = character_image_link(top["_id"])
+        %br
+        %b
+          = character_name_link(top["_id"])
+%br
+.row
+  .span6#kill_box
     %h4 Top bounty last 10 days
     - top_bounty_10days.each do |top|
       .span1#kill
