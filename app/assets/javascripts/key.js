@@ -23,7 +23,9 @@ function check_api (key, vcode) {
           }
         });
   } else {
-    $('.notification-area').html('<div class="alert key alert-warning"><button type="button" class="close" data-dismiss="alert">&times;</button>Check the format</div>');
+    if ( $('#vcode').val() != '' && $('#key').val() != '' ) {
+      $('.notification-area').html('<div class="alert key alert-warning"><button type="button" class="close" data-dismiss="alert">&times;</button>Check the format</div>');
+    }
   }
 };
 
