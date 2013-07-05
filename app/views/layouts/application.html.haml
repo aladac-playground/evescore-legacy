@@ -14,16 +14,11 @@
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
-          %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand{:href => root_path} 
-            = image_tag "eve.png"
-            -# %img{ :src => "../assets/images/eve.png"}
+          .brand
+            = link_to image_tag("evescore.png", { :style => "height: 20px"}), root_path
           .nav-collapse.collapse
             = render 'layouts/navigation'
-          .pull-right
+          .nav.pull-right
             = render 'layouts/search'
     .container
       %p
