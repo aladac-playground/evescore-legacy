@@ -1,7 +1,7 @@
 .hero-unit
   %h3 
     Contact info
-  - if request.headers["HTTP_USER_AGENT"] =~ /EVE-IGB$/
+  - if session[:igb] == true
     %p
       Click on the portrait below or the link besides it to open the EVE Mail window  
     %a{ :onclick => "CCPEVE.sendMail(810699209, 'EVESCORE', ' ');"}
