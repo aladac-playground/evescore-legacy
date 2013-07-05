@@ -10,7 +10,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield(:head)
-  %body{ :onload => "CCPEVE.requestTrust('http://evescore.com')" }
+  %body{ :onload => "CCPEVE.requestTrust('#{request.scheme + "://" + request.host + ":" + request.port.to_s}')" }
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
