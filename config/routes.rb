@@ -1,4 +1,12 @@
 Evescore::Application.routes.draw do
+  get "info/about"
+
+  get "info/faq"
+
+  get "info/changelog"
+  
+  get "info/contact"
+
   get "character/profile"
   get "character/all"
 

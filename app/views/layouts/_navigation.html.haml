@@ -14,9 +14,11 @@
       %span.caret
     %ul.dropdown-menu
       %li
-        %a{:href => "#", :tabindex => "-1"} FAQ
+        = link_to "FAQ", info_faq_path
       %li
-        %a{:href => "#", :tabindex => "-1"} Changelog
+        = link_to "Changelog", info_changelog_path
+      %li
+        = link_to "Contact", info_contact_path
       %li.divider
       %li
-        %a{:href => "#", :tabindex => "-1"} About author
+        = link_to "About author", info_about_path

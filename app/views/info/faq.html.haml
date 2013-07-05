@@ -1,0 +1,27 @@
+.well
+  %h1 FAQ
+  %hr
+  #accordion.accordion
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#c1"}
+          What is the purpose of this site?
+      #c1.accordion-body.collapse
+        .accordion-inner
+          The main purpose of this site is to embrace the spirit of competition when it comes to EVE Online PvE.
+          This site was also build as a hobby project to further my knowledge of MongoDB and mongoid.
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#c2"}
+          What kind of data are you getting / storing?
+      #c2.accordion-body.collapse
+        .accordion-inner
+          As bounties are wallet transactions, this site parses your wallet journal. I do have full access to every transaction, but I process
+          only records of type "85" - "Concord Bounty".
+    / .accordion-group
+    /   .accordion-heading
+    /     %a.accordion-toggle{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#c1"}
+    /       Collapsible Group Item #1
+    /   #c1.accordion-body.collapse
+    /     .accordion-inner
+    /       Anim pariatur cliche...              
