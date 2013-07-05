@@ -1,4 +1,4 @@
-%form.form-search{ :action => character_profile_path }
+%form.form-search.form-inline{ :action => character_profile_path, :style => "margin-bottom: 0px" }
   %input#search.input-medium.search-query{ :required => true, :type => :text, :autocomplete => :off, :name => :char_name, :"data-provide" => :typeahead, :"data-source" => Character.json }
   %button.btn{ :type => :submit }
     Search
