@@ -7,4 +7,16 @@ module CharacterHelper
     date = ts.strftime("%b-%-d")
     return date
   end
+  def total_kills
+    Bounty.total_kills(@char_id.to_i)
+  end
+  def total_bounty
+    Bounty.total_bounty(@char_id)
+  end
+  def top_tick
+    Bounty.top_tick(@char_id.to_i)
+  end
+  def avg_tick
+    Bounty.avg_tick(@char_id.to_i)
+  end
 end
