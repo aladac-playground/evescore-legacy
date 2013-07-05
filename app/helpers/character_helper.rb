@@ -19,4 +19,13 @@ module CharacterHelper
   def avg_tick
     Bounty.avg_tick(@char_id.to_i)
   end
+  def top_daily
+    Bounty.top_daily(@char_id.to_i)
+  end
+  def bounty_this_month
+    Bounty.bounty_this_month(@char_id.to_i)
+  end
+  def kills_this_month
+    Bounty.kills_this_month(@char_id.to_i)
+  end
 end

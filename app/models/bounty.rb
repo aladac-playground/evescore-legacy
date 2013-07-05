@@ -30,6 +30,19 @@ class Bounty
                              {"$sort" => { "_id" => -1 } }  
                         )[0..limit]
   end
+  def self.top_daily(char_id)
+    collection.aggregate( 
+                         { "$match" => { "char_id" => char_id } }, 
+                         { "$group" => { "_id" => 
+                           { 
+                             "year" => { "$year" => "$ts" }, 
+                             "month" => { "$month" => "$ts" }, 
+                             "day" => { "$dayOfMonth" => "$ts" } 
+                           }, 
+                             "sum" => { "$sum" => "$bounty"} } }, 
+                             {"$sort" => { "sum" => -1 } }  
+                        ).first["sum"]/100
+  end
   def self.top_kills_this_month(limit=5)
     limit -= 1
     collection.aggregate( 
@@ -45,6 +58,12 @@ class Bounty
                            { "kills" => -1 } 
                          } 
                         )[0..limit]
+  end
+  def self.kills_this_month(id)
+    collection.aggregate( 
+                         { "$match" => { "char_id" => id, "ts" => { "$gt" => (Time.now.utc.at_beginning_of_month) } } },
+                         {"$unwind" => "$kills"}
+                        ).count
   end
   def self.top_kills_days(days=10, limit=5)
     limit -= 1
@@ -108,6 +127,21 @@ class Bounty
                            { "sum" => -1 } 
                          } 
                         )[0..limit]
+  end
+  def self.bounty_this_month(id)
+    collection.aggregate(  
+                         { "$match" => { "char_id" => id, "ts" => { "$gt" => (Time.now.utc.at_beginning_of_month) } } }, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$char_id", 
+                             "sum" => 
+                              { "$sum" => "$bounty"}  
+                           } 
+                         }, 
+                         {"$sort" => 
+                           { "sum" => -1 } 
+                         } 
+                        ).first["sum"]/100
   end
   def self.top_bounty(limit=5)
     limit -= 1

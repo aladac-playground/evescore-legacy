@@ -68,17 +68,16 @@
 -# %script{ src: "http://code.highcharts.com/modules/exporting.js" }
 
 .row
-  #profile_box.span5
+  #profile_box.span12
     .margin20
       .row
         .span2
           = character_image(@character[:char_id], 128)
-        .span2
+        .span3
           %p
             %b
               = character_name(@character[:char_id],50)
-          %br
-          %div{:style => "position:relative;left:0;bottom:0"}
+          %p
             %b 
               Ranking
             %br
@@ -88,10 +87,47 @@
               = kill_rank(@character[:char_id])
             %span.badge.badge-important.ttp{:title => "Tick Rank"}
               = tick_rank(@character[:char_id])
+        %table.span6#stats{ :style => "text-align: right; vertical-align: top"}
+          %tr
+            %td
+              %h4 Bounty
+            %td
+              %h4 Kills
+            %td
+              %h4 Ticks
+            %td
+              %h4 IPH
+          %tr
+            %td.span2
+              %b Total
+              %br
+              = isk total_bounty
+              %b This month
+              = isk bounty_this_month
+            %td.span2
+              %b Total
+              %br
+                = total_kills
+              %b This month
+              %br
+              = kills_this_month
+            %td.span2
+              %b Top tick
+              %br
+              = isk top_tick
+              %b Average tick
+              %br
+              = isk avg_tick
+            %td.span2
+              %b Max. IPH
+              = isk top_tick * 3
+              %br
+              %b Avg. IPH
+              = isk avg_tick * 3
       .row
         .span5
-  .span7
-    #chart.span7{ style: "min-width: 400px; height: 170px; margin: 0 auto" }
+  / .span7
+  /   #chart.span7{ style: "min-width: 400px; height: 170px; margin: 0 auto" }
 
 %br
 
