@@ -7,3 +7,16 @@
     %a{:href => kills_log_path } Kill Log
   %li
     %a{:href => key_add_path } Add API 
+%ul.nav
+  %li
+    %a.dropdown-toggle{ :"data-toggle" => :dropdown, :href => "#" }
+      Info
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        %a{:href => "#", :tabindex => "-1"} FAQ
+      %li
+        %a{:href => "#", :tabindex => "-1"} Changelog
+      %li.divider
+      %li
+        %a{:href => "#", :tabindex => "-1"} About author
