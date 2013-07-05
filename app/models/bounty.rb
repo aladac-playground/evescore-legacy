@@ -8,6 +8,13 @@ class Bounty
   index({ ts: 1, char_id: 1 }, { unique: true, drop_dups: true })
   embeds_many :kills
 
+  def self.total_bounty(id)
+    Bounty.where(char_id: id).sum(:bounty) / 100
+  end
+  def self.total_kills(id)
+    Bounty.collection.aggregate({ "$match" => { "char_id" => id }}, { "$unwind" => "$kills" } ).count
+  end
+
   def self.daily(char_id, limit=10)
     limit -= 1
     collection.aggregate( 
@@ -139,6 +146,12 @@ class Bounty
   end
   def self.highest_tick(limit=5)
     all.sort(:bounty.desc).limit(limit)
+  end
+  def self.top_tick(id)
+    where(char_id: id).max(:bounty)/100
+  end
+  def self.avg_tick(id)
+    where(char_id: id).avg(:bounty)/100
   end
   def self.tick_rank(char_id)
     rank=0
