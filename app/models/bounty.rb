@@ -1,12 +1,17 @@
 class Bounty
   include Mongoid::Document
+  embeds_many :kills
   validates_uniqueness_of :ts, :scope => [ :char_id ]
   validates_presence_of :ts, :char_id, :bounty
   field :ts, type: Time
   field :char_id, type: Integer
   field :bounty, type: Integer
   index({ ts: 1, char_id: 1 }, { unique: true, drop_dups: true })
-  embeds_many :kills
+  index({ ts: -1 })
+  index({ ts: 1 })
+  index({ bounty: 1 })
+  index({ bounty: -1 })
+  index({ "kill.rat_id" => 1 }, { unique: true, drop_dups: true } )
 
   def self.total_bounty(id)
     Bounty.where(char_id: id).sum(:bounty) / 100
