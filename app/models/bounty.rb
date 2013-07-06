@@ -134,7 +134,7 @@ class Bounty
                         )[0..limit]
   end
   def self.bounty_this_month(id)
-    collection.aggregate(  
+    bounty = collection.aggregate(  
                          { "$match" => { "char_id" => id, "ts" => { "$gt" => (Time.now.utc.at_beginning_of_month) } } }, 
                          { "$group" => 
                            { 
@@ -146,7 +146,12 @@ class Bounty
                          {"$sort" => 
                            { "sum" => -1 } 
                          } 
-                        ).first["sum"]/100
+                        ).first
+    if bounty
+      bounty["sum"]/100
+    else
+      0
+    end
   end
   def self.top_bounty(limit=5)
     limit -= 1
