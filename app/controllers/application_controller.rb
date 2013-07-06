@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
       name = request.headers["HTTP_EVE_CHARNAME"]
       char = { id: id, name: name}
       session[:char] = char
+      @char = char
     else
       return nil
     end

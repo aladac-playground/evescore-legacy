@@ -3,4 +3,5 @@
     - if msg.is_a?(String)
       %div{:class => "alert #{params[:controller]} alert-#{name}"}
         %a.close{"data-dismiss" => "alert"} ×
-        = content_tag :div, msg, :id => "flash_#{name}"
+        = msg
+        / = content_tag :div, msg, :id => "flash_#{name}"

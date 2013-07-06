@@ -1,4 +1,12 @@
 Evescore::Application.routes.draw do
+  get "link/index"
+
+  get "link/new"
+
+  get "link/show"
+
+  get "link/pap"
+
   get "info/about"
 
   get "info/faq"
