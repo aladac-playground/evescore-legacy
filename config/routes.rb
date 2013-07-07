@@ -1,13 +1,4 @@
 Evescore::Application.routes.draw do
-  get "link/index"
-  match "link/delete"
-
-  get "link/new"
-
-  get "link/show"
-
-  get "link/pap"
-
   get "info/about"
 
   get "info/faq"
@@ -30,5 +21,8 @@ Evescore::Application.routes.draw do
 
   get "key/add"
   match "key/save"
+  
+  match "/irs", :controller => :home, :action => :taxes
+  
   root :to => "home#index"
 end
