@@ -192,10 +192,12 @@ class Bounty
     all.sort(:bounty.desc).limit(limit)
   end
   def self.top_tick(id)
-    where(char_id: id).max(:bounty)/100
+    top_tick = where(char_id: id).max(:bounty)
+    top_tick ? top_tick=top_tick/100 : 0
   end
   def self.avg_tick(id)
-    where(char_id: id).avg(:bounty)/100
+    avg_tick = where(char_id: id).avg(:bounty)
+    avg_tick ? avg_tick=avg_tick/100 : 0
   end
   def self.tick_rank(char_id)
     rank=0

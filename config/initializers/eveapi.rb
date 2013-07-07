@@ -4,7 +4,8 @@ require "net/http"
 API_URL = "https://api.eveonline.com"
 METHOD_URLS = {
   :api_key_info => "/account/APIKeyInfo.xml.aspx",
-  :characters => "/account/Characters.xml.aspx"
+  :characters => "/account/Characters.xml.aspx",
+  :wallet_journal => "/char/WalletJournal.xml.aspx"
 }
 VAR_MAP = {
   :@key => "keyID",
@@ -71,6 +72,8 @@ module Eve
       key_info = Hash.new
       if ! key.empty?
         key_info = {
+          key_id: @key,
+          vcode: @vcode,
           type: key.attr("type").value,
           access_mask: key.attr("accessMask").value,
           expires: key.attr("expires").value
@@ -105,6 +108,25 @@ module Eve
       else
         return characters
       end
+    end
+    
+    # ==================
+    # = Wallet Journal =
+    # ==================
+    
+    
+    def wallet_journal
+      doc = Util.fetch( __method__, self.instance_variables_hash )
+      rows = doc.xpath("//row")
+      wallet = Array.new
+      rows.each do |row|
+        output = Hash.new
+        row.attributes.each_pair do |attr, inside|
+          output.merge!( { attr => inside.value } )
+        end
+        wallet.push output
+      end
+      wallet
     end
     
   end

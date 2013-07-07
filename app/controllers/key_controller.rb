@@ -2,17 +2,19 @@ class KeyController < ApplicationController
   def add
   end
   def save
-    char = Character.new(char_id: params[:char_id], name: params[:name], key: params[:key], vcode: params[:vcode])
-    key = Key.new(key_id: params[:key], vcode: params[:vcode])
+    api = Eve::Api.new(params[:key], params[:vcode])
+    key_info = api.api_key_info
+    key = Key.new(key_info)
+    char = api.characters.first
+    p char
+    p key
     if key.valid?
       key.save
+      key.characters.create!(char)
       flash[:notice] = "Character key successfuly stored"
       redirect_to api_import_path(:char_id => params[:char_id])
     else
       error_alert = String.new
-      char.errors.messages.each_pair do |field, message|
-        error_alert += message[0]
-      end
       key.errors.messages.each_pair do |field, message|
         error_alert += message[0]
       end

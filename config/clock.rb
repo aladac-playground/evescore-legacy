@@ -13,20 +13,10 @@ class GetWalletData
     start = Time.now.to_i
     Character.all.each do |character|
       Log.info "STARTED Getting data for: #{character[:name]}"
-      vcode = character[:vcode]
-      key_id = character[:key]
-      uri = URI.parse "https://api.eveonline.com/char/WalletJournal.xml.aspx?keyID=#{key_id}&vcode=#{vcode}&rowCount=1000"
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-      request = Net::HTTP::Get.new(uri.request_uri)
-
-      response = http.request(request)
-
-      xml = Nokogiri::XML(response.body)
-
-      xml.xpath("//row").each do |row|
+      key = character.key
+      api = Eve::Api.new(key[:key_id], key[:vcode])    
+      wallet = api.wallet_journal
+      wallet.each do |row|
         if row['refTypeID'] == "85"
           reason = row['reason']
           amount = row['amount'].to_i
