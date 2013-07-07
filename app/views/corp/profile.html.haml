@@ -1,0 +1,20 @@
+.well
+  %h4
+    = @corp.name
+  %p
+    %b Total Tax
+    %br
+    = isk @total_tax
+  
+  %table.table.table-striped.table-condensed
+    %thead
+      %caption Top 10 Tax Contributors
+    %tr
+      %th Character
+      %th Tax Amount
+    - @tax_contrib.each do |contrib|
+      %tr
+        %td
+          = character_image_link contrib["_id"]["char_id"], 32
+          = character_name_link contrib["_id"]["char_id"]
+        %td= isk contrib["sum"] / 100
