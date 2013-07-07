@@ -5,10 +5,15 @@ class Bounty
   validates_presence_of :ts, :char_id, :bounty
   field :ts, type: Time
   field :char_id, type: Integer
+  field :corp_id, type: Integer
+  field :tax, type: Integer
   field :bounty, type: Integer
   index({ ts: 1, char_id: 1 }, { unique: true, drop_dups: true })
   index({ ts: -1 })
   index({ ts: 1 })
+  index({ char_id: 1})
+  index({ tax: -1 })
+  index({ tax: 1 })
   index({ bounty: 1 })
   index({ bounty: -1 })
   index({ "kill.rat_id" => 1 }, { unique: true, drop_dups: true } )
@@ -16,10 +21,29 @@ class Bounty
   def self.total_bounty(id)
     Bounty.where(char_id: id).sum(:bounty) / 100
   end
+  def self.total_tax(id)
+    Bounty.where(corp_id: id).sum(:tax) / 100
+  end
+
+  def self.tax_contrib(corp_id, limit=10)
+    limit -= 1
+    collection.aggregate( 
+                         { "$match" => { "corp_id" => corp_id } }, 
+                         { "$group" => { "_id" => 
+                           { 
+                             "corp_id" => "$corp_id",
+                             "char_id" => "$char_id"
+                           }, 
+                             "sum" => { "$sum" => "$tax"} } }, 
+                             {"$sort" => { "sum" => -1 } }  
+                        )[0..limit]
+  end
+
+
   def self.total_kills(id)
     Bounty.collection.aggregate({ "$match" => { "char_id" => id }}, { "$unwind" => "$kills" } ).count
   end
-
+  
   def self.daily(char_id, limit=10)
     limit -= 1
     collection.aggregate( 
