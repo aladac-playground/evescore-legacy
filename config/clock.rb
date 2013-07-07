@@ -69,10 +69,33 @@ class GetRatImages
     Log.info "COMPLETED Getting images for all rats, took: #{duration} seconds"
   end
 end
+
+class GetCorpImages
+  def self.perform
+    start = Time.now.to_i
+    Corp.each do |corp|
+      [ "32", "64" ].each do |size|
+        next if Rails.application.assets.find_asset("corps/#{corp.corp_id}_#{size}.png")
+        Log.info "STARTED Getting image size: #{size} for: #{corp.name}"  
+        Net::HTTP.start("image.eveonline.com") do |http|
+            resp = http.get("/Corporation/#{corp.corp_id}_#{size}.png")
+            open("./app/assets/images/corps/#{corp.corp_id}_#{size}.png", "wb") do |file|
+                file.write(resp.body)
+            end
+        end
+        Log.info "FINISHED Getting image size: #{size} for: #{corp.name}"  
+      end
+    end
+    finish = Time.now.to_i
+    duration = finish - start
+    Log.info "COMPLETED Getting images for all corps, took: #{duration} seconds"
+  end
+end
  
 module Clockwork
   every 5.minutes, 'get_score' do
     GetWalletData.perform
+    # GetCorpImages.perform
     # GetCharacterImages.perform
     # GetRatImages.perform
   end
