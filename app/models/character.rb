@@ -20,4 +20,5 @@ class Character
     return @characters.to_json
   end
   belongs_to :key
+  belongs_to :corp, primary_key: :corp_id
 end
