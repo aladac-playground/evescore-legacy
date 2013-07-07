@@ -9,7 +9,8 @@ METHOD_URLS = {
 }
 VAR_MAP = {
   :@key => "keyID",
-  :@vcode => "vCode"
+  :@vcode => "vCode",
+  :@rows => "rowCount"
 }
 
 # Get instance vars as Hash
@@ -53,9 +54,10 @@ module Eve
     attr_reader :key
     attr_reader :vcode
     
-    def initialize(key, vcode)
+    def initialize(key, vcode, rows=50)
       @key = key
       @vcode = vcode
+      @rows = rows.to_s
     end
     
     def tst
