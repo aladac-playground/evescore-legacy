@@ -8,3 +8,18 @@
     %a{ href: "/link/new" }
       %button.btn.btn-success
         Create
+
+%table.table.table-stipped
+  %thead
+    %tr
+      %th Timestamp
+      %th Expires
+      %th Operations
+  %tbody
+    - @links.each do |link|
+      %tr
+        %td= link.ts
+        %td= link.ts
+        %td= link_to "Delete", link, :method => :delete, :data => { :confirm => "Are you sure?" }, :class => "btn btn-danger"
+
+  

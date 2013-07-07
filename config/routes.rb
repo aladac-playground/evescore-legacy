@@ -1,5 +1,6 @@
 Evescore::Application.routes.draw do
   get "link/index"
+  match "link/delete"
 
   get "link/new"
 
