@@ -92,8 +92,9 @@ module Eve
         if row
           character = {
             name: row.attr("name"),
-            character_id: row.attr("characterID"),
-            corporation_id: row.attr("corporationID")
+            char_id: row.attr("characterID").to_i,
+            corp_id: row.attr("corporationID").to_i,
+            corp_name: row.attr("corporationName")
           }
           characters.push character
         end

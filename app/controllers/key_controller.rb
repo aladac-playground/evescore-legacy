@@ -13,6 +13,9 @@ class KeyController < ApplicationController
       char.errors.messages.each_pair do |field, message|
         error_alert += message[0]
       end
+      key.errors.messages.each_pair do |field, message|
+        error_alert += message[0]
+      end
       flash[:error] = error_alert
       redirect_to key_add_path
     end
