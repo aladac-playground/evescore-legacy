@@ -3,8 +3,9 @@ class KeyController < ApplicationController
   end
   def save
     char = Character.new(char_id: params[:char_id], name: params[:name], key: params[:key], vcode: params[:vcode])
-    if char.valid?
-      char.save
+    key = Key.new(key_id: params[:key], vcode: params[:vcode])
+    if key.valid?
+      key.save
       flash[:notice] = "Character key successfuly stored"
       redirect_to api_import_path(:char_id => params[:char_id])
     else

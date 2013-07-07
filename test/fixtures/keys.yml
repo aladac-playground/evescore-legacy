@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  key_id: MyString
+  vcode: MyString
+  access_mask: 1
+  expires: 2013-07-07 12:49:10
+  valid: false
+
+two:
+  key_id: MyString
+  vcode: MyString
+  access_mask: 1
+  expires: 2013-07-07 12:49:10
+  valid: false
