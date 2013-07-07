@@ -6,10 +6,9 @@ class KeyController < ApplicationController
     key_info = api.api_key_info
     key = Key.new(key_info)
     char = api.characters.first
-    p char
-    p key
     if key.valid?
       key.save
+      corp = Corp.create!(corp_id: char[:corp_id], name: char[:corp_name])
       key.characters.create!(char)
       flash[:notice] = "Character key successfuly stored"
       redirect_to api_import_path(:char_id => params[:char_id])
