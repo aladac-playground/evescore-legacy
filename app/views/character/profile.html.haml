@@ -72,11 +72,14 @@
     .margin20
       .row
         .span2
-          = character_image(@character[:char_id], 128)
+          = character_image(@character[:char_id], 64)
+          = corp_image_link(@character[:corp_id],64)
         .span3
           %p
             %b
               = character_name(@character[:char_id],50)
+            %br
+              = corp_name_link(@character[:corp_id],50)
           %p
             %b 
               Ranking
