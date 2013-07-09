@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :page_validation, :using_igb?, :current_char
+  before_filter :page_validation, :using_igb?, :trust?, :current_char
 
   private 
   def page_validation
@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
   def using_igb?  
     if request.headers["HTTP_USER_AGENT"] =~ /EVE-IGB$/
       session[:igb] = true
+    end
+  end
+  def trust?
+    if request.headers["HTTP_EVE_TRUSTED"] == "Yes"
+      @trust = true
     end
   end
   def current_char
