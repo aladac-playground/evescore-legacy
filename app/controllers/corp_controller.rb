@@ -5,6 +5,7 @@ class CorpController < ApplicationController
     @corp = Corp.where(:corp_id => @corp_id).first
     @total_tax = Bounty.total_tax(@corp_id)
     @tax_contrib = Bounty.tax_contrib(@corp_id.to_i)
+    @tax_this_month = Bounty.tax_this_month(@corp_id.to_i)
   end
   
   private

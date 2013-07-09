@@ -1,4 +1,25 @@
 module ApplicationHelper
+  def tax_this_month(id)
+    tax = Bounty.tax_this_month(id)
+    if tax
+      return tax.first / 100
+    else
+      return 0
+    end
+  end
+  def tax_daily(id)
+    tax = Bounty.tax_daily(id)
+    if tax
+      return tax.first / 100
+    else
+      return 0
+    end
+  end
+    
+  def corp_name_link(id, len=20)
+    corp = Corp.where(corp_id: id).first
+    link_to truncate(corp[:name], :length => len), corp_profile_path( :corp_id => id )
+  end
   def character_name(id, len=15)
     character = Character.where(char_id: id).first
     return truncate character[:name], :length => len
@@ -29,12 +50,26 @@ module ApplicationHelper
     end
     link_to image_tag(src, :class => "img-rounded"), kills_log_path(:filter => { :rat_id => id } )
   end
+  def corp_image(id, size=64)
+    src = "corps/#{id}_#{size}.jpg"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("corp", id, size)
+    end
+    image_tag(src, :class => "img-rounded")
+  end
   def character_image(id, size=64)
     src = "characters/#{id}_#{size}.jpg"
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("character", id, size)
     end
     image_tag(src, :class => "img-rounded")
+  end
+  def corp_image_link(id, size=64)
+    src = "corps/#{id}_#{size}.jpg"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("corp", id, size)
+    end
+    link_to image_tag(src, :class => "img-rounded"), corp_profile_path( :corp_id => id )
   end
   def character_image_link(id, size=64)
     src = "characters/#{id}_#{size}.jpg"
@@ -101,9 +136,11 @@ module ApplicationHelper
   def ext_image(type, id, size)
     require 'net/http'
     dir = "Type" if type == "rat"
+    dir = "Corporation" if type = "corp"
     dir = "Character" if type == "character"
     ext = "jpg" if type == "character"
     ext = "png" if type == "rat"
+    ext = "png" if type == "corp"
     return "http://image.eveonline.com/#{dir}/#{id}_#{size}.#{ext}"
   end
 end

@@ -43,6 +43,21 @@ class Bounty
   def self.total_kills(id)
     Bounty.collection.aggregate({ "$match" => { "char_id" => id }}, { "$unwind" => "$kills" } ).count
   end
+  def self.tax_daily(corp_id, limit=10)
+    limit -= 1
+    collection.aggregate( 
+                         { "$match" => { "corp_id" => corp_id } }, 
+                         { "$group" => { "_id" => 
+                           { 
+                             "corp_id" => "$corp_id", 
+                             "year" => { "$year" => "$ts" }, 
+                             "month" => { "$month" => "$ts" }, 
+                             "day" => { "$dayOfMonth" => "$ts" } 
+                           }, 
+                             "sum" => { "$sum" => "$tax"} } }, 
+                             {"$sort" => { "_id" => -1 } }  
+                        )[0..limit]
+  end
   
   def self.daily(char_id, limit=10)
     limit -= 1
@@ -173,6 +188,26 @@ class Bounty
                         ).first
     if bounty
       bounty["sum"]/100
+    else
+      0
+    end
+  end
+  def self.tax_this_month(id)
+    tax = collection.aggregate(  
+                         { "$match" => { "corp_id" => id, "ts" => { "$gt" => (Time.now.utc.at_beginning_of_month) } } }, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$corp_id", 
+                             "sum" => 
+                              { "$sum" => "$tax"}  
+                           } 
+                         }, 
+                         {"$sort" => 
+                           { "sum" => -1 } 
+                         } 
+                        ).first
+    if tax
+      tax["sum"]/100
     else
       0
     end

@@ -1,14 +1,23 @@
 .well
-  %h4
-    = @corp.name
+  %p
+    = corp_image(@corp.corp_id, 64)
+  %p
+    %h3
+      = @corp.name
   %p
     %b Total Tax
     %br
     = isk @total_tax
+  %p
+    %b Tax This Month
+    %br
+    = isk @tax_this_month
   
   %table.table.table-striped.table-condensed
     %thead
-      %caption Top 10 Tax Contributors
+      %caption 
+        %h4
+          Top 10 Tax Contributors
     %tr
       %th Character
       %th Tax Amount
