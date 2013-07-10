@@ -88,8 +88,8 @@
               = bounty_rank(@character[:char_id])
             %span.badge.badge-warning.ttp{:title => "Kill Rank"}
               = kill_rank(@character[:char_id])
-            %span.badge.badge-important.ttp{:title => "Tick Rank"}
-              = tick_rank(@character[:char_id])
+            / %span.badge.badge-important.ttp{:title => "Tick Rank"}
+            /   = tick_rank(@character[:char_id])
         %table.span6#stats{ :style => "text-align: right; vertical-align: top"}
           %tr
             %td
