@@ -21,4 +21,11 @@ class Character
   end
   belongs_to :key
   belongs_to :corp, primary_key: :corp_id
+  
+  def daily(limit=90)
+    Bounty.daily(self.char_id, limit)
+  end
+  def top_rats(limit=10)
+    Bounty.rats(self.char_id)
+  end
 end

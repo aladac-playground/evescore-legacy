@@ -135,10 +135,18 @@
               = isk avg_tick * 3
       .row
         .span5
+          
+
   / .span7
   /   #chart.span7{ style: "min-width: 400px; height: 170px; margin: 0 auto" }
 
 %br
+
+              
+
+.row
+  = render :partial => 'daily'
+  = render :partial => 'top_rats'
 
 = render :partial => "shared/log"
 

@@ -32,6 +32,10 @@ module ApplicationHelper
     rat = Rat.where(rat_id: id).first
     return truncate rat[:rat_name], :length => len
   end
+  def rat_type(id, len=18)
+    rat = Rat.where(rat_id: id).first
+    return truncate rat[:rat_type], :length => len
+  end
   def rat_name_link(id, len=18)
     rat = Rat.where(rat_id: id).first
     link_to truncate(rat[:rat_name], :length => len), kills_log_path(:filter => { :rat_id => id } )

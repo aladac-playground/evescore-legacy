@@ -1,0 +1,23 @@
+.span8
+  %table.table.table-bordered.table-striped
+    %tr
+      %th{ colspan: 4 }
+        Favourite Rats
+    %tr
+      %th 
+        %em Name
+      %th 
+        %em Type
+      %th 
+        %em Bounty
+      %th 
+        %em Count
+    - @character.top_rats.each do |rat|
+      %tr
+        %td 
+          = rat_name(rat["_id"]["rat_id"], 50)
+        %td
+          = rat_type(rat["_id"]["rat_id"], 50)
+        %td.isk
+          = isk rat_bounty(rat["_id"]["rat_id"])
+        %td.isk= rat["sum"]

@@ -1,0 +1,22 @@
+/ %table.table.span6#daily
+
+.span4
+  %table.table.table-striped.table-bordered
+    %caption
+      %tr
+        %th{ colspan: 2 }
+          Last 5 days
+      %tr
+        %th 
+          %em
+            Date
+        %th
+          %em
+            Bounty
+    - daily = Bounty.daily(@character.char_id, 5)
+    - daily.each do |day|
+      %tr
+        %td
+          = build_date day
+        %td.isk
+          = isk day["sum"]/100

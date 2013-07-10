@@ -271,4 +271,27 @@ class Bounty
   def self.unique_rats
     Bounty.collection.aggregate({ "$unwind" => "$kills" }, { "$group" => { "_id" => "$kills.rat_id" } } )
   end
+  def self.rats(id, limit=5)
+    limit -= 1    
+    Bounty.collection.aggregate(
+    { 
+      "$match" => { "char_id" => id }
+    },
+    { 
+      "$unwind" => "$kills" 
+    }, 
+    { 
+      "$group" => { 
+        "_id" => {
+          "rat_id" => "$kills.rat_id", 
+          "char_id" => "$char_id" }, 
+          "sum" => { "$sum" => 1 } 
+         
+      }
+    }, 
+    { 
+      "$sort" => { "sum" => -1 }
+    } 
+    )[0..limit]
+  end
 end
