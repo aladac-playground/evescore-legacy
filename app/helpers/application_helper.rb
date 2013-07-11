@@ -140,7 +140,7 @@ module ApplicationHelper
   def ext_image(type, id, size)
     require 'net/http'
     dir = "Type" if type == "rat"
-    dir = "Corporation" if type = "corp"
+    dir = "Corporation" if type == "corp"
     dir = "Character" if type == "character"
     ext = "jpg" if type == "character"
     ext = "png" if type == "rat"
