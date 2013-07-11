@@ -1,4 +1,7 @@
 Evescore::Application.routes.draw do
+  get '/mu-70933399-cf59f263-41132851-471e4059' do
+    '42'
+  end
   get "corp/profile"
 
   get "info/about"
