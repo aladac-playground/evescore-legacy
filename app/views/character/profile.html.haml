@@ -80,14 +80,14 @@
               = character_name(@character[:char_id],50)
             %br
               = corp_name_link(@character[:corp_id],50)
-          %p
-            %b 
-              Ranking
-            %br
-            %span.badge.badge-success.ttp{:title => "Bounty Rank"}
-              = bounty_rank(@character[:char_id])
-            %span.badge.badge-warning.ttp{:title => "Kill Rank"}
-              = kill_rank(@character[:char_id])
+          / %p
+          /   %b 
+          /     Ranking
+          /   %br
+          /   %span.badge.badge-success.ttp{:title => "Bounty Rank"}
+          /     = bounty_rank(@character[:char_id])
+          /   %span.badge.badge-warning.ttp{:title => "Kill Rank"}
+          /     = kill_rank(@character[:char_id])
             / %span.badge.badge-important.ttp{:title => "Tick Rank"}
             /   = tick_rank(@character[:char_id])
         %table.span6#stats{ :style => "text-align: right; vertical-align: top"}
