@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def cache_key
+    count = Bounty.count
+    params[:controller].to_s + params[:action].to_s + count.to_s
+  end
   def tax_this_month(id)
     tax = Bounty.tax_this_month(id)
     if tax

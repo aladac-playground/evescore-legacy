@@ -1,22 +1,23 @@
-%table.table.table-condensed.table-striped.rounded.table-bordered
-  %thead
-    %tr
-      %th Recent Kills
-  %tbody
-    - @kill_log.each do |log|
+= cache(cache_key) do
+  %table.table.table-condensed.table-striped.rounded.table-bordered
+    %thead
       %tr
-        %td
-          .span1{ :style => "margin: 7px" }
-            = character_image_link( log[:char_id] ) 
-          .span3
-            %b
-              = character_name_link( log[:char_id], 50 )
-            %br
-            = log[:ts].strftime("%Y-%m-%d %H:%M:%S")
-            %br
-            %b
-              = isk log[:bounty]/100
-          .span7
-            - log.kills.each do |kill|
-              = rat_image(kill["rat_id"], 32)
-= will_paginate @kill_log
+        %th Recent Kills
+    %tbody
+      - @kill_log.each do |log|
+        %tr
+          %td
+            .span1{ :style => "margin: 7px" }
+              = character_image_link( log[:char_id] ) 
+            .span3
+              %b
+                = character_name_link( log[:char_id], 50 )
+              %br
+              = log[:ts].strftime("%Y-%m-%d %H:%M:%S")
+              %br
+              %b
+                = isk log[:bounty]/100
+            .span7
+              - log.kills.each do |kill|
+                = rat_image(kill["rat_id"], 32)
+  = will_paginate @kill_log
