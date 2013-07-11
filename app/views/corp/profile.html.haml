@@ -14,7 +14,7 @@
     = isk @tax_this_month
 .row
   .span6
-    %table.table.table-striped.table-rounded
+    %table.table.table-striped.table-bordered
       %thead
         %caption 
           %h4
@@ -29,7 +29,7 @@
             = character_name_link contrib["_id"]["char_id"]
           %td= isk contrib["sum"] / 100
   .span6
-    %table.table.table-striped
+    %table.table.table-striped.table-bordered
       %thead
         %caption 
           %h4
