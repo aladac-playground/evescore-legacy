@@ -17,7 +17,6 @@ class CheckCharacters
       api = Eve::Api.new(key[:key_id], key[:vcode])    
       api.char_id = character.char_id
       char = api.characters.first
-      p char
       corp = Corp.create!(corp_id: char[:corp_id], name: char[:corp_name])
       character.corp_id = corp.corp_id
       character.corp_name = corp.name
@@ -38,6 +37,7 @@ class GetWalletData
       Log.info "STARTED Getting data for: #{character[:name]}"
       key = character.key
       api = Eve::Api.new(key[:key_id], key[:vcode])    
+      api.rows = 3000
       wallet = api.wallet_journal
       wallet.wallet_import
       Log.info "FINISHED Getting data for: #{character[:name]}"  

@@ -56,6 +56,7 @@ module Eve
     attr_accessor :key
     attr_accessor :vcode
     attr_accessor :char_id
+    attr_accessor :rows
     
     def initialize(key, vcode, rows=50)
       @key = key
