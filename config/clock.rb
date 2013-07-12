@@ -8,6 +8,29 @@ require_relative "../config/environment"
 require 'clockwork'
 require 'net/http'
 
+class CheckCharacters
+  def self.perform
+    start = Time.now.to_i
+    Character.all.each do |character|
+      Log.info "STARTED Updating character data for: #{character[:name]}"
+      key = character.key
+      api = Eve::Api.new(key[:key_id], key[:vcode])    
+      api.char_id = character.char_id
+      char = api.characters.first
+      p char
+      corp = Corp.create!(corp_id: char[:corp_id], name: char[:corp_name])
+      character.corp_id = corp.corp_id
+      character.corp_name = corp.name
+      character.save!
+      Log.info "FINISHED Updating character data for: #{character[:name]}"  
+    end
+    finish = Time.now.to_i
+    duration = finish - start
+    Log.info "COMPLETED Updating character data for all, took: #{duration} seconds"
+  end
+end
+
+
 class GetWalletData
   def self.perform
     start = Time.now.to_i
@@ -94,6 +117,7 @@ end
  
 module Clockwork
   every 5.minutes, 'get_score' do
+    CheckCharacters.perform
     GetWalletData.perform
     # GetCorpImages.perform
     # GetCharacterImages.perform
