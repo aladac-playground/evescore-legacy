@@ -92,6 +92,13 @@ module ApplicationHelper
     end
     link_to image_tag(src, :class => "img-rounded"), character_profile_path( :char_id => id )
   end
+  def character_image_link_tiny(id, size=32)
+    src = "characters/#{id}_#{size}.jpg"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("character", id, size)
+    end
+    link_to image_tag(src, :class => "img-rounded", :style => "height: 18px"), character_profile_path( :char_id => id )
+  end
   def character_tick_link(id, tick, size=64)
     src = "characters/#{id}_#{size}.jpg"
     if ! Rails.application.assets.find_asset(src)

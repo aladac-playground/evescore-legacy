@@ -5,12 +5,14 @@ API_URL = "https://api.eveonline.com"
 METHOD_URLS = {
   :api_key_info => "/account/APIKeyInfo.xml.aspx",
   :characters => "/account/Characters.xml.aspx",
-  :wallet_journal => "/char/WalletJournal.xml.aspx"
+  :wallet_journal => "/char/WalletJournal.xml.aspx",
+  :character_info => "/eve/CharacterInfo.xml.aspx"
 }
 VAR_MAP = {
   :@key => "keyID",
   :@vcode => "vCode",
-  :@rows => "rowCount"
+  :@rows => "rowCount",
+  :@char_id => "characterID"
 }
 
 # Get instance vars as Hash
@@ -42,7 +44,7 @@ module Eve
       i = 0
       args.each_pair do |name, value|
         i += 1
-        query_string += VAR_MAP[name] + "=" + value
+        query_string += VAR_MAP[name] + "=" + value.to_s
         if i < len
           query_string += "&"
         end
@@ -51,8 +53,9 @@ module Eve
     end
   end
   class Api
-    attr_reader :key
-    attr_reader :vcode
+    attr_accessor :key
+    attr_accessor :vcode
+    attr_accessor :char_id
     
     def initialize(key, vcode, rows=50)
       @key = key
@@ -83,6 +86,23 @@ module Eve
       else
         nil
       end      
+    end
+    
+    # ==================
+    # = Character Info =
+    # ==================
+    
+    def character_info
+      doc = Util.fetch( __method__, self.instance_variables_hash )
+      char_id = doc.xpath("//result/characterID").text.to_i
+      char_name = doc.xpath("//result/characterName").text
+      corp_id = doc.xpath("//result/corporationID").text.to_i
+      corp_name = doc.xpath("//result/corporation").text
+      if ! ( char_name.empty? and corp_name.empty?)
+        return { char_id: char_id, char_name: char_name, corp_id: corp_id, corp_name: corp_name }
+      else
+        return nil
+      end
     end
     
     # ==============

@@ -1,45 +1,50 @@
-.well
-  %p
-    = corp_image(@corp.corp_id, 64)
-  %p
-    %h3
-      = @corp.name
-  %p
-    %b Total Tax
-    %br
-    = isk @total_tax
-  %p
-    %b Tax This Month
-    %br
-    = isk @tax_this_month
-.row
-  .span6
-    %table.table.table-striped.table-bordered
-      %thead
-        %caption 
-          %h4
-            .well Top 10 Tax Contributors
-      %tr
-        %th Character
-        %th Tax Amount
-      - @tax_contrib.each do |contrib|
-        %tr
-          %td
-            = character_image_link contrib["_id"]["char_id"], 32
-            = character_name_link contrib["_id"]["char_id"]
-          %td= isk contrib["sum"] / 100
-  .span6
-    %table.table.table-striped.table-bordered
-      %thead
-        %caption 
-          %h4
-            .well Tax Last 10 Days
-      %tr
-        %th Character
-        %th Tax Amount
-      - @daily.each do |contrib|
-        %tr
-          %td
-            = corp_image(@corp.corp_id,32)
-            = build_date contrib
-          %td= isk contrib["sum"] / 100
+= cache(cache_key) do
+  .well
+    .row
+      .span8
+        %p
+          = corp_image(@corp.corp_id, 64)
+        %p
+          %h3
+            = @corp.name
+      .span3.pull-right
+        %p
+          %b Total Tax
+          %br
+          = isk @total_tax
+        %p
+          %b Tax This Month
+          %br
+          = isk @tax_this_month
+  .row
+    .span6
+      %table.table.table-striped.table-bordered
+        %thead
+          %tr
+            %th{colspan: 2} Top 10 Tax Contributors
+          %tr
+            %th 
+              %em Character
+            %th 
+              %em Tax Amount
+        - @tax_contrib.each do |contrib|
+          %tr
+            %td
+              = character_image_link_tiny contrib["_id"]["char_id"]
+              = character_name_link contrib["_id"]["char_id"]
+            %td= isk contrib["sum"] / 100
+    .span6
+      %table.table.table-striped.table-bordered
+        %thead
+          %tr
+            %th{colspan: 2} Tax Last 10 Days
+          %tr
+            %th 
+              %em Date
+            %th 
+              %em Tax Amount
+        - @daily.each do |contrib|
+          %tr
+            %td
+              = build_date contrib
+            %td= isk contrib["sum"] / 100
