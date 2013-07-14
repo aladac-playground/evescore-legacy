@@ -32,10 +32,14 @@ class Character
   def top_rats(limit=10)
     Bounty.rats(self.char_id)
   end
-  def award_badge(id)
+  def award_badge(name)
     badge = self.character_badges.new
+    id = Badge.where(name: name).first.id
     badge.badge_id = id
     badge.save
+  end
+  def total_bounty
+    Bounty.total_bounty(self.char_id)
   end
   def badges
     a = Array.new
@@ -43,5 +47,19 @@ class Character
       a.push badge.badge
     end
     a
+  end
+  def kills_by_rat_type(type)
+    rat_ids = Array.new
+    Rat.any_of(rat_type: /#{type}/ ).to_a.each do |rat|
+      rat_ids.push rat.rat_id
+    end
+    count = 0
+    Bounty.collection.aggregate({ "$match" => { "char_id" => self.char_id }}, { "$unwind" => "$kills" } ).to_a.each do |row|
+      # "kills"=>{"_id"=>"51e06424ade21b90a700005f", "rat_id"=>23319, "rat_amount"=>2}
+      if rat_ids.include? row["kills"]["rat_id"]
+        count += row["kills"]["rat_amount"]
+      end
+    end
+    count
   end
 end

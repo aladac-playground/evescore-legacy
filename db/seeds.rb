@@ -14,6 +14,12 @@ rats.each do |rat|
   b.save
 end
 
+badges = YAML.load_file("badges.yml")
+badges.each do |badge|
+  b = Badge.new
+  b.save
+end
+
 # chars = YAML.load_file("characters.yml")
 # chars.each do |char|
 #   b = Character.new(char)

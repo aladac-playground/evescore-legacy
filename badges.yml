@@ -1,0 +1,30 @@
+---
+- name: Bring me 1000 rat tails!
+  text: Combat badge earned by the pilots who destroyed 1000 pirate vessels
+  icon: dogtags.png
+
+- name: You Guristas scum...
+  text: You are fighting the good fight and in that fight you sunk 1000 Guristas
+    ships
+  icon: guristas_copper.png
+
+- name: Found the Water Chip!
+  text: Awarded for killing a Deadspace Overseer.<br><i>''You're a hero... and you
+    have to leave.''</i>
+  icon: overseer.png
+
+- name: You need to call Tyrone!
+  text: 'Reward for earning your first 100,000,000 ISK in pirate bounty. This badge
+    commemorates a great New Eden philantropist - Tyrone Spooner'
+  icon: cash.png
+
+- name: Eastbound and down...
+  text: Congrats! Your first Pirate Hauler is down. Hope you got something nice
+    outta it pard-ner.<br><i>''Snowman, you got your ears on?''</i>
+  icon: cargo.png
+
+- name: Triple your ISK... honestly
+  text: Reward for earning your first 300,000,000 ISK in pirate bounty. This badge
+    commemorates the nice people giving lessons in trust over the numerous New Edens
+    trade hub chat channels
+  icon: cash.png

@@ -37,9 +37,36 @@ class AwardBadges
       # "Bring me 1000 rat tails!"
       # Combat badge earned by the pilots who destroyed 1000 pirate vessels
       if character.kills >= 1000
-        character.award_badge("51e30e44de387e7466000001")
+        character.award_badge("Bring me 1000 rat tails!")
       end
-
+      
+      # "You Guristas scum..."
+      # "You are fighting the good fight and in that fight you sunk 1000 Guristas ships"
+      if character.kills_by_rat_type("Guristas") >= 1000
+        character.award_badge("You Guristas scum...")
+      end
+      
+      # "Found the Water Chip!"
+      # "Awarded for killing a Deadspace Overseer.<br><i>''You're a hero... and you have to leave.''</i>"
+      if character.kills_by_rat_type("Overseer") >= 1
+        character.award_badge("Found the Water Chip!")
+      end
+      
+      # "You need to call Tyrone!"
+      if character.total_bounty >= 100000000
+        character.award_badge("You need to call Tyrone!")
+      end
+      
+      # "Triple your ISK... honestly"
+      if character.total_bounty >= 300000000
+        character.award_badge("Triple your ISK... honestly")
+      end
+      
+      # "Eastbound and down..."
+      if character.kills_by_rat_type("Hauler") >= 1
+        character.award_badge("Eastbound and down...")
+      end
+      
       Log.info "FINISHED Badge awarding for: #{character[:name]}"
 
     end
@@ -137,8 +164,8 @@ end
  
 module Clockwork
   every 5.minutes, 'get_score' do
-    CheckCharacters.perform
-    GetWalletData.perform
+    # CheckCharacters.perform
+    # GetWalletData.perform
     AwardBadges.perform
     # GetCorpImages.perform
     # GetCharacterImages.perform
