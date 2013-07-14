@@ -37,7 +37,7 @@ class AwardBadges
       # "Bring me 1000 rat tails!"
       # Combat badge earned by the pilots who destroyed 1000 pirate vessels
       if character.kills >= 1000
-        character.award_badge("51e2f9a7de387ecadf000001")
+        character.award_badge("51e30e44de387e7466000001")
       end
 
       Log.info "FINISHED Badge awarding for: #{character[:name]}"

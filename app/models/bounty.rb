@@ -16,7 +16,7 @@ class Bounty
   index({ tax: 1 })
   index({ bounty: 1 })
   index({ bounty: -1 })
-  index({ "kill.rat_id" => 1 }, { unique: true, drop_dups: true } )
+  # index({ "kill.rat_id" => 1 }, { unique: true, drop_dups: true } )
 
   def self.total_bounty(id)
     Bounty.where(char_id: id).sum(:bounty) / 100

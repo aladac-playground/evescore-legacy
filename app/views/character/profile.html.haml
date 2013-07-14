@@ -68,73 +68,74 @@
   %script{ src: "http://code.highcharts.com/themes/gray.js" }
   -# %script{ src: "http://code.highcharts.com/modules/exporting.js" }
 
-  .row
-    #profile_box.span12
-      .margin20
-        .row
-          .span2
-            = character_image(@character[:char_id], 64)
-            = corp_image_link(@character[:corp_id],64)
-          .span3
-            %p
-              %b
-                = character_name(@character[:char_id],50)
-              %br
-                = corp_name_link(@character[:corp_id],50)
-          %table.span6#stats{ :style => "text-align: right; vertical-align: top"}
-            %tr
-              %td
-                %h4 Bounty
-              %td
-                %h4 Kills
-              %td
-                %h4 Ticks
-              %td
-                %h4 IPH
-            %tr
-              %td.span2
-                %b Total
-                %br
-                = isk total_bounty
-                %br
-                %b This month
-                %br
-                = isk bounty_this_month
-              %td.span2
-                %b Total
-                %br
-                = total_kills
-                %br
-                %b This month
-                %br
-                = kills_this_month
-              %td.span2
-                %b Top tick
-                %br
-                = isk top_tick
-                %br
-                %b Average tick
-                %br
-                = isk avg_tick
-              %td.span2
-                %b Max. IPH
-                %br
-                = isk top_tick * 3
-                %br
-                %b Avg. IPH
-                %br
-                = isk avg_tick * 3
-        .row
-          .span5
-          
+  / .row
+  /   #profile_box.span12
+  /     .margin20
+  .well#profile
+    .row
+      .span2
+        = character_image(@character[:char_id], 64)
+        = corp_image_link(@character[:corp_id],64)
+      .span3
+        %p
+          %b
+            = character_name(@character[:char_id],50)
+          %br
+            = corp_name_link(@character[:corp_id],50)
+      %table.span6#stats{ :style => "text-align: right; vertical-align: top"}
+        %tr
+          %td
+            %h4 Bounty
+          %td
+            %h4 Kills
+          %td
+            %h4 Ticks
+          %td
+            %h4 IPH
+        %tr
+          %td.span2
+            %b Total
+            %br
+            = isk total_bounty
+            %br
+            %b This month
+            %br
+            = isk bounty_this_month
+          %td.span2
+            %b Total
+            %br
+            = total_kills
+            %br
+            %b This month
+            %br
+            = kills_this_month
+          %td.span2
+            %b Top tick
+            %br
+            = isk top_tick
+            %br
+            %b Average tick
+            %br
+            = isk avg_tick
+          %td.span2
+            %b Max. IPH
+            %br
+            = isk top_tick * 3
+            %br
+            %b Avg. IPH
+            %br
+            = isk avg_tick * 3
+    .row
+      .span5
+        %h4 Badges
+        - @character.badges.each do |badge|
+          = image_tag "badges/" + badge.icon, { class: "ttp", title: "<h4>#{badge.name}</h4><br>#{badge.text}" }
 
-    / .span7
-    /   #chart.span7{ style: "min-width: 400px; height: 170px; margin: 0 auto" }
 
-  %br
-
-              
-
+  / .row
+  /   .span12
+  /     #chart{ style: "min-width: 400px; height: 267px; margin: 0 auto" }
+  / %br
   .row
     = render :partial => 'daily'
     = render :partial => 'top_rats'

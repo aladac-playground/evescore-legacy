@@ -37,4 +37,11 @@ class Character
     badge.badge_id = id
     badge.save
   end
+  def badges
+    a = Array.new
+    self.character_badges.each do |badge|
+      a.push badge.badge
+    end
+    a
+  end
 end
