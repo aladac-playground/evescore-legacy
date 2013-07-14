@@ -29,6 +29,26 @@ class CheckCharacters
   end
 end
 
+class AwardBadges
+  def self.perform
+    start = Time.now.to_i
+    Character.all.each do |character|
+      Log.info "STARTED Badge awarding for: #{character[:name]}"
+      # "Bring me 1000 rat tails!"
+      # Combat badge earned by the pilots who destroyed 1000 pirate vessels
+      if character.kills >= 1000
+        character.award_badge("51e2f9a7de387ecadf000001")
+      end
+
+      Log.info "FINISHED Badge awarding for: #{character[:name]}"
+
+    end
+    finish = Time.now.to_i
+    duration = finish - start
+    Log.info "COMPLETED Badge awarding for all, took: #{duration} seconds"
+  end
+end
+
 
 class GetWalletData
   def self.perform
@@ -119,6 +139,7 @@ module Clockwork
   every 5.minutes, 'get_score' do
     CheckCharacters.perform
     GetWalletData.perform
+    AwardBadges.perform
     # GetCorpImages.perform
     # GetCharacterImages.perform
     # GetRatImages.perform

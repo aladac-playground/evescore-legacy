@@ -32,4 +32,9 @@ class Character
   def top_rats(limit=10)
     Bounty.rats(self.char_id)
   end
+  def award_badge(id)
+    badge = self.character_badges.new
+    badge.badge_id = id
+    badge.save
+  end
 end

@@ -4,4 +4,5 @@ class Badge
   field :text, type: String
   field :icon, type: String
   index({ name: 1 }, { unique: true, drop_dups: true })
+  has_many :character_badges
 end
