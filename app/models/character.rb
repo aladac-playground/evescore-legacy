@@ -12,6 +12,7 @@ class Character
   # field :vcode, type: String
   field :last_visit, type: Time
   index({  char_id: 1 }, { unique: true, drop_dups: true })
+  has_many :character_badges
   def self.json
     @characters = Array.new
     Character.all.each do |char|
@@ -24,6 +25,9 @@ class Character
   
   def daily(limit=90)
     Bounty.daily(self.char_id, limit)
+  end
+  def kills
+    Bounty.total_kills(self.char_id)
   end
   def top_rats(limit=10)
     Bounty.rats(self.char_id)
