@@ -11,7 +11,7 @@ class Character
   # field :key, type: String
   # field :vcode, type: String
   field :last_visit, type: Time
-  index({  char_id: 1 }, { unique: true })
+  index({  char_id: 1 }, { unique: true, drop_dups: true })
   def self.json
     @characters = Array.new
     Character.all.each do |char|
