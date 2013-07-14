@@ -1,0 +1,12 @@
+[  
+  {
+    name: "Bring me 1000 rat tails!",
+    text: "Combat badge earned by the pilots who destroyed 1000 pirate vessels",
+    pic: "dogtags.png"
+  },
+  {
+    name: "You Guristas scum..."
+    text: "You are fighting the good fight and in that fight you sunk 1000 Guristas ships"
+    pic: "guristas_copper.png"
+  }
+]
