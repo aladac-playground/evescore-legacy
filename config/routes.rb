@@ -1,5 +1,7 @@
 Evescore::Application.routes.draw do
   get "blitz/test"
+  
+  get "rats/show"
 
   get '/mu-70933399-cf59f263-41132851-471e4059', :controller => :blitz, :action => :test do
     '42'
