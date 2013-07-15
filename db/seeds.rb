@@ -20,6 +20,15 @@ badges.each do |badge|
   b.save
 end
 
+rat_data = YAML.load_file("rat_data.yml")
+rat_data.each_pair do |rat_id, data|
+  rat = Rat.where(rat_id: rat_id).first
+  data.each_pair do |k,v|
+    rat.rat_attributes.new(name: k, value: v)
+    rat.save
+  end
+end
+
 # chars = YAML.load_file("characters.yml")
 # chars.each do |char|
 #   b = Character.new(char)

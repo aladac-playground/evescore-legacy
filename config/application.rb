@@ -19,7 +19,7 @@ module Evescore
   class Application < Rails::Application
 
     config.generators do |g|
-      g.test_framework  :rspec, :fixture => false
+      g.test_framework  false, :fixture => false
       g.view_specs      false
       g.helper_specs    false
     end
