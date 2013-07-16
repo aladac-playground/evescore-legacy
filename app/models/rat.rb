@@ -7,7 +7,6 @@ class Rat
   field :rat_name, type: String
   field :rat_type, type: String
   index({ rat_id: 1 }, { unique: true })
-  index( { "rat_attribute.name" => 1 }, { unique: true, drop_dups: true })
 
   def self.rat_name(id)
     where(:rat_id => id).first.rat_name

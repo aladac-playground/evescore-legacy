@@ -14,11 +14,11 @@
 #   b.save
 # end
 # 
-# badges = YAML.load_file("badges.yml")
-# badges.each do |badge|
-#   b = Badge.new
-#   b.save
-# end
+badges = YAML.load_file("badges.yml")
+badges.each do |badge|
+  b = Badge.new
+  b.save
+end
 # 
 rat_data = YAML.load_file("rat_data.yml")
 rat_data.each_pair do |rat_id, data|
