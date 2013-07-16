@@ -62,9 +62,10 @@ class Rat
   end
   def gun_dps
     multi = rat_attributes.where(name: "damageMultiplier").first
-    if multi and multi != 0.0
+    rate = rat_attributes.where(name: "speed").first
+    if multi and rate
       multi = multi.value 
-      rate = rat_attributes.where(name: "speed").first.value / 1000
+      rate = rate.value / 1000
       kinetic = rat_attributes.where(name: "kineticDamage").first
       thermal = rat_attributes.where(name: "thermalDamage").first
       explosive = rat_attributes.where(name: "explosiveDamage").first
