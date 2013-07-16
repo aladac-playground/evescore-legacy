@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :page_validation, :using_igb?, :trust?, :current_char
-
+  before_filter :page_validation, :using_igb?, :trust?, :current_char, :news
   private 
+  def news
+    if ! session["news"] or session["news"] < News.fresh.updated_at
+      flash.now[:info] = News.fresh.text.html_safe
+      session["news"] = Time.now
+    end
+  end
   def page_validation
     if params[:page].numeric? == false 
       params[:page] = 1
