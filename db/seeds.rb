@@ -20,14 +20,14 @@
 #   b.save
 # end
 # 
-# rat_data = YAML.load_file("rat_data.yml")
-# rat_data.each_pair do |rat_id, data|
-#   rat = Rat.where(rat_id: rat_id).first
-#   data.each_pair do |k,v|
-#     rat.rat_attributes.new(name: k, value: v)
-#     rat.save
-#   end
-# end
+rat_data = YAML.load_file("rat_data.yml")
+rat_data.each_pair do |rat_id, data|
+  rat = Rat.where(rat_id: rat_id).first
+  data.each_pair do |k,v|
+    rat.rat_attributes.new(name: k, value: v)
+    rat.save
+  end
+end
 
 charges = YAML.load_file("charges.yml")
 charges.each_pair do |charge_id, data|
