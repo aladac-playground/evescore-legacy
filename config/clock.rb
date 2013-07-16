@@ -164,8 +164,8 @@ end
  
 module Clockwork
   every 5.minutes, 'get_score' do
-    # CheckCharacters.perform
-    # GetWalletData.perform
+    CheckCharacters.perform
+    GetWalletData.perform
     AwardBadges.perform
     # GetCorpImages.perform
     # GetCharacterImages.perform
