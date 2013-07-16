@@ -97,6 +97,9 @@ GEM
       moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
+    mongoid-grid_fs (1.8.0)
+      mime-types (~> 1.19)
+      mongoid (~> 3.0)
     moped (1.5.0)
     multi_json (1.7.7)
     nokogiri (1.6.0)
@@ -193,6 +196,7 @@ DEPENDENCIES
   less-rails (>= 2.2.6)
   libv8 (>= 3.11.8)
   mongoid (>= 3.1.2)
+  mongoid-grid_fs
   nokogiri
   quiet_assets (>= 1.0.2)
   rack-mini-profiler

@@ -14,6 +14,7 @@ gem 'nokogiri'
 gem 'jquery-rails'
 gem "unicorn", ">= 4.3.1"
 gem "mongoid", ">= 3.1.2"
+gem "mongoid-grid_fs"
 gem "rack-mini-profiler"
 gem "haml-rails", ">= 0.4"
 gem "html2haml", ">= 1.0.1", :group => :development
