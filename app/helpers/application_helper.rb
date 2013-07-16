@@ -62,7 +62,7 @@ module ApplicationHelper
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("rat", id, size)
     end
-    link_to image_tag(src, :class => "img-rounded"), rats_show_path(:rat_id => id)
+    link_to image_tag(src, :class => "img-rounded ttp", :title => Rat.rat_name(id) + "<br>" + Rat.rat_type(id) + "<br><b>Click to show Rat details!"), rats_show_path(:rat_id => id)
   end
   def corp_image(id, size=64)
     src = "corps/#{id}_#{size}.jpg"
