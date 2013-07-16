@@ -1,6 +1,18 @@
 #profile td {
   background-color: rgb(32, 35, 40);
 }
+.rat td, .rat tr, .rat table, .rat th {
+  border: 0px;
+  background-color: rgb(32, 35, 40);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-rounded {
+  -webkit-border-radius: 4px, 4px, 4px, 4px;
+     -moz-border-radius: 4px, 4px, 4px, 4px;
+          border-radius: 4px, 4px, 4px, 4px;
+}
 
 #search {
   margin-top: 5px;

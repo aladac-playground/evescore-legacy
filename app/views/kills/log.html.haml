@@ -19,5 +19,5 @@
                 = isk log[:bounty]/100
             .span7
               - log.kills.each do |kill|
-                = rat_image(kill["rat_id"], 32)
+                = rat_image_link(kill["rat_id"], 32)
   = will_paginate @kill_log

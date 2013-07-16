@@ -1,6 +1,164 @@
+.well
+  .row
+    .span5
+      .span1
+        = rat_image @rat.rat_id
+      .span4
+        %h4
+          = @rat.rat_name
+        %em
+          = @rat.rat_type
+        %br
+          %p
+          %b Bounty
+          %br
+          = isk @rat.bounty
+    .span6
+      .row
+        .span6
+          %b Mobility
+      .row
+        .span2
+          = image_tag "icons/speed.png", { class: "ttp", title: "Cruise Speed"}
+          = mobility[:cruise]
+        .span2
+          = image_tag "icons/max_speed.png", { style: "height: 32px", class: "ttp", title: "Max Speed" }
+          = mobility[:max]
+      .row
+        .span2
+          = image_tag "icons/orbit.png", { class: "ttp", title: "Orbit Range" }
+          = mobility[:orbit]
+        .span2
+          = image_tag "icons/range.png", { class: "ttp", title: "Attack Range" }
+          = mobility[:range]
+      .row
+        %br
+      .row
+        .span8
+          %p
+            %b Extras
+  
+.row
+  .span6
+    - hp = @rat.hps
+    - shield_res = @rat.shield_res
+    - armor_res = @rat.armor_res
+    %table.table.table-bordered.table-striped.rat
+      %tr
+        %th{ colspan: 6 } Defensive
+      %tr
+        %th
+        %th
+          HP
+        %th
+          = image_tag "icons/em.png", { class: "ttp", title:  "EM Resistance"}
+        %th
+          = image_tag "icons/thermal.png", { class: "ttp", title:  "Thermal Resistance"}
+        %th
+          = image_tag "icons/kinetic.png", { class: "ttp", title:  "Kinetic Resistance"}
+        %th
+          = image_tag "icons/explosive.png", { class: "ttp", title:  "Explosive Resistance"}
+  
+      %tr
+        %td
+          = image_tag "icons/shield.png", { class: "ttp", title: "Shield"}
+        %td
+          = hp[:shield].to_i
+        %td
+          = number_to_percentage shield_res[:em], precision: 0
+        %td
+          = number_to_percentage shield_res[:thermal], precision: 0
+        %td
+          = number_to_percentage shield_res[:kinetic], precision: 0
+        %td
+          = number_to_percentage shield_res[:explosive], precision: 0
+      %tr
+        %td
+          = image_tag "icons/armor.png", { class: "ttp", title: "Armor"}
+        %td
+          = hp[:armor].to_i
+        %td
+          = number_to_percentage armor_res[:em], precision: 0
+        %td
+          = number_to_percentage armor_res[:thermal], precision: 0
+        %td
+          = number_to_percentage armor_res[:kinetic], precision: 0
+        %td
+          = number_to_percentage armor_res[:explosive], precision: 0
+      %tr
+        %td
+          = image_tag "icons/structure.png", { style: "height: 32px", class: "ttp", title: "Structure" }
+        %td
+          = hp[:structure].to_i
+        %td 0%
+        %td 0%
+        %td 0%
+        %td 0%
+  .span6
+    %table.table.table-striped.table-bordered.rat
+      %tr
+        %th{ colspan: 6 } 
+          Offensive
+      %tr
+        %th.span1{ colspan: 2}
+        %th
+          = image_tag "icons/em.png", { class: "ttp", title:  "EM Damage"}
+        %th
+          = image_tag "icons/thermal.png", { class: "ttp", title:  "Thermal Damage"}
+        %th
+          = image_tag "icons/kinetic.png", { class: "ttp", title:  "Kinetic Damage"}
+        %th
+          = image_tag "icons/explosive.png", { class: "ttp", title:  "Explosive Damage"}
+      %tr
+        %td{ colspan: 2}
+          = image_tag "icons/turret.png", { style: "height: 32px", class: "ttp", title: "Turret DPS" }
+        %td
+          = gun_damage[:em]
+        %td
+          = gun_damage[:thermal]
+        %td
+          = gun_damage[:kinetic]
+        %td
+          = gun_damage[:explosive]
+      %tr
+        %td{ colspan: 2 }
+          = image_tag "icons/missiles.png", { style: "height: 32px", class: "ttp", title: "Missile DPS" }
+        %td
+          = missile_damage[:em]
+        %td
+          = missile_damage[:thermal]
+        %td
+          = missile_damage[:kinetic]
+        %td
+          = missile_damage[:explosive]
+      %tr
+        %td{ colspan: 2 }
+          = image_tag "icons/dps.png", { style: "height: 32px", class: "ttp", title: "Total DPS" }
+        %td
+          = total_damage[:em]
+        %td
+          = total_damage[:thermal]
+        %td
+          = total_damage[:kinetic]
+        %td
+          = total_damage[:explosive]
+
+        
+.row
+
 %pre
+  = missile_damage
+  %br
   = @rat.rat_name
   %br
   = @rat.rat_type
   %br
   = @rat.hps
+  %br
+  = @rat.shield_res
+  %br
+  = @rat.armor_res
+  %br
+  = @rat.gun_dps
+  %br
+  = @rat.missile_dps
