@@ -106,6 +106,20 @@ class Rat
       }
     end
   end
+  def scram
+     scram_chance = rat_attributes.where(name: "entityWarpScrambleChance").first
+     scram_range = rat_attributes.where(name: "warpScrambleRange").first
+     scram_strength = rat_attributes.where(name: "warpScrambleStrength").first
+     if scram_chance and scram_range and scram_strength
+       scram_chance != 0 ? scram_chance = scram_chance.value * 100 : 0
+       scram_range != 0 ? scram_range = scram_range.value : 0
+       scram_strength != 0 ? scram_strength = scram_strength.value : 0
+       return { scram_chance: scram_chance, scram_range: scram_range, scram_strength: scram_strength }
+     else
+       return { scram_chance: 0, scram_range: 0, scram_strength: 0 }
+     end
+   end
+     
   def mobility
     cruise = rat_attributes.where(name: "entityCruiseSpeed").first 
     max = rat_attributes.where(name: "maxVelocity").first

@@ -15,7 +15,8 @@
     - @character.top_rats.each do |rat|
       %tr
         %td 
-          = rat_name(rat["_id"]["rat_id"], 50)
+          = rat_image_tiny rat["_id"]["rat_id"]
+          = rat_name_link(rat["_id"]["rat_id"], 50)
         %td
           = rat_type(rat["_id"]["rat_id"], 50)
         %td.isk

@@ -48,7 +48,7 @@ module ApplicationHelper
   end
   def rat_name_link(id, len=18)
     rat = Rat.where(rat_id: id).first
-    link_to truncate(rat[:rat_name], :length => len), kills_log_path(:filter => { :rat_id => id } )
+    link_to truncate(rat[:rat_name], :length => len), rats_show_path( :rat_id => id )
   end
   def rat_image(id, size=64)
     src = "rats/#{id}_#{size}.png"
@@ -56,6 +56,13 @@ module ApplicationHelper
       src = ext_image("rat", id, size)
     end
     image_tag src, :class => "img-rounded ttp", :style => "margin: 2px", :title => Rat.rat_name(id) + "<br>" + Rat.rat_type(id)
+  end
+  def rat_image_tiny(id, size=32)
+    src = "rats/#{id}_#{size}.png"
+    if ! Rails.application.assets.find_asset(src)
+      src = ext_image("rat", id, size)
+    end
+    link_to image_tag(src, :style => "height: 18px", :class => "img-rounded ttp", :title => Rat.rat_name(id) + "<br>" + Rat.rat_type(id) + "<br><b>Click to show Rat details!"), rats_show_path(:rat_id => id)
   end
   def rat_image_link(id, size=64)
     src = "rats/#{id}_#{size}.png"
