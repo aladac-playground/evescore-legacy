@@ -25,6 +25,12 @@ class ApiController < ApplicationController
       else
         valid = false
       end
+      mask = api.api_key_info[:access_mask].to_i
+      check = 2097152 & mask
+      if check == 0
+        valid = false
+        message = "No wallet journal permissions!"
+      end
     end
     @verify = { valid: valid, character: character, message: message ? message : nil }
     respond_to do |format|
