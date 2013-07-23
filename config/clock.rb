@@ -16,7 +16,9 @@ class CheckCharacters
       key = character.key
       api = Eve::Api.new(key[:key_id], key[:vcode])    
       api.char_id = character.char_id
-      char = api.characters.first
+      chars = api.characters
+      next if chars.nil?
+      char = chars.first
       corp = Corp.create!(corp_id: char[:corp_id], name: char[:corp_name])
       character.corp_id = corp.corp_id
       character.corp_name = corp.name
