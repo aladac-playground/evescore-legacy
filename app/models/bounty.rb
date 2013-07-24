@@ -156,6 +156,70 @@ class Bounty
                          } 
                         )[0..limit]
   end
+  def self.top_tax_days(days=10, limit=5)
+    limit -= 1
+    collection.aggregate(  
+                         { "$match" => { "ts" => { "$gt" => (Time.now.utc - days.days) } } }, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$corp_id", 
+                             "sum" => 
+                              { "$sum" => "$tax"}  
+                           } 
+                         }, 
+                         {"$sort" => 
+                           { "sum" => -1 } 
+                         } 
+                        )[0..limit]
+  end
+  def self.top_corp_bounty_days(days=10, limit=5)
+    limit -= 1
+    collection.aggregate(  
+                         { "$match" => { "ts" => { "$gt" => (Time.now.utc - days.days) } } }, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$corp_id", 
+                             "sum" => 
+                              { "$sum" => "$bounty"}  
+                           } 
+                         }, 
+                         {"$sort" => 
+                           { "sum" => -1 } 
+                         } 
+                        )[0..limit]
+  end
+  def self.top_corp_bounty_this_month(limit=5)
+    limit -= 1
+    collection.aggregate(  
+                         { "$match" => { "ts" => { "$gt" => (Time.now.utc.at_beginning_of_month) } } }, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$corp_id", 
+                             "sum" => 
+                              { "$sum" => "$bounty"}  
+                           } 
+                         }, 
+                         {"$sort" => 
+                           { "sum" => -1 } 
+                         } 
+                        )[0..limit]
+  end
+  def self.top_tax_this_month(limit=5)
+    limit -= 1
+    collection.aggregate(  
+                         { "$match" => { "ts" => { "$gt" => (Time.now.utc.at_beginning_of_month) } } }, 
+                         { "$group" => 
+                           { 
+                             "_id" => "$corp_id", 
+                             "sum" => 
+                              { "$sum" => "$tax"}  
+                           } 
+                         }, 
+                         {"$sort" => 
+                           { "sum" => -1 } 
+                         } 
+                        )[0..limit]
+  end
   def self.top_bounty_this_month(limit=5)
     limit -= 1
     collection.aggregate(  
@@ -212,12 +276,34 @@ class Bounty
       0
     end
   end
+  def self.top_corp_bounty(limit=5)
+    limit -= 1
+    collection.aggregate( 
+                         { "$group" => 
+                           { "_id" => 
+                             "$corp_id", "sum" => { "$sum" => "$bounty"}  
+                           } 
+                         }, 
+                         {"$sort" => { "sum" => -1 } } 
+                        )[0..limit]
+  end  
   def self.top_bounty(limit=5)
     limit -= 1
     collection.aggregate( 
                          { "$group" => 
                            { "_id" => 
                              "$char_id", "sum" => { "$sum" => "$bounty"}  
+                           } 
+                         }, 
+                         {"$sort" => { "sum" => -1 } } 
+                        )[0..limit]
+  end  
+  def self.top_tax(limit=5)
+    limit -= 1
+    collection.aggregate( 
+                         { "$group" => 
+                           { "_id" => 
+                             "$char_id", "sum" => { "$sum" => "$tax"}  
                            } 
                          }, 
                          {"$sort" => { "sum" => -1 } } 

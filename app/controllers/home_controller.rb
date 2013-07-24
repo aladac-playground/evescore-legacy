@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     #   session[:char_profile_nag] = true
     # end
   end
-  def taxes
+  def corps
     
   end
 end
