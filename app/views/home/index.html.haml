@@ -1,3 +1,16 @@
+.well.news
+  .row
+    .span12
+      %b
+        %a{ href: "https://twitter.com/EveScore", target: "_blank"}
+          Follow EveScore on Twitter!
+  - tweets.each_pair do |ts, tweet|
+    .row
+      .span2
+        %i
+          = ts
+      .span9
+        = tweet
 = cache(cache_key) do
   .row
     .span6#kill_box

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :page_validation, :using_igb?, :trust?, :current_char, :news
+  before_filter :page_validation, :using_igb?, :trust?, :current_char
   private 
   def news
     if ! session["news"] or session["news"] < News.fresh.updated_at

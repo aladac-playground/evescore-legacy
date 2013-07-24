@@ -54,6 +54,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faraday (0.8.7)
+      multipart-post (~> 1.1)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -102,6 +104,7 @@ GEM
       mongoid (~> 3.0)
     moped (1.5.0)
     multi_json (1.7.7)
+    multipart-post (1.2.0)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     origin (1.1.0)
@@ -148,6 +151,7 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simple_oauth (0.2.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -161,6 +165,10 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
+    twitter (4.8.1)
+      faraday (~> 0.8, < 0.10)
+      multi_json (~> 1.0)
+      simple_oauth (~> 0.2)
     twitter-bootstrap-rails (2.2.7)
       actionpack (>= 3.1)
       execjs
@@ -204,6 +212,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   simple_form (>= 2.1.0)
   therubyracer (>= 0.11.3)
+  twitter
   twitter-bootstrap-rails (>= 2.2.4)
   uglifier (>= 1.0.3)
   unicorn (>= 4.3.1)

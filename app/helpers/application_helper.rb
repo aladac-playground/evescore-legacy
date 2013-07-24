@@ -9,6 +9,16 @@ module ApplicationHelper
     key += params[:filter].to_s if params[:filter]
     return key
   end
+  def tweets
+    tweets=Twitter.user_timeline(:count => 3)
+    news = Hash.new
+    tweets.each do |t|
+      ts = Time.parse(t.attrs[:created_at]).utc.strftime("%Y-%m-%d %H:%M")
+      tmp = { ts => t.attrs[:text] }
+      news.merge! tmp
+    end
+    news
+  end
   def tax_this_month(id)
     tax = Bounty.tax_this_month(id)
     if tax
