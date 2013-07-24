@@ -113,6 +113,9 @@ module ApplicationHelper
     end
     link_to image_tag(src, :class => "img-rounded"), kills_log_path(:filter => { :_id => tick } )
   end
+  def top_incursion(limit=5)
+    return Incursion.top_incursion(limit)
+  end
   def top_bounty(limit=5)
     return Bounty.top_bounty(limit)
   end
@@ -125,6 +128,12 @@ module ApplicationHelper
   def rat_bounty(id)
     bounty = Rat.where(rat_id: id).first[:bounty]
     return bounty
+  end
+  def top_incursion_this_month(limit=5)
+    return Incursion.top_incursion_this_month(limit)
+  end
+  def top_incursion_10days(limit=5)
+    return Incursion.top_incursion_days(10, limit)
   end
   def top_tax_this_month(limit=5)
     return Bounty.top_tax_this_month(limit)

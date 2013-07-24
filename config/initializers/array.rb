@@ -9,7 +9,9 @@ class Array
         ref_id = row['refID']
         ts = row['date']
         tax = row['taxAmount'].to_i
-        corp_id = Character.where(char_id: owner_id).first.corp_id
+        char = Character.where(char_id: owner_id).first
+        next if char.nil?
+        corp_id = char.corp_id
         begin
           b = Bounty.new(ts: ts, char_id: owner_id, bounty: ( amount * 100 ).to_i, tax: (tax * 100).to_i, corp_id: corp_id)
           r = b.save
@@ -29,6 +31,23 @@ class Array
           end
         end
       end
+      if row['refTypeID'] == "99"
+        reason = row['reason']
+        amount = row['amount'].to_i
+        owner_name = row['ownerName2']
+        owner_id = row['ownerID2']
+        ref_id = row['refID']
+        ts = row['date']
+        tax = row['taxAmount'].to_i
+        corp_id = Character.where(char_id: owner_id).first.corp_id
+        begin
+          b = Incursion.new(ts: ts, char_id: owner_id, reward: ( amount * 100 ).to_i, corp_id: corp_id)
+          r = b.save
+          next if r == false
+        rescue Exception => e
+          p e.message
+        end
+      end      
     end
   end
 end
