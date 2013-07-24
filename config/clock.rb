@@ -126,6 +126,8 @@ class GetRatImages
     Bounty.unique_rats.each do |rat|
       [ "32", "64" ].each do |size|
         next if Rails.application.assets.find_asset("rats/#{rat["_id"]}_#{size}.png")
+        rat_name = Rat.where(:rat_id => rat["_id"]).first
+        next if rat_name.nil?
         Log.info "STARTED Getting image size: #{size} for: #{Rat.where(:rat_id => rat["_id"]).first.rat_name}"  
         Net::HTTP.start("image.eveonline.com") do |http|
             resp = http.get("/Type/#{rat["_id"]}_#{size}.png")
@@ -165,7 +167,7 @@ class GetCorpImages
 end
  
 module Clockwork
-  every 5.minutes, 'get_score' do
+  every 15.minutes, 'get_score' do
     CheckCharacters.perform
     GetWalletData.perform
     AwardBadges.perform
