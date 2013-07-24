@@ -303,7 +303,7 @@ class Bounty
     collection.aggregate( 
                          { "$group" => 
                            { "_id" => 
-                             "$char_id", "sum" => { "$sum" => "$tax"}  
+                             "$corp_id", "sum" => { "$sum" => "$tax"}  
                            } 
                          }, 
                          {"$sort" => { "sum" => -1 } } 

@@ -116,6 +116,12 @@ module ApplicationHelper
   def top_bounty(limit=5)
     return Bounty.top_bounty(limit)
   end
+  def top_tax(limit=5)
+    return Bounty.top_tax(limit)
+  end
+  def top_corp_bounty(limit=5)
+    return Bounty.top_corp_bounty(limit)
+  end
   def rat_bounty(id)
     bounty = Rat.where(rat_id: id).first[:bounty]
     return bounty

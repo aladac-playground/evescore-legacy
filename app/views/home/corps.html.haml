@@ -42,3 +42,25 @@
           %br
           %b
             = corp_name_link(top["_id"])
+  %br
+  .row
+    .span6#kill_box
+      %h4 Top bounty all time
+      - top_corp_bounty.each do |top|
+        .span1#kill
+          %b
+            = isk_short top["sum"]
+          = corp_image_link(top["_id"])
+          %br
+          %b
+            = corp_name_link(top["_id"])
+    .span6#kill_box
+      %h4 Top tax all time
+      - top_tax.each do |top|
+        .span1#kill
+          %b
+            = isk_short top["sum"]
+          = corp_image_link(top["_id"])
+          %br
+          %b
+            = corp_name_link(top["_id"])
