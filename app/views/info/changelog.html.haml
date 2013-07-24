@@ -1,12 +1,6 @@
-.well
-  %h1 Changelog
-  %hr
-  %p
-    %h4 2013-06-05
-    %p 
-      %ul
-        %li New logo!
-        %li New dark theme!
-        %li Info dropdown
-        %li New character profile layout
-        %li Removed graph (for now)
+- @news.each do |post|
+  .hero-unit
+    %h4
+      = post.created_at
+    %p
+      = post.text.html_safe

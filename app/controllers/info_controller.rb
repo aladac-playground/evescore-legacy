@@ -6,6 +6,7 @@ class InfoController < ApplicationController
   end
 
   def changelog
+    @news = News.order_by(:created_at.desc)
   end
   
   def contact

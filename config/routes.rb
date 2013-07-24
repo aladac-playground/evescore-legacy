@@ -1,4 +1,8 @@
 Evescore::Application.routes.draw do
+  get "ladder/bounty"
+
+  get "ladder/incursion"
+
   get "home/corps"
   
   get "blitz/test"
