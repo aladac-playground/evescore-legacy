@@ -52,6 +52,35 @@ module ApplicationHelper
     rat = Rat.where(rat_id: id).first
     return truncate rat[:rat_name], :length => len
   end
+  def pirate_logo(name)
+    logo = "skull.png"
+    if name =~ /Guristas/
+      logo = "guristas.png"
+      title = $&
+    end
+    if name =~ /Angel Cartel/
+      logo = "angels.png"
+      title = $&
+    end
+    if name =~ /Serpentis/
+      logo = "serpentis.png"
+      title = "Serpentis Corporation  "
+    end
+    if name =~ /Blood Raiders/
+      logo = "blood.png"
+      title = $&
+    end
+    if name =~ /Sansha's Nation/
+      logo = "sansha.png"
+      title = $&
+    end
+    image_tag( "icons/" + logo, :style => "height: 18px", :class => "img-rounded ttp", :title => title )
+  end
+  def ship_class(name)
+    if name =~ /.*\b(.*)\b$/
+      ship_class = $1
+    end
+  end
   def rat_type(id, len=18)
     rat = Rat.where(rat_id: id).first
     return truncate rat[:rat_type], :length => len

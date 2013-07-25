@@ -7,18 +7,16 @@
       %th 
         %em Name
       %th 
-        %em Type
-      %th 
         %em Bounty
       %th 
         %em Count
     - @character.top_rats.each do |rat|
+      - type = rat_type(rat["_id"]["rat_id"], 50)
       %tr
         %td 
           = rat_image_tiny rat["_id"]["rat_id"]
-          = rat_name_link(rat["_id"]["rat_id"], 18)
-        %td
-          = rat_type(rat["_id"]["rat_id"], 50)
+          = pirate_logo(type)
+          = rat_name_link(rat["_id"]["rat_id"], 30)
         %td.isk
           = isk rat_bounty(rat["_id"]["rat_id"])
         %td.isk= rat["sum"]
