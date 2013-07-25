@@ -43,6 +43,23 @@ class Bounty
   def self.total_kills(id)
     Bounty.collection.aggregate({ "$match" => { "char_id" => id }}, { "$unwind" => "$kills" } ).count
   end
+  def self.global_kills
+    collection.aggregate({ "$unwind" => "$kills" } ).count
+  end
+  def self.global_faction_kills(type)
+    rat_ids = Array.new
+    Rat.any_of(rat_type: /#{type}/ ).to_a.each do |rat|
+      rat_ids.push rat.rat_id
+    end
+    count = 0
+    Bounty.collection.aggregate( { "$unwind" => "$kills" } ).to_a.each do |row|
+      # "kills"=>{"_id"=>"51e06424ade21b90a700005f", "rat_id"=>23319, "rat_amount"=>2}
+      if rat_ids.include? row["kills"]["rat_id"]
+        count += row["kills"]["rat_amount"]
+      end
+    end
+    count
+  end
   def self.tax_daily(corp_id, limit=10)
     limit -= 1
     collection.aggregate( 

@@ -16,7 +16,7 @@
 
 badges = YAML.load_file("badges.yml")
 badges.each do |badge|
-  b = Badge.new
+  b = Badge.new(badge)
   b.save
 end
 # # 
