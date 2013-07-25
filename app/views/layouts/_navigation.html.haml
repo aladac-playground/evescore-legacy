@@ -20,8 +20,16 @@
         = link_to "Incursion", ladder_incursion_path
   %li
     %a{:href => kills_log_path } Kill Log
+%ul.nav{ :style => "margin-right: 0px"}
   %li
-    %a{:href => key_add_path } Add API key
+    %a.dropdown-toggle{:"data-toggle" => :dropdown, :href =>  "#" }
+      API Key
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        = link_to "Add", key_add_path
+      %li
+        = link_to "Delete", key_delete_path
 %ul.nav{ :style => "margin-left: 0px"}
   %li
     %a.dropdown-toggle{ :"data-toggle" => :dropdown, :href => "#" }

@@ -38,7 +38,7 @@ module ApplicationHelper
     
   def corp_name_link(id, len=20)
     corp = Corp.where(corp_id: id).first
-    link_to truncate(corp[:name], :length => len), corp_profile_path( :corp_id => id )
+    link_to truncate(corp[:name], :length => len), corp_profile_path( :corp_id => id ) unless id == 0
   end
   def character_name(id, len=15)
     character = Character.where(char_id: id).first
@@ -46,7 +46,8 @@ module ApplicationHelper
   end
   def character_name_link(id, len=15)
     character = Character.where(char_id: id).first
-    link_to truncate(character[:name], :length => len), character_profile_path( :char_id => id  )
+    name = character.name
+    link_to truncate(character[:name], :length => len), character_profile_path( :char_name => name  )
   end
   def rat_name(id, len=18)
     rat = Rat.where(rat_id: id).first
@@ -115,35 +116,49 @@ module ApplicationHelper
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("corp", id, size)
     end
-    image_tag(src, :class => "img-rounded")
+    image_tag(src, :class => "img-rounded") unless id == 0
   end
   def character_image(id, size=64)
-    src = "characters/#{id}_#{size}.jpg"
+    src = "characters/#{id}_#{size}.jpg" 
+    char = Character.where(char_id: id).first
+    if bear = char.bear
+      src = "bears/bear#{bear}.gif"
+    end
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("character", id, size)
     end
-    image_tag(src, :class => "img-rounded")
+    image_tag(src, :class => "img-rounded", :style => "height: #{size}px")
   end
   def corp_image_link(id, size=64)
     src = "corps/#{id}_#{size}.jpg"
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("corp", id, size)
     end
-    link_to image_tag(src, :class => "img-rounded"), corp_profile_path( :corp_id => id )
+    link_to image_tag(src, :class => "img-rounded"), corp_profile_path( :corp_id => id ) unless id == 0
   end
   def character_image_link(id, size=64)
     src = "characters/#{id}_#{size}.jpg"
+    char = Character.where(char_id: id).first
+    if bear = char.bear
+      src = "bears/bear#{bear}.gif"
+    end
+    
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("character", id, size)
     end
-    link_to image_tag(src, :class => "img-rounded"), character_profile_path( :char_id => id )
+    link_to image_tag(src, :class => "img-rounded"), character_profile_path( :char_name => char.name )
   end
   def character_image_link_tiny(id, size=32)
     src = "characters/#{id}_#{size}.jpg"
+    char = Character.where(char_id: id).first
+    if bear = char.bear
+      src = "bears/bear#{bear}.gif"
+    end
+    
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("character", id, size)
     end
-    link_to image_tag(src, :class => "img-rounded", :style => "height: 18px"), character_profile_path( :char_id => id )
+    link_to image_tag(src, :class => "img-rounded", :style => "height: 18px"), character_profile_path( :char_name => char.name )
   end
   def character_tick_link(id, tick, size=64)
     src = "characters/#{id}_#{size}.jpg"

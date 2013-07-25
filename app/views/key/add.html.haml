@@ -21,4 +21,13 @@
     %input{ :type => :hidden, :name => :char_id, :id => :char_id }
     %input{ :type => :hidden, :name => :name, :id => :name }
     %button#api_submit.btn.btn-large{ :type => :submit } Save
+    .row#anon
+      %p
+      %br
+      .span1
+        %input.input-inline{ :type => :checkbox, :name => :anon, :value => "anon" }
+      .span5  
+        %label 
+          I want to remain anonymous. I want my name, corporation and portrait to remain hidden from the public (Placeholders will be used).
+    
   %button#api_check.btn.btn-large Check API

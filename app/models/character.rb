@@ -8,6 +8,7 @@ class Character
   field :name, type: String
   field :corp_id, type: Integer
   field :corp_name, type: String
+  field :bear, type: Integer
   # field :key, type: String
   # field :vcode, type: String
   field :last_visit, type: Time

@@ -35,7 +35,9 @@ Evescore::Application.routes.draw do
   match "api/import"
 
   get "key/add"
+  get "key/delete"
   match "key/save"
+  match "key/delete"
   
   match "/irs", :controller => :home, :action => :taxes
   

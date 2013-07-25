@@ -14,6 +14,7 @@ function check_api (key, vcode) {
           } else if ( result['valid'] == true ) {
             character = result['character'];
             $('#api_submit').show();
+            $('#anon').show();
             $('#api_check').hide();
             $('.notification-area').html('<div class="alert key alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Key successfuly verified, press <b>Save</b></div>');
             $('#key').attr('readonly','true');
@@ -31,8 +32,11 @@ function check_api (key, vcode) {
   }
 };
 
+
+
 $(document).ready(function(){
   $('#api_submit').hide();
+  $('#anon').hide();
   $('#api_check').click(function() {
     check_api( $('#key').val(), $('#vcode').val() );
   });

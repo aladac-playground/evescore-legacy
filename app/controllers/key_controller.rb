@@ -13,11 +13,37 @@ class KeyController < ApplicationController
       session[:key_help] = true
     end
   end
+  def delete
+    if params[:key] and params[:vcode]
+      if params[:key].length != 7 or params[:vcode].length != 64
+        flash.now[:warning] = "Check the format"
+      else
+        key = Key.where(key_id: params[:key], vcode: params[:vcode]).first
+        char = key.characters.first
+        key.delete
+        char.delete
+        msg = Array.new
+        Bounty.where(char_id: char.char_id).delete ? msg.push("Bounties") : nil
+        Incursion.where(char_id: char.char_id).delete ? msg.push("Incrusion rewards") : nil
+        CharacterBadge.where(char_id: char.char_id).delete ? msg.push("Badges") : nil
+        flash.now[:info] = msg.join(", ") + " deleted"
+      end
+    else
+      flash.now[:error] = %Q|This will delete your key and all the data associated with it!|
+    end
+  end
   def save
     api = Eve::Api.new(params[:key], params[:vcode])
     key_info = api.api_key_info
     key = Key.new(key_info)
     char = api.characters.first
+    pp params
+    if params[:anon] == "anon"
+      char[:name] = "New Eden Citizen " + rand(99999).to_s
+      char[:corp_id] = 0
+      char[:corp_name] = "Generic Corp"
+      char[:bear] = (rand(4) + 1)
+    end
     if key.valid?
       key.save
       corp = Corp.create!(corp_id: char[:corp_id], name: char[:corp_name])
