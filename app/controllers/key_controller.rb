@@ -37,7 +37,6 @@ class KeyController < ApplicationController
     key_info = api.api_key_info
     key = Key.new(key_info)
     char = api.characters.first
-    pp params
     if params[:anon] == "anon"
       char[:name] = "New Eden Citizen " + rand(99999).to_s
       char[:corp_id] = 0
