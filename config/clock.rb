@@ -19,9 +19,11 @@ class CheckCharacters
       chars = api.characters
       next if chars.nil?
       char = chars.first
-      corp = Corp.create!(corp_id: char[:corp_id], name: char[:corp_name])
-      character.corp_id = corp.corp_id
-      character.corp_name = corp.name
+      if character.corp_id != 0
+        corp = Corp.create!(corp_id: char[:corp_id], name: char[:corp_name]) 
+        character.corp_id = corp.corp_id
+        character.corp_name = corp.name
+      end
       character.save!
       Log.info "FINISHED Updating character data for: #{character[:name]}"  
     end
