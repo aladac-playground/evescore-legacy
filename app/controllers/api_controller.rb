@@ -2,10 +2,11 @@ class ApiController < ApplicationController
   def import
     char = Character.where(char_id: params[:char_id]).first
     key = char.key
-    api = Eve::Api.new(key[:key_id], key[:vcode])    
+    api = Eve::Api.new(key[:key_id], key[:vcode])
+    api.rows = 3000
     wallet = api.wallet_journal
     wallet.wallet_import
-    redirect_to character_profile_path(:char_id => params[:char_id])
+    redirect_to character_profile_path(:char_name => char.name)
   end
   def verify
     if Key.where(key_id: params[:key]).count > 0
