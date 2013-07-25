@@ -14,7 +14,8 @@ class ApiController < ApplicationController
     else
       api = Eve::Api.new(params[:key], params[:vcode])
       characters = api.characters
-      if characters
+      num = characters.size
+      if characters and num == 1
         character = characters.first
         if Character.where(char_id: character[:char_id]).empty?
           valid = true 
@@ -22,6 +23,9 @@ class ApiController < ApplicationController
           valid = false
           message = "Character already exists in database!"
         end
+      elsif num != 1
+        valid = false
+        message = "Please generate a key for a single character! Account keys not yet supported."
       else
         valid = false
       end
