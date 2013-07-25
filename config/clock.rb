@@ -48,6 +48,11 @@ class AwardBadges
         character.award_badge("You Guristas scum...")
       end
       
+      # "Scaring the nation..."
+      if character.kills_by_rat_type("Sansha's") >= 1000
+        character.award_badge("Scaring the nation...")
+      end     
+      
       # "Found the Water Chip!"
       # "Awarded for killing a Deadspace Overseer.<br><i>''You're a hero... and you have to leave.''</i>"
       if character.kills_by_rat_type("Overseer") >= 1
@@ -62,6 +67,16 @@ class AwardBadges
       # "Triple your ISK... honestly"
       if character.total_bounty >= 300000000
         character.award_badge("Triple your ISK... honestly")
+      end
+      
+      # "Love the smell of Plex!"
+      if character.total_bounty >= 600000000
+        character.award_badge("Love the smell of Plex!")
+      end
+
+      # "Great Scott!"
+      if character.total_bounty >= 1200000000
+        character.award_badge("Great Scott!")
       end
       
       # "Eastbound and down..."
