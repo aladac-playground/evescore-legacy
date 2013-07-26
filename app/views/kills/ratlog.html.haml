@@ -17,10 +17,13 @@
               %br
             .span1{ :style => "margin: 7px" }
               = rat_image_link( log["kills"]["rat_id"] ) 
-            .span3
+            .span5
               %b
                 = rat_name_link( log["kills"]["rat_id"], 50 )
               %br
               = rat_type( log["kills"]["rat_id"], 50 )
               %br
+              %i
+                Bounty: 
+              = isk rat_bounty( log["kills"]["rat_id"])
   = will_paginate @kill_log

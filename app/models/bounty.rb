@@ -413,7 +413,10 @@ class Bounty
           }
         }
       }, 
-      { "$unwind" => "$kills" } 
+      { "$unwind" => "$kills" },
+      { 
+        "$sort" => { "ts" => -1 }
+      }
     )
   end
 
