@@ -1,0 +1,26 @@
+= cache(cache_key) do
+  %table.table.table-condensed.table-striped.rounded.table-bordered
+    %thead
+      %tr
+        %th Recent Kills
+    %tbody
+      - @kill_log.each do |log|
+        %tr
+          %td
+            .span1{ :style => "margin: 7px" }
+              = character_image_link( log["char_id"] ) 
+            .span3
+              %b
+                = character_name_link( log["char_id"], 50 )
+              %br
+              = log["ts"].strftime("%Y-%m-%d %H:%M:%S")
+              %br
+            .span1{ :style => "margin: 7px" }
+              = rat_image_link( log["kills"]["rat_id"] ) 
+            .span3
+              %b
+                = rat_name_link( log["kills"]["rat_id"], 50 )
+              %br
+              = rat_type( log["kills"]["rat_id"], 50 )
+              %br
+  = will_paginate @kill_log

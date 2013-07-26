@@ -28,6 +28,7 @@ Evescore::Application.routes.draw do
   match "/donate", :controller => :donate, :action => :index
 
   get "kills/log"
+  get "kills/ratlog"
   get "/ladder", :controller => :kills, :action => :ladder
 
   get "api/verify"

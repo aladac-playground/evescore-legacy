@@ -397,4 +397,24 @@ class Bounty
     } 
     )[0..limit]
   end
+  def self.rat_kills
+    collection.aggregate( { "$unwind" => "$kills" })
+  end
+  def self.kills_by_rat_type(type)
+    rat_ids = Array.new
+    Rat.any_of(rat_type: /#{type}/ ).to_a.each do |rat|
+      rat_ids.push rat.rat_id
+    end
+    count = 0
+    Bounty.collection.aggregate(
+      { "$match" => { 
+        "kills.rat_id" => { 
+          "$in" => rat_ids 
+          }
+        }
+      }, 
+      { "$unwind" => "$kills" } 
+    )
+  end
+
 end
