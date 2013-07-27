@@ -78,7 +78,7 @@ class GetCorpImages
 end
  
 module Clockwork
-  every 15.minutes, 'get_images' do
+  every 2.hours, 'get_images' do
     GetCorpImages.perform
     GetCharacterImages.perform
     GetRatImages.perform

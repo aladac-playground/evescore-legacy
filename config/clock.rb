@@ -52,7 +52,7 @@ class GetWalletData
 end
  
 module Clockwork
-  every 15.minutes, 'get_score' do
+  every 20.minutes, 'get_score' do
     CheckCharacters.perform
     GetWalletData.perform
   end
