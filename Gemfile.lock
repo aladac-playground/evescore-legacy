@@ -166,6 +166,9 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
+    turbo-sprockets-rails3 (0.3.6)
+      railties (> 3.2.8, < 4.0.0)
+      sprockets (>= 2.0.0)
     twitter (4.8.1)
       faraday (~> 0.8, < 0.10)
       multi_json (~> 1.0)
@@ -214,6 +217,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   simple_form (>= 2.1.0)
   therubyracer (>= 0.11.3)
+  turbo-sprockets-rails3
   twitter
   twitter-bootstrap-rails (>= 2.2.4)
   uglifier (>= 1.0.3)
