@@ -86,7 +86,7 @@ class AwardBadges
 end
  
 module Clockwork
-  every 15.minutes, 'award_badges' do
+  every 60.minutes, 'award_badges' do
     AwardBadges.perform
   end
 end
