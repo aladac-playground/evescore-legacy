@@ -38,7 +38,7 @@ module ApplicationHelper
     
   def corp_name_link(id, len=19)
     corp = Corp.where(corp_id: id).first
-    link_to truncate(corp[:name], :length => len), corp_profile_path( :corp_id => id ) unless id == 0
+    link_to truncate(corp[:name], :length => len), corp_profile_path( :corp_id => id )
   end
   def corp_name(id)
     corp = Corp.where(corp_id: id).first
@@ -120,7 +120,7 @@ module ApplicationHelper
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("corp", id, size)
     end
-    image_tag(src, :class => "img-rounded") unless id == 0
+    image_tag(src, :class => "img-rounded")
   end
   def character_image(id, size=64)
     src = "characters/#{id}_#{size}.jpg" 
@@ -138,7 +138,7 @@ module ApplicationHelper
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("corp", id, size)
     end
-    link_to image_tag(src, :class => "img-rounded ttp", :title => corp_name(id)), corp_profile_path( :corp_id => id ) unless id == 0
+    link_to image_tag(src, :class => "img-rounded ttp", :title => corp_name(id)), corp_profile_path( :corp_id => id )
   end
   def character_image_link(id, size=64)
     src = "characters/#{id}_#{size}.jpg"
