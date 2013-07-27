@@ -18,15 +18,20 @@ class KeyController < ApplicationController
       if params[:key].length != 7 or params[:vcode].length != 64
         flash.now[:warning] = "Check the format"
       else
-        key = Key.where(key_id: params[:key], vcode: params[:vcode]).first
-        char = key.characters.first
-        key.delete
-        char.delete
-        msg = Array.new
-        Bounty.where(char_id: char.char_id).delete ? msg.push("Bounties") : nil
-        Incursion.where(char_id: char.char_id).delete ? msg.push("Incrusion rewards") : nil
-        CharacterBadge.where(char_id: char.char_id).delete ? msg.push("Badges") : nil
-        flash.now[:info] = msg.join(", ") + " deleted"
+        key = Key.where(key_id: params[:key], vcode: params[:vcode])
+        if ! key.empty?
+          key = key.first
+          char = key.characters.first
+          key.delete
+          char.delete
+          msg = Array.new
+          Bounty.where(char_id: char.char_id).delete ? msg.push("Bounties") : nil
+          Incursion.where(char_id: char.char_id).delete ? msg.push("Incrusion rewards") : nil
+          CharacterBadge.where(char_id: char.char_id).delete ? msg.push("Badges") : nil
+          flash.now[:info] = msg.join(", ") + " deleted"
+        else
+          flash.now[:error] = "Key not found in database"
+        end
       end
     else
       flash.now[:error] = %Q|This will delete your key and all the data associated with it!|
