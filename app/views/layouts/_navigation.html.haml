@@ -1,7 +1,7 @@
 %ul.nav{ :style => "margin-right: 0px"}
   %li
     %a.dropdown-toggle{:"data-toggle" => :dropdown, :href =>  "#" }
-      Top Scores
+      Top
       %span.caret
     %ul.dropdown-menu
       %li
@@ -23,13 +23,13 @@
 %ul.nav{ :style => "margin-right: 0px"}
   %li
     %a.dropdown-toggle{:"data-toggle" => :dropdown, :href =>  "#" }
-      API Key
+      API
       %span.caret
     %ul.dropdown-menu
       %li
-        = link_to "Add", key_add_path
+        = link_to "Add Key", key_add_path
       %li
-        = link_to "Delete", key_delete_path
+        = link_to "Delete Key and Data", key_delete_path
 %ul.nav{ :style => "margin-left: 0px"}
   %li
     %a.dropdown-toggle{ :"data-toggle" => :dropdown, :href => "#" }
@@ -45,3 +45,8 @@
       %li.divider
       %li
         = link_to "About author", info_about_path
+%ul.nav
+  %a{ href: info_about_path }
+    .btn.btn-warning
+      = image_tag "badges/cash.png", :style => "height: 20px"
+      Donate
