@@ -44,6 +44,11 @@ class AwardBadges
         character.award_badge("Bring me 1000 rat tails!")
       end
       
+      # "On with the race"
+      if character.kills >= 2000
+        character.award_badge("On with the race")
+      end
+      
       # "You Guristas scum..."
       # "You are fighting the good fight and in that fight you sunk 1000 Guristas ships"
       if character.kills_by_rat_type("Guristas") >= 1000
@@ -54,6 +59,11 @@ class AwardBadges
       if character.kills_by_rat_type("Sansha's") >= 1000
         character.award_badge("Scaring the nation...")
       end     
+      
+      # "With blood and rage of crimson red..."
+      if character.kills_by_rat_type("Blood") >= 1000
+        character.award_badge("With blood and rage of crimson red...")
+      end           
       
       # "Found the Water Chip!"
       # "Awarded for killing a Deadspace Overseer.<br><i>''You're a hero... and you have to leave.''</i>"
@@ -79,6 +89,11 @@ class AwardBadges
       # "Great Scott!"
       if character.total_bounty >= 1200000000
         character.award_badge("Great Scott!")
+      end
+      
+      # "Greed is good!"
+      if character.total_bounty >= 2000000000
+        character.award_badge("Greed is good!")
       end
       
       # "Eastbound and down..."
