@@ -50,9 +50,9 @@
             - if neut
               = image_tag "icons/neut.png", { style: "height: 32px", class: "ttp", title: "<b>Energy Neutralizer</b><br>Strength: #{neut[:strength]}<br>Range: #{neut[:range]}<br>Chance: #{neut[:chance]}%<br>Duration: #{neut[:duration]}" }
             - if jam
-              = image_tag "icons/jam.png", { style: "height: 32px", class: "ttp", title: "<b>Target Jammer</b><br>Strength: #{jam[:falloff]}<br>Range: #{jam[:range]}<br>Chance: #{jam[:chance]}%<br>Duration: #{jam[:duration]}" }
+              = image_tag "icons/jam.png", { style: "height: 32px", class: "ttp", title: "<b>Target Jammer</b><br>Falloff: #{jam[:falloff]}<br>Range: #{jam[:range]}<br>Chance: #{jam[:chance]}%<br>Duration: #{jam[:duration]}" }
             - if damp
-              = image_tag "icons/damp.png", { style: "height: 32px", class: "ttp", title: "<b>Target Jammer</b><br>Strength: #{damp[:falloff]}<br>Range: #{damp[:range]}<br>Chance: #{damp[:chance]}%<br>Duration: #{damp[:duration]}" }
+              = image_tag "icons/damp.png", { style: "height: 32px", class: "ttp", title: "<b>Target Jammer</b><br>Falloff: #{damp[:falloff]}<br>Range: #{damp[:range]}<br>Chance: #{damp[:chance]}%<br>Duration: #{damp[:duration]}" }
             
   
 .row
