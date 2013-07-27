@@ -44,17 +44,17 @@
 #   text: ... with their guns and ammunation. Congrats 1,000 ships of the Rouge Sansha State wiped off 
 #     the face of New Edens skies
 #   icon: sansha_copper.png
-- name: With blood and rage of crimson red...
-  text: Reward for sinking 1,000 Blood Raider vessels. 
-  icon: blood_copper.png
-
-- name: Greed is good!
-  text: Now really... 2 Billion? Seriously? Hows about leaving some of them Forsakens 
-    for the rest of us, you greedy wanker! <br><i>''Greed, for lack of a better word, is good''</i>
-  icon: cash.png
-  
-- name: On with the race
-  text: 2000 Pirates down. That's gotta be some kind of record - so here's a badge<br>
-    <i>''She was a great, dear friend of mine and I shall remember her forever howling 
-    down that freeway in the sky, knocking over... the angels.''</i>
-  icon: dogtag_copper.png
+# - name: With blood and rage of crimson red...
+#   text: Reward for sinking 1,000 Blood Raider vessels. 
+#   icon: blood_copper.png
+# 
+# - name: Greed is good!
+#   text: Now really... 2 Billion? Seriously? Hows about leaving some of them Forsakens 
+#     for the rest of us, you greedy wanker! <br><i>''Greed, for lack of a better word, is good''</i>
+#   icon: cash.png
+#   
+# - name: On with the race
+#   text: 2000 Pirates down. That's gotta be some kind of record - so here's a badge<br>
+#     <i>''She was a great, dear friend of mine and I shall remember her forever howling 
+#     down that freeway in the sky, knocking over... the angels.''</i>
+#   icon: dogtags_copper.png
