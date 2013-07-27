@@ -38,4 +38,32 @@ module RatsHelper
       range: number_to_currency(@rat.mobility[:range], precision: 0, delimiter: ",", format: "%n %u", unit: "m")
     }
   end
+  def extras(rat)
+    jam = rat.jam
+    scram = rat.scram
+    web = rat.web
+    neut = rat.neut
+    damp = rat.damp
+    if scram
+      scram
+      # image_tag "icons/scramble.png", { style: "height: 32px", class: "ttp", 
+      #   title: "<b>Warp Scram</b><br>Strength: #{scram[:strength]}<br>Range: #{scram[:range]}<br>Chance: #{scram[:chance]}%<br>Duration: #{scram[:duration]}" }
+    end
+    if web
+      image_tag "icons/web.png", { style: "height: 32px", class: "ttp", 
+        title: "<b>Stasis Webefier</b><br>Range: #{web[:range]}<br>Chance: #{web[:chance]}%<br>Duration: #{web[:duration]}" }
+    end
+    if neut
+      image_tag "icons/neut.png", { style: "height: 32px", class: "ttp", 
+        title: "<b>Energy Neutralizer</b><br>Strength: #{neut[:strength]}<br>Range: #{neut[:range]}<br>Chance: #{neut[:chance]}%<br>Duration: #{neut[:duration]}" }
+    end
+    if jam
+      image_tag "icons/jam.png", { style: "height: 32px", class: "ttp", 
+        title: "<b>Target Jammer</b><br>Strength: #{jam[:falloff]}<br>Range: #{jam[:range]}<br>Chance: #{jam[:chance]}%<br>Duration: #{jam[:duration]}" }
+    end
+    if damp
+      image_tag "icons/damp.png", { style: "height: 32px", class: "ttp", 
+        title: "<b>Target Jammer</b><br>Strength: #{damp[:falloff]}<br>Range: #{damp[:range]}<br>Chance: #{damp[:chance]}%<br>Duration: #{damp[:duration]}" }
+    end    
+  end
 end

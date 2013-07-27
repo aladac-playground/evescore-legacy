@@ -5,7 +5,6 @@ class LadderController < ApplicationController
       i += 1
       row.merge!({ :pos => i })
     end
-    p ladder_array
     @ladder = ladder_array.paginate(:page => params[:page], :per_page => 10)
     render :ladder
   end
@@ -16,7 +15,6 @@ class LadderController < ApplicationController
       i += 1
       row.merge!({ :pos => i })
     end
-    p ladder_array
     @ladder = ladder_array.paginate(:page => params[:page], :per_page => 10)    
     render :ladder
   end

@@ -40,6 +40,7 @@ class Rat
       em: em
     }
   end
+  
   def armor_res
     kinetic = rat_attributes.where(name: "armorKineticDamageResonance").first.value
     kinetic ? kinetic = sprintf("%.0f", (1 - kinetic) * 100.0) : kinetic = 0
@@ -56,9 +57,11 @@ class Rat
       em: em
     }
   end
+  
   def speed
     rat_attributes.where(name: "maxVelocity").first.value
   end
+  
   def gun_dps
     multi = rat_attributes.where(name: "damageMultiplier").first
     rate = rat_attributes.where(name: "speed").first
@@ -84,6 +87,7 @@ class Rat
       }
     end
   end
+  
   def missile_dps
     multi = rat_attributes.where(name: "missileDamageMultiplier").first
     if multi
@@ -106,19 +110,84 @@ class Rat
       }
     end
   end
+
   def scram
-     scram_chance = rat_attributes.where(name: "entityWarpScrambleChance").first
-     scram_range = rat_attributes.where(name: "warpScrambleRange").first
-     scram_strength = rat_attributes.where(name: "warpScrambleStrength").first
-     if scram_chance and scram_range and scram_strength
-       scram_chance != 0 ? scram_chance = scram_chance.value * 100 : 0
-       scram_range != 0 ? scram_range = scram_range.value : 0
-       scram_strength != 0 ? scram_strength = scram_strength.value : 0
-       return { scram_chance: scram_chance, scram_range: scram_range, scram_strength: scram_strength }
-     else
-       return { scram_chance: 0, scram_range: 0, scram_strength: 0 }
-     end
-   end
+    chance = rat_attributes.where(name: "entityWarpScrambleChance").first
+    range = rat_attributes.where(name: "warpScrambleRange").first
+    strength = rat_attributes.where(name: "warpScrambleStrength").first
+    duration = rat_attributes.where(name: "warpScrambleDuration").first
+    if chance and range and strength and duration
+     chance != 0 ? chance = chance.value * 100 : 0
+     range != 0 ? range = range.value : 0
+     strength != 0 ? strength = strength.value : 0
+     duration != 0 ? duration = (duration.value / 1000).to_s + "s" : 0
+     return { chance: chance, range: range, strength: strength, duration: duration }
+    else
+     return nil
+    end
+  end
+
+  def web
+    chance = rat_attributes.where(name: "modifyTargetSpeedChance").first
+    range = rat_attributes.where(name: "modifyTargetSpeedRange").first
+    duration = rat_attributes.where(name: "modifyTargetSpeedDuration").first
+    if chance and range and duration
+     chance != 0 ? chance = chance.value * 100 : 0
+     range != 0 ? range = range.value : 0
+     duration != 0 ? duration = (duration.value / 1000).to_s + "s" : 0
+     return { chance: chance, range: range, duration: duration }
+    else
+     return nil
+    end
+  end
+
+  def neut
+    chance = rat_attributes.where(name: "entityCapacitorDrainDurationChance").first
+    range = rat_attributes.where(name: "entityCapacitorDrainMaxRange").first
+    strength = rat_attributes.where(name: "entityCapacitorDrainAmount").first
+    duration = rat_attributes.where(name: "entityCapacitorDrainDuration").first
+    if chance and range and strength and duration
+     chance != 0 ? chance = chance.value * 100 : 0
+     range != 0 ? range = range.value : 0
+     strength != 0 ? strength = strength.value : 0
+     duration != 0 ? duration = (duration.value / 1000).to_s + "s" : 0
+     return { chance: chance, range: range, strength: strength, durtaion: duration }
+    else
+     return nil
+    end
+  end
+
+  def jam
+    chance = rat_attributes.where(name: "entityTargetJamDurationChance").first
+    range = rat_attributes.where(name: "entityTargetJamMaxRange").first
+    falloff = rat_attributes.where(name: "entityTargetJamFallOff").first
+    duration = rat_attributes.where(name: "entityTargetJamDuration").first
+    if chance and range and falloff and duration
+     chance != 0 ? chance = chance.value * 100 : 0
+     range != 0 ? range = range.value : 0
+     falloff != 0 ? falloff = falloff.value : 0
+     duration != 0 ? duration = (duration.value / 1000).to_s + "s" : 0
+     return { chance: chance, range: range, falloff: falloff, durtaion: duration }
+    else
+     return nil
+    end
+  end
+
+  def damp
+    chance = rat_attributes.where(name: "entitySensorDampenDurationChance").first
+    range = rat_attributes.where(name: "entitySensorDampenMaxRange").first
+    falloff = rat_attributes.where(name: "entitySensorDampenFallOff").first
+    duration = rat_attributes.where(name: "entitySensorDampenDuration").first
+    if chance and range and falloff and duration
+     chance != 0 ? chance = chance.value * 100 : 0
+     range != 0 ? range = range.value : 0
+     falloff != 0 ? falloff = falloff.value : 0
+     duration != 0 ? duration = (duration.value / 1000).to_s + "s" : 0
+     return { chance: chance, range: range, falloff: falloff, durtaion: duration }
+    else
+     return nil
+    end
+  end
      
   def mobility
     cruise = rat_attributes.where(name: "entityCruiseSpeed").first 

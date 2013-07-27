@@ -38,11 +38,22 @@
           %p
             %b Extras
             %br
+            - jam = @rat.jam
             - scram = @rat.scram
-            %br
-            - if scram[:scram_strength] != 0
-              = image_tag "icons/scramble.png", { style: "height: 32px", class: "ttp", title: "<b>Warp Scram</b><br>Strength: #{scram[:scram_strength]}<br>Range: #{scram[:scram_range]}<br>Chance: #{scram[:scram_chance]}%" }
-            Jam, Web and Neut info comming soon&trade;
+            - web = @rat.web
+            - neut = @rat.neut
+            - damp = @rat.damp
+            - if scram
+              = image_tag "icons/scramble.png", { style: "height: 32px", class: "ttp", title: "<b>Warp Scram</b><br>Strength: #{scram[:strength]}<br>Range: #{scram[:range]}<br>Chance: #{scram[:chance]}%<br>Duration: #{scram[:duration]}" }
+            - if web
+              = image_tag "icons/web.png", { style: "height: 32px", class: "ttp", title: "<b>Stasis Webefier</b><br>Range: #{web[:range]}<br>Chance: #{web[:chance]}%<br>Duration: #{web[:duration]}" }
+            - if neut
+              = image_tag "icons/neut.png", { style: "height: 32px", class: "ttp", title: "<b>Energy Neutralizer</b><br>Strength: #{neut[:strength]}<br>Range: #{neut[:range]}<br>Chance: #{neut[:chance]}%<br>Duration: #{neut[:duration]}" }
+            - if jam
+              = image_tag "icons/jam.png", { style: "height: 32px", class: "ttp", title: "<b>Target Jammer</b><br>Strength: #{jam[:falloff]}<br>Range: #{jam[:range]}<br>Chance: #{jam[:chance]}%<br>Duration: #{jam[:duration]}" }
+            - if damp
+              = image_tag "icons/damp.png", { style: "height: 32px", class: "ttp", title: "<b>Target Jammer</b><br>Strength: #{damp[:falloff]}<br>Range: #{damp[:range]}<br>Chance: #{damp[:chance]}%<br>Duration: #{damp[:duration]}" }
+            
   
 .row
   .span6
