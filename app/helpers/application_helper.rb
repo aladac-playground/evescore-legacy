@@ -1,4 +1,7 @@
 module ApplicationHelper
+  def javascript(*files)
+    content_for(:head) { javascript_include_tag(*files) }
+  end
   def cache_key
     count = Bounty.count
     key = params[:controller].to_s + params[:action].to_s + count.to_s

@@ -13,10 +13,13 @@ class KillsController < ApplicationController
   end
   def ratlog
     if params[:filter]
-      @kill_log = Bounty.kills_by_rat_type(params[:filter])
-    else
-      @kill_log = Bounty.rat_kills      
+      @kill_log = Bounty.kills_by_rat_type(params[:filter]) 
+      @kill_log = Bounty.kills_by_rat_name(params[:filter]) if @log.nil?
     end
-    @kill_log = @kill_log.paginate(:page => params[:page], :per_page => 8)
+    if @kill_log.nil?
+      redirect_to root_path
+    else
+      @kill_log = @kill_log.paginate(:page => params[:page], :per_page => 8)
+    end
   end
 end

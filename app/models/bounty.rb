@@ -419,5 +419,21 @@ class Bounty
       }
     )
   end
-
+  def self.kills_by_rat_name(name)
+    rat = Rat.any_of(rat_name: /#{name}/ ).first
+    if rat
+      Bounty.collection.aggregate(
+        { "$unwind" => "$kills" },
+        { 
+          "$sort" => { "ts" => -1 }
+        },
+        { "$match" => { 
+          "kills.rat_id" => rat.rat_id
+          }
+        }, 
+      )
+    else
+      nil
+    end
+  end
 end
