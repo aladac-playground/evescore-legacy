@@ -1,0 +1,35 @@
+- badges = Badge.all
+- i = 2
+- two_c = []
+- tmp = []
+- badges.each do |badge|
+  - i -= 1
+  - tmp.push badge
+  - if i == 0
+    - two_c.push tmp
+    - tmp = []
+    - i = 2  
+
+- two_c.each do |row|
+  - badge = row[0]
+  .row
+    .span6
+      .well{ style: "min-height: 150px; text-align: center;"}
+        = image_tag "badges/" + badge.icon
+        %h4
+          = badge.name
+        %p{ style: "font-size: 11px"}
+          = badge.text.html_safe
+    - badge = row[1]
+    .span6
+      .well{ style: "min-height: 150px; text-align: center;"}
+        = image_tag "badges/" + badge.icon
+        %h4
+          = badge.name
+        %p{ style: "font-size: 11px"}
+          = badge.text.html_safe
+  
+
+  
+      
+        

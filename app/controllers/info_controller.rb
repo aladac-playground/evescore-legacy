@@ -1,4 +1,6 @@
 class InfoController < ApplicationController
+  def badges
+  end
   def about
   end
 

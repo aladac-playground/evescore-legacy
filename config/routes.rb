@@ -1,4 +1,5 @@
 Evescore::Application.routes.draw do
+  get "info/badges"
   get "ladder/bounty"
 
   get "ladder/incursion"

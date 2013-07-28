@@ -3,6 +3,7 @@ class ApiController < ApplicationController
     char = Character.where(char_id: params[:char_id]).first
     key = char.key
     api = Eve::Api.new(key[:key_id], key[:vcode])
+    api.char_id = params[:char_id]
     api.rows = 3000
     wallet = api.wallet_journal
     wallet.wallet_import
