@@ -7,7 +7,13 @@
     %meta{:content => "EVEScore, EVE Online PvE Score-board", :name => "description"}/
     %meta{:content => "chi", :name => "author"}/
     = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "jquery"
+    = javascript_include_tag "bootstrap"
+    = javascript_include_tag "hogan"
+    = javascript_include_tag "typeahead"
     = javascript_include_tag "application"
+    
+    
     = csrf_meta_tags
     = yield(:head)
   %body{ :onload => "CCPEVE.requestTrust('#{request.scheme + "://" + request.host + ":" + request.port.to_s}')" }
@@ -18,7 +24,7 @@
             = link_to image_tag("evescore.png", { :style => "height: 20px"}), root_path
           .nav-collapse.collapse
             = render 'layouts/navigation'
-          .nav.pull-right
+          .pull-right
             = render 'layouts/search'
     .container
       %p

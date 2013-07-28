@@ -1,6 +1,5 @@
 Evescore::Application.routes.draw do
   get "info/badges"
-  get "info/type"
   get "ladder/bounty"
 
   get "ladder/incursion"
@@ -33,6 +32,7 @@ Evescore::Application.routes.draw do
   get "kills/ratlog"
   get "/ladder", :controller => :kills, :action => :ladder
 
+  match "api/search"
   get "api/verify"
   get "api/import_all"
   match "api/import"

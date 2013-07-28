@@ -13,6 +13,8 @@ class Character
   # field :vcode, type: String
   field :last_visit, type: Time
   index({  char_id: 1 }, { unique: true, drop_dups: true })
+  index({ name: 1 })
+  index({ name: -1 })
   has_many :character_badges
   def self.json
     @characters = Array.new

@@ -4,5 +4,7 @@ class Corp
   field :name, type: String
   field :corp_id, type: Integer
   index({ corp_id: 1 }, { unique: true, drop_dups: true })
+  index({ name: 1 })
+  index({ name: -1 })
   has_many :characters, primary_key: :corp_id
 end

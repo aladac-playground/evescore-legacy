@@ -1,4 +1,36 @@
 module ApplicationHelper
+  def search_data
+    @search = Array.new
+    Corp.all.each do |corp|
+      c = { 
+        name: corp.name,
+        value: corp.corp_id,
+        type: "Corporation",
+        image: "corps/#{corp.corp_id}_32.png"
+      }
+      @search.push c
+    end
+    Character.all.each do |char|
+      c = { 
+        name: char.name,
+        value: char.char_id,
+        type: "Character",
+        image: "characters/#{char.char_id}_32.png"
+      }
+      @search.push c
+    end
+    Rat.all.each do |rat|
+      c = { 
+        name: rat.rat_name,
+        value: rat.rat_id,
+        type: "Rat",
+        image: "rats/#{rat.rat_id}_32.png"
+      }
+      @search.push c
+    end
+    @search.to_json
+  end
+
   def javascript(*files)
     content_for(:head) { javascript_include_tag(*files) }
   end

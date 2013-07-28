@@ -7,6 +7,8 @@ class Rat
   field :rat_name, type: String
   field :rat_type, type: String
   index({ rat_id: 1 }, { unique: true })
+  index({ rat_name: 1 })
+  index({ rat_name: -1 })
 
   def self.rat_name(id)
     where(:rat_id => id).first.rat_name

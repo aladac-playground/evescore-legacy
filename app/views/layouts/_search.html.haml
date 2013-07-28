@@ -1,4 +1,4 @@
-%form.form-search.form-inline{ :action => character_profile_path, :style => "margin-bottom: 0px" }
-  %input#search.search-query{ :style => "width: 130px", :required => true, :type => :text, :autocomplete => :off, :name => :char_name, :"data-provide" => :typeahead, :"data-source" => Character.json }
-  %button.btn{ :type => :submit }
+%form.form.search-main{ :action => character_profile_path }
+  %input.typeahead.tt-query{ :placeholder => "Enter query...", :required => true, :type => :text, :name => :char_name }
+  %button.btn{ type: :submit }
     Search

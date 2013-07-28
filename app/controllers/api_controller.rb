@@ -1,4 +1,52 @@
 class ApiController < ApplicationController
+  def search
+    if params[:text] 
+      @search = Array.new
+      Corp.any_of(name: /#{params[:text]}/i).to_a.each do |corp|
+        c = { 
+          name: corp.name,
+          value: corp.name,
+          path: "/corp/profile",
+          field_name: "corp_id",
+          field_value: corp.corp_id,
+          type: "Corporation",
+          image: "#{corp.corp_id}_32.png"
+        }
+        @search.push c
+      end
+      Character.any_of(name: /#{params[:text]}/i).to_a.each do |char|
+        c = { 
+          name: char.name,
+          value: char.name,
+          path: "/character/profile",
+          field_name: "char_name",
+          field_value: char.name,
+          type: "Character",
+          image: "#{char.char_id}_32.png"
+        }
+        @search.push c
+      end
+      Rat.any_of(rat_name: /#{params[:text]}/i).to_a.each do |rat|
+        c = { 
+          name: rat.rat_name,
+          value: rat.rat_name,
+          path: "/rats/show",
+          field_name: "rat_id",
+          field_value: rat.rat_id,
+          type: "Rat",
+          image: "Type/#{rat.rat_id}_32.png"
+        }
+        @search.push c
+      end
+    else
+      @search = nil
+    end
+    respond_to do |format|
+      format.json { render json: @search }
+    end
+  end
+  
+
   def import
     char = Character.where(char_id: params[:char_id]).first
     key = char.key
