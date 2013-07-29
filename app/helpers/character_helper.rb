@@ -1,7 +1,10 @@
 module CharacterHelper
   def cache_key
     count = Bounty.count
-    badge_count = Character.where(char_id: @char_id).first.badges.count
+    badges = Character.where(char_id: @char_id).first.badges
+    if badges
+      badge_count = badges.count
+    end
     key = params[:controller].to_s + params[:action].to_s + count.to_s
     key += badge_count.to_s
     key += params[:char_id].to_s if params[:char_id]
