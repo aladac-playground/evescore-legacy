@@ -1,20 +1,4 @@
 module CharacterHelper
-  def cache_key
-    count = Bounty.count
-    badges = Character.where(char_id: @char_id).first.badges
-    if badges
-      badge_count = badges.count
-    end
-    key = params[:controller].to_s + params[:action].to_s + count.to_s
-    key += badge_count.to_s
-    key += params[:char_id].to_s if params[:char_id]
-    key += params[:char_name].to_s if params[:char_name]
-    key += params[:page].to_s if params[:page]
-    key += params[:corp_id].to_s if params[:corp_id]
-    key += params[:filter].to_s if params[:filter]
-    return key
-  end
-  
   def build_date(day)
     year = day["_id"]["year"].to_i
     month = day["_id"]["month"].to_i
