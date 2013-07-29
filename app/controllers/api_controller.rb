@@ -31,8 +31,8 @@ class ApiController < ApplicationController
           name: rat.rat_name,
           value: rat.rat_name,
           path: "/rats/show",
-          field_name: "rat_id",
-          field_value: rat.rat_id,
+          field_name: "rat_name",
+          field_value: rat.rat_name,
           type: "Rat",
           image: "Type/#{rat.rat_id}_32.png"
         }
