@@ -7,8 +7,8 @@ class ApiController < ApplicationController
           name: corp.name,
           value: corp.name,
           path: "/corp/profile",
-          field_name: "corp_id",
-          field_value: corp.corp_id,
+          field_name: "corp_name",
+          field_value: corp.name,
           type: "Corporation",
           image: "#{corp.corp_id}_32.png"
         }

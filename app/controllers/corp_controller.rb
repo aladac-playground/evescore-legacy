@@ -13,7 +13,7 @@ class CorpController < ApplicationController
   def name_to_id
     if params[:corp_name] 
       corp = Corp.where(:name => params[:corp_name]).first
-      if char
+      if corp
         @corp_id = corp.corp_id
       else
         redirect_to root_path
