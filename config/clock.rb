@@ -40,6 +40,7 @@ class GetWalletData
       Log.info "STARTED Getting data for: #{character[:name]}"
       key = character.key
       api = Eve::Api.new(key[:key_id], key[:vcode])    
+      api.char_id = character.char_id
       api.rows = 3000
       wallet = api.wallet_journal
       wallet.wallet_import
