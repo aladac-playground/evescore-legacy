@@ -9,6 +9,8 @@
           %td
             .span1{ :style => "margin: 7px" }
               = character_image_link( log[:char_id] ) 
+            .span1{ :style => "margin: 7px" }
+              = corp_image_link( log[:corp_id] ) 
             .span3
               %b
                 = character_name_link( log[:char_id], 50 )
@@ -17,7 +19,7 @@
               %br
               %b
                 = isk log[:bounty]/100
-            .span7
+            .span6
               - log.kills.each do |kill|
                 = rat_image_link(kill["rat_id"], 32)
   = will_paginate @kill_log
