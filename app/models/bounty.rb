@@ -439,4 +439,27 @@ class Bounty
       }
     )
   end
+
+  def self.kills_by_rat_id
+    map = %Q|
+      function() {
+        for (index in this.kills) {
+            emit(this.kills[index].rat_id, this.kills[index].rat_amount );
+        }
+      }
+    |
+
+    reduce = %Q|
+      function(key, values) {
+        var count = 0;
+
+        for (index in values) {
+            count += values[index];
+        }
+
+        return count;
+      }
+    |
+    map_reduce(map, reduce).out(inline: true).to_a
+  end
 end

@@ -41,6 +41,19 @@ class Character
     badge.badge_id = id
     badge.save
   end
+  def has_badge?(badge)
+    badge = Badge.where(name: badge).first
+    badge_id = badge.id if badge
+    char = Character.where(id: self.id).first
+    if char
+      check = char.character_badges.where(badge_id: badge_id).first
+    end
+    if check
+      return true
+    else
+      return false
+    end
+  end
   def total_bounty
     Bounty.total_bounty(self.char_id)
   end
