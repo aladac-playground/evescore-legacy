@@ -406,18 +406,34 @@ class Bounty
       rat_ids.push rat.rat_id
     end
     count = 0
-    Bounty.collection.aggregate(
-      { "$match" => { 
-        "kills.rat_id" => { 
-          "$in" => rat_ids 
-          }
+    map = %Q|
+      function() {
+        for (index in this.kills) {
+            emit(this.kills[index].rat_id, this.kills[index].rat_amount );
         }
-      }, 
-      { "$unwind" => "$kills" },
-      { 
-        "$sort" => { "ts" => -1 }
       }
-    )
+    |
+
+    reduce = %Q|
+      function(key, values) {
+        var count = 0;
+
+        for (index in values) {
+            count += values[index];
+        }
+
+        return count;
+      }
+    |
+
+    result = 0
+    a = Bounty.map_reduce(map, reduce).out(inline: true)
+    a.to_a.each do |rat|
+      if rat_ids.include?(rat["_id"].to_i)
+        result += rat["value"]
+      end
+    end
+    result
   end
   def self.kills_by_rat_name(name)
     rat_ids = Array.new
@@ -438,6 +454,15 @@ class Bounty
         }
       }
     )
+  end
+
+  def self.rat_kills
+    a = collection.aggregate({ "$unwind" => "$kills" }, { "$project" => { "amount" => "$kills.rat_amount" } }  )  
+    result = 0
+    a.each do |row|
+      result = result + row["amount"]
+    end
+    result
   end
 
   def self.kills_by_rat_id

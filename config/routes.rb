@@ -6,6 +6,8 @@ Evescore::Application.routes.draw do
 
   get "home/corps"
   
+  get "home/players"
+  
   get "blitz/test"
   
   get "rats/show"

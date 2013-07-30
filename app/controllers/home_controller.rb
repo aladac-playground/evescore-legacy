@@ -8,4 +8,6 @@ class HomeController < ApplicationController
   def corps
     
   end
+  def players
+  end
 end
