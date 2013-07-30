@@ -26,4 +26,5 @@ reduce = %Q|
   }
 |
 
-pp Bounty.map_reduce(map, reduce).out(inline: true).to_a
+a = Bounty.map_reduce(map, reduce).out(replace: "rat_kills")
+pp a.first
