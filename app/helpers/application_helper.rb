@@ -41,6 +41,7 @@ module ApplicationHelper
     key += params[:char_name].to_s if params[:char_name]
     key += params[:page].to_s if params[:page]
     key += params[:corp_id].to_s if params[:corp_id]
+    key += params[:corp_name].to_s if params[:corp_name]
     key += params[:filter].to_s if params[:filter]
     return key
   end
