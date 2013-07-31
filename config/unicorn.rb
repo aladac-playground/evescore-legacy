@@ -11,8 +11,6 @@ timeout 30
 # we will use this in our nginx.conf later
 listen "#{@dir}tmp/sockets/unicorn.sock", :backlog => 2048
 
-worker_processes 4
-
 # Set process id path
 pid "#{@dir}tmp/pids/unicorn.pid"
 
