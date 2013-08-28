@@ -103,7 +103,8 @@ class Rat
   def missile_dps
     multi = rat_attributes.where(name: "missileDamageMultiplier").first
     if multi
-      rate = rat_attributes.where(name: "missileLaunchDuration").first.value / 1000
+      rate = rat_attributes.where(name: "missileLaunchDuration").first.value / 1000 
+      rate = rate / 1000 unless rate < 1000 # Bug? Most durations are presented in miliseconds - some seem to be in seconds
       multi = multi.value
       missile = Charge.where(charge_id: rat_attributes.where(name: "entityMissileTypeID").first.value.to_i ).first
       {
