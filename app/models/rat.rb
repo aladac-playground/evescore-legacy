@@ -11,10 +11,20 @@ class Rat
   index({ rat_name: -1 })
 
   def self.rat_name(id)
-    where(:rat_id => id).first.rat_name
+    rat = where(:rat_id => id).first
+    if rat
+      rat.rat_name
+    else
+      id.to_s
+    end
   end
   def self.rat_type(id)
-    where(:rat_id => id).first.rat_type
+    rat = where(:rat_id => id).first
+    if rat
+      rat.rat_type
+    else
+      id.to_s
+    end
   end
   def hps
     {
