@@ -1,2 +1,2 @@
-web: bundle exec unicorn -c ./config/unicorn.rb
+web: bundle exec unicorn -p $PORT
 worker: bundle exec clockwork ./config/clock.rb
