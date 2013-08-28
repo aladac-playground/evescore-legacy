@@ -5,7 +5,7 @@ production:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      uri: mongodb://evescore:!23QweAsdZxc@paulo.mongohq.com:10089/app17780631
       # database: evescore_production
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
