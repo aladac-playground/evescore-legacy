@@ -298,13 +298,13 @@ class GetWalletData
 end
  
 module Clockwork
-  every 60.minutes, 'award_badges' do
+  every 24.hours, 'award_badges' do
     AwardBadges.perform
   end
-  every 30.minutes, 'gen_graphs' do
+  every 24.hours, 'gen_graphs' do
     GenGraphs.perform
   end
-  every 4.hours, 'get_images' do
+  every 48.hours, 'get_images' do
     GetCorpImages.perform
     GetCharacterImages.perform
     GetRatImages.perform
