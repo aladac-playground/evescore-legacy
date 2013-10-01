@@ -202,6 +202,11 @@ module ApplicationHelper
   end
   def character_tick_link(id, tick, size=64)
     src = "characters/#{id}_#{size}.jpg"
+    char = Character.where(char_id: id).first
+    if bear = char.bear
+      src = "bears/bear#{bear}.gif"
+    end
+
     if ! Rails.application.assets.find_asset(src)
       src = ext_image("character", id, size)
     end
