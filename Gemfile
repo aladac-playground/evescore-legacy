@@ -7,6 +7,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'turbo-sprockets-rails3'
 end
+gem 'newrelic_rpm'
 gem 'googlecharts'
 gem 'will_paginate_mongoid'
 gem 'twitter'
