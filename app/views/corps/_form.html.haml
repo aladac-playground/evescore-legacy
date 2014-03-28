@@ -1,0 +1,10 @@
+= form_for @corp do |f|
+  - if @corp.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@corp.errors.count, "error")} prohibited this corp from being saved:"
+      %ul
+        - @corp.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,41 @@
+.well
+  .row
+    %ol.breadcrumb
+      %li
+        = link_to "Rats", "/rats/factions"
+      %li
+        = link_to type_to_faction(@rat_type), "/rats/faction/#{us type_to_faction(@rat_type)}"
+      %li.active
+        = @rat_type
+      
+  .row
+    .col-lg-12
+      = paginate @rats
+  %table.table.table-striped
+    %tr
+      %th Name
+      %th 
+      %th 
+    - if params[:rat_type]
+      - @rats.each do |rat|
+        %tr
+          %td
+            %a{href: "/rats/#{rat.id}"}
+              = rat.name
+          %td 
+            = rat.rat_type
+          %td
+            = nice_number(rat.attrib "entityKillBounty")
+            ISK
+    - else
+      - @rats.each do |rat|
+        %tr
+          %td
+            %a{ href: "/rats/type/#{rat.rat_type}" }
+              = rat.rat_type
+          %td
+          %td
+
+  .row
+    .col-lg-12
+      = paginate @rats

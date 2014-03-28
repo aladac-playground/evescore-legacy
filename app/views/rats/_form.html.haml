@@ -1,0 +1,10 @@
+= form_for @rat do |f|
+  - if @rat.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@rat.errors.count, "error")} prohibited this rat from being saved:"
+      %ul
+        - @rat.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

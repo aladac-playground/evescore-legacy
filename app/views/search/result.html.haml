@@ -1,0 +1,16 @@
+.well
+  %h4 Search Results
+  %table.table.table-striped
+    - @rat_result.each do |rat|
+      %tr
+        %td
+          = link_to rat.name, rat
+        %td
+          Rat
+    - @char_result.each do |char|
+      %tr
+        %td
+          = link_to char.name, char
+        %td
+          Character
+    

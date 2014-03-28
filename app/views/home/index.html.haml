@@ -1,0 +1,41 @@
+= cache WalletRecord.count do
+  = render 'progress'
+  .well
+    .row
+      - title = link_to "Income", top_income_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @wallet.top_income.last_ten_days.limit(5), :char, :isk, 4)
+    
+      - title = link_to "Bounty", top_bounty_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @wallet.top_income.bounty.last_ten_days.limit(5), :char, :isk, 4)
+    
+      - title = link_to "Incursion", top_incursion_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @wallet.top_income.incursion.last_ten_days.limit(5), :char, :isk, 4)
+    .row
+      - title = link_to "Mission Total", top_mission_all_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @wallet.top_income.mission_all.last_ten_days.limit(5), :char, :isk, 4)
+    
+      - title = link_to "Mission Rewards", top_mission_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @wallet.top_income.mission.last_ten_days.limit(5), :char, :isk, 4)
+    
+      - title = link_to "Mission Time Rewards", top_mission_time_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @wallet.top_income.mission_time.last_ten_days.limit(5), :char, :isk, 4)
+
+    .row
+      - title = link_to "Ticks", top_ticks_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @wallet.top_ticks.last_ten_days.limit(5), :char, :isk, 4)
+
+      - title = link_to "Overseer Kills", top_kills_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @kills.overseer.top_kills.last_ten_days.limit(5), :char, :kill, 4)
+
+      - title = link_to "Overseer Deaths", top_rats_path
+      - title += " - Last 10 Days".html_safe
+      = top_table(title, @kills.overseer.top_rats.last_ten_days.limit(5), :type, :kill, 4)
+  = render 'log'

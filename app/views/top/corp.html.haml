@@ -1,0 +1,34 @@
+.well
+  %h4
+    Top
+    = params[:action].capitalize
+    
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Rank
+        %th Corporation Name
+        %th Alliance Name
+        %th.numeric ISK earned by Characters
+        %th.numeric ISK short
+    - i = 0
+    - if params[:page]
+      - i = i + ( params[:page].to_i - 1 )* 10
+    - @corps.each do |corp|
+      - i+=1
+      / - next if corp.name.nil?
+      %tr
+        %td= i
+        %td
+          = eve_image :corp, corp.id, 32
+          - corp.name ? corp_name = corp.name : corp_name = Corp.find(corp.id).name
+          = link_to corp_name, corp_path(corp.id)
+        %td
+          = Corp.find(corp.id).alliance ? Corp.find(corp.id).alliance.name : "-"
+        %td.numeric
+          = nice_number corp.amount / 100
+          ISK
+        %td.numeric
+          = number_to_isk corp.amount
+          
+  = paginate(@corps)

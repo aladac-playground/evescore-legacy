@@ -1,0 +1,31 @@
+.well
+  .row
+    .col-lg-12
+      = paginate @wallet
+  %p
+  %table.table.vertical-middle.table-striped
+    %tr
+      %th.col-lg-2
+        Timestamp
+      %th
+        Character
+      %th
+        Details
+      %th.numeric
+        Amount
+    - @wallet.each do |record|
+      %tr
+        %td= record.ts.strftime("%Y-%m-%d %H:%M:%S")
+        %td
+          = eve_image(:char, record.char_id)
+          = eve_image(:corp, record.corp_id)
+          = eve_image(:alliance, record.alliance_id)
+        %td
+          - record.kills.each do |kill|
+            - ttp = "<b>#{kill.rat_name}</b><br><i>#{kill.rat_type}</i>".html_safe
+            = eve_image(:rat, kill.rat_id, 32, ttp)
+        %td.numeric= number_with_delimiter(number_with_precision(record.amount / 100.0, precision: 2))
+
+  .row
+    .col-lg-12
+      = paginate @wallet

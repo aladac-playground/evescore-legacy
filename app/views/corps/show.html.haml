@@ -1,0 +1,91 @@
+.well
+  .row
+    .col-lg-2
+      = eve_image :corp, @corp.id, 64
+      - if @corp.alliance_id
+        = eve_image :alliance, @corp.alliance_id, 64
+    .col-lg-10
+      .col-lg-4
+        %h4
+          = @corp.name
+        %p
+          %i
+            = @corp.alliance_name
+      .col-lg-8
+        / = form_for @search, url: corp_path(@corp.id), method: :get, html: { class: "form-horizontal" } do |f|
+        /   .form-group
+        /     .col-lg-4.control-label
+        /       %label Date From
+        /     .col-lg-8
+        /       = f.text_field :ts_gteq, class: "date form-control"
+        /       / %input.form-control{:type => "text"}/
+        /   .form-group
+        /     .col-lg-4.control-label
+        /       %label Date To
+        /     .col-lg-8
+        /       = f.text_field :ts_lteq, class: "date form-control"
+        /   .form-group
+        /     .col-lg-offset-4.col-lg-8
+        /       = f.submit "Filter", class: "btn btn-primary"
+        / 
+        / .col-lg-3.numeric
+        /   %b Time Range
+        / .col-lg-9
+        /   #datepicker.input-daterange.input-group
+        /     %input.input.form-control{:name => "start", :type => "text"}/
+        /     %span.input-group-addon to
+        /     %input.input.form-control{:name => "end", :type => "text"}/            
+        /     %span.input-group-btn
+        /       %button.btn Filter
+        / 
+        / 
+        .col-lg-3.numeric
+          %b Time Range
+        .col-lg-9
+          = form_for @search, url: corp_path(@corp.id), method: :get, html: { class: "form-horizontal" } do |f|
+            #datepicker.input-group
+              %span.input-group-btn
+                %button.btn.btn-sm#reset{ type: "button" }
+                  Clear
+              = f.text_field :ts_gteq, class: "input-sm form-control date"
+              %span.input-group-addon.input-sm to
+              = f.text_field :ts_lteq, class: "input-sm form-control date"
+              %span.input-group-btn
+                %button.btn.btn-sm Filter
+            
+          
+  .row
+    .col-lg-12
+      %table.table.table-striped
+        %thead
+          %tr
+            %th 
+              Rank
+            %th
+              / = sort_link @search, :char_name, "Character"
+            %th.numeric
+              / = sort_link @search, :amount, "Income"
+            %th.numeric
+              / = sort_link @search, :amount, "Income (Short)"
+            %th.numeric
+              / = sort_link @search, :tax, "Tax"
+        %tbody
+          - i = 0
+          - @members_income.each do |member|
+            - i+=1
+            %tr
+              %td
+                = i
+              %td
+                = link_to Char.find(member.id).name, char_path(member.id)
+              %td.numeric
+                = nice_number member.amount / 100
+                ISK
+              %td.numeric
+                = number_to_isk member.amount
+              %td.numeric
+                = nice_number member.tax / 100
+                ISK
+          
+      / = paginate @members_income
+  

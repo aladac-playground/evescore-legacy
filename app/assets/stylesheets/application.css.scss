@@ -1,0 +1,339 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_tree
+ *= require_self
+ */
+
+//@import 'bootstrap-datetimepicker';
+
+
+.table-striped > tbody > tr:nth-child(odd) > th, .table-striped > tbody > tr:nth-child(odd) > td {
+  background-color: rgba(33,33,33,0.8);
+}
+
+.yellow {
+  color: yellow;
+}
+
+.small-font {
+  font-size: 12px;
+}
+
+.white {
+  color: white;
+}
+
+.table > tbody > tr > th, .table > tbody > tr > td {
+  border: 0px;
+}
+
+.numeric {
+  text-align: right;
+}
+
+div.numeric {
+  line-height: 32px;
+  padding: 0px;
+}
+
+table.index-table > tbody > tr > td {
+  padding: 5px;
+}
+
+th.small-img-col {
+  width: 50px;
+}
+
+img.site-logo {
+  width: 150px;
+}
+
+th.action-column {
+  width: 60px;
+}
+
+th.character-column {
+  width: 122px;
+}
+
+body {
+  padding-top: 20px;
+  background-color: #555;
+  background-size: cover;
+  background-image: asset-url('bg.jpg', image);
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+}
+
+main {
+  background-color: transparent;
+}
+
+table > tbody > tr > td.tt {
+  font-family: courier;
+}
+
+table.vertical-middle > tbody > tr > th, table.vertical-middle > tbody > tr > td {
+  vertical-align: middle;
+}
+
+img.ttp {
+  display: inline;
+}
+
+.right {
+  text-align: right;
+}
+
+table.character-info > tbody > tr > td {
+  padding: 3px;
+}
+
+.authform form, .authform fieldset, .well {
+   background-color: rgba(0, 0, 0, 0.8);
+   color: #999999;
+   border-color: #101010;
+}
+
+.progress-bar-gray {
+  background-color: gray;
+}
+
+.progress {
+  margin: 6px;
+  position: relative;
+}
+
+.progress span {
+  font-size: 11px;
+  position: absolute;
+  display: block;
+  width: 100%;
+  color: black;
+  font-weight: bold;
+}
+
+.numeric {
+  text-align: right;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-dropdown-menu {
+  width: 422px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: rgba(33, 33, 33, 0.8);
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+img.img-tt {
+  display: inline;
+  margin-right: 20px;
+}
+
+.tt-suggestion {
+  color: #aaa;
+  padding: 3px 20px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+//li.search { 
+//  margin-top: 8px;
+//  margin-right: 20px;
+//}
+
+tr.collapse.in {
+  display: compact;
+}
+
+.dropdown-menu {
+  color: #999999;
+  background-color: #101010;
+}
+
+.dropdown-menu > li > a {
+  color: #999999;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: #0097cf;
+  
+}
+
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 8px 12px;
+  line-height: 1.42857143;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #222222;
+  border: 1px solid #282828;
+  margin-left: -1px;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  color: #ffffff;
+  background-color: #2a9fd6;
+  border-color: transparent;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #2a9fd6;
+  border-color: transparent;
+  cursor: default;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #888888;
+  background-color: #222222;
+  border-color: #282828;
+  cursor: not-allowed;
+}
+.pagination-lg > li > a,
+.pagination-lg > li > span {
+  padding: 14px 16px;
+  font-size: 18px;
+}
+.pagination-lg > li:first-child > a,
+.pagination-lg > li:first-child > span {
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+}
+.pagination-lg > li:last-child > a,
+.pagination-lg > li:last-child > span {
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.pagination-sm > li > a,
+.pagination-sm > li > span {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.pagination-sm > li:first-child > a,
+.pagination-sm > li:first-child > span {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.pagination-sm > li:last-child > a,
+.pagination-sm > li:last-child > span {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.breadcrumb {
+  background-color: transparent;
+}
+
+.rat-details img {
+  height: 32px;
+  display: inline;
+}
+
+.pseudo-header > div {
+  text-align: center;
+}
+
+.footer {
+  font-size: 12px;
+}
+
+.section-title {
+  margin-top: 20px;
+}
+
+.hand {
+  cursor: hand;
+  cursor: pointer;
+}
+
+.btn {
+  color: #000;
+}
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+#footer {
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+//  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+}

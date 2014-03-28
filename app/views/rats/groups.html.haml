@@ -1,0 +1,17 @@
+.well
+  .row
+    %ol.breadcrumb
+      %li
+        = link_to "Rats", "/rats/factions"
+      %li.active
+        = @faction
+  %table.table.table-striped
+    %tr
+      %th
+        Group Name
+    - @groups.each do |group|
+      %tr
+        %td
+          = link_to group.name, "/rats/type/#{group.name.gsub(/\ /,"_")}"
+  = paginate @groups
+    

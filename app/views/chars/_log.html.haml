@@ -1,0 +1,43 @@
+.well
+  .pull-right 
+    %a{ href: "#"} (Show more)
+  %p
+    %h4 
+      Recent Activity
+      
+  %br
+  %table.table.vertical-middle.table-striped
+    %tr
+      %th.col-lg-2
+        Timestamp
+      %th
+        Character
+      %th
+        Details
+      %th.numeric
+        Amount
+    - @wallet.each do |record|
+      %tr
+        %td= record.ts.strftime("%Y-%m-%d %H:%M:%S")
+        %td
+          = eve_image(:char, record.char_id)
+          = eve_image(:corp, record.corp_id)
+          - if record.alliance_id
+            = eve_image(:alliance, record.alliance_id)
+        %td
+          - if record.ref_type_id == 99
+            = image_tag "http://image.eveonline.com/Alliance/500019_32.png", style: "display: inline"
+            %b Incursion Reward
+          - if record.ref_type_id == 34
+            = image_tag "http://image.eveonline.com/Corporation/1000125_32.png", style: "display: inline"
+            %b Agent Mission Time Bonus Reward
+          - if record.ref_type_id == 33
+            = image_tag "http://image.eveonline.com/Corporation/1000125_32.png", style: "display: inline"
+            %b Agent Mission Reward
+          - record.kills.each do |kill|
+            - ttp = "<b>#{kill.rat_name}</b><br><i>#{kill.rat_type}</i>".html_safe
+            = eve_image(:rat, kill.rat_id, 32, ttp)
+        %td.numeric
+          = number_with_delimiter(number_with_precision(record.amount / 100.0, precision: 0))
+          ISK
+

@@ -1,0 +1,2 @@
+class RatopediaController < ApplicationController
+end

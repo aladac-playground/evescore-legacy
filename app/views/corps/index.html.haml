@@ -1,0 +1,17 @@
+%h1 Listing corps
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @corps.each do |corp|
+    %tr
+      %td= link_to 'Show', corp
+      %td= link_to 'Edit', edit_corp_path(corp)
+      %td= link_to 'Destroy', corp, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Corp', new_corp_path

@@ -1,0 +1,37 @@
+.well
+  %h4
+    = t("#{params[:controller]}.#{params[:action]}.title")
+  %p
+    %i
+      = t("#{params[:controller]}.#{params[:action]}.desc")
+  %br
+    
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Rank
+        %th Character Name
+        %th.numeric ISK earned
+        %th.numeric ISK short
+    - i = 0
+    - if params[:page]
+      - i = i + ( params[:page].to_i - 1 )* 10
+    - @income.each do |char|
+      - i+=1
+      %tr
+        %td= i
+        %td
+          = eve_image :char, char.id, 32
+          - if char.name.nil?
+            - c = Char.where(id: char.id).first
+            - next if c.nil?
+            - name = c.name
+          - else
+            - name = char.name
+          = link_to name, char_path(char.id)
+        %td.numeric
+          %i= nice_number char.amount / 100
+        %td.numeric
+          %i= number_to_isk char.amount
+
+  = paginate @income

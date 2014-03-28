@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require_relative "config/boot"
+require_relative "config/environment"
+
+chars = Char.all
+
+chars.each do |char|
+  key = char.key
+  if key.nil?
+    pp char
+  end
+end

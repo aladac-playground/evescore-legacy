@@ -1,0 +1,63 @@
+-# navigation styled for Bootstrap 3.0
+%nav.navbar.navbar-inverse.navbar-fixed-top
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to image_tag('evescore.png', class: 'site-logo'), root_path, class: 'navbar-brand'
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        / %li
+        /   =link_to "Ladders"
+        / %li
+        /   =link_to "Top"
+        / %li
+        /   =link_to "Badges"
+        %li
+          =link_to "Ratopedia", "/rats/factions"
+        %li.dropdown
+          %a{"data-toggle" => "dropdown", :href => "#"} Top
+          %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
+            %li= link_to "Income", top_income_path
+            %li= link_to "Mission (Total)", top_mission_all_path
+            %li= link_to "Mission (Rewards)", top_mission_path
+            %li= link_to "Mission (Time Rewards)", top_mission_time_path
+            %li= link_to "Bounty", top_bounty_path
+            %li= link_to "Incursion", top_incursion_path
+            %li= link_to "Corporation", top_corp_path
+            %li= link_to "Alliance", top_alliance_path
+        
+      %ul.nav.navbar-nav.navbar-right
+        %li.search
+          %form{ action: "/search/result", id: "main-search", class: "form-search navbar-form" }
+            %input.typeahead.form-control{ type: :text, name: "q[name_cont]", placeholder: "Search" }
+            / %button{ style: "display: none"}
+        - if user_signed_in?
+          - icon = content_tag(:i, "", class: "glyphicon glyphicon-cog")
+          - settings_link = ( icon + " Settings" ).html_safe
+          %li.dropdown
+            %a{"data-toggle" => "dropdown", :href => "#"}= settings_link
+            %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
+              %li= link_to "Change Password", edit_user_registration_path
+              - if user_signed_in?
+                %li= link_to 'Kill Log', wallet_index_path
+              - if user_signed_in?
+                %li= link_to 'Characters', chars_path
+              - if user_signed_in?
+                %li= link_to 'Keys', keys_path
+              
+          - icon = content_tag(:i, "", class: "glyphicon glyphicon-log-out")
+          - logout_link = ( icon + " Logout" ).html_safe
+          %li= link_to logout_link, destroy_user_session_path, :method=>'delete'
+        - else
+          - icon = content_tag(:i, "", class: "glyphicon glyphicon-plus")
+          - signup_link = ( icon + " Register" ).html_safe
+          %li= link_to signup_link, new_user_registration_path
+          - icon = content_tag(:i, "", class: "glyphicon glyphicon-log-in")
+          - login_link = ( icon + " Login" ).html_safe
+          %li= link_to login_link, new_user_session_path
+        
+          

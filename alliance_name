@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require_relative "config/boot"
+require_relative "config/environment"
+
+
+chars=Char.all
+records=chars.count
+
+pb = ProgressBar.create(:title => "Importing WalletJournals", :starting_at => 0, :total => records, :format => '%a |%b>>%i| %p%% %t', length: 100 )
+
+chars.each do |char|
+    allied = Allied.where(corp_id: char.corp_id).first
+    if allied
+      alliance_id = allied.alliance_id
+    else
+      pb.increment
+      next
+    end
+    alliance_name = Alliance.find(alliance_id).name
+    char.alliance_name = alliance_name
+    char.alliance_id = alliance_id
+    char.save
+    pb.increment
+end

@@ -1,0 +1,21 @@
+- if @key.errors.any?
+  - @key.errors.full_messages.each do |error|
+    - flash.now[:error] = error
+.well
+  %h3
+    New API Key
+  %hr
+  = form_for @key, html: { class: "form-horizontal" } do |f|
+    %fieldset
+      .form-group
+        %label.col-lg-2.control-label KeyID
+        .col-lg-10
+          = f.hidden_field :user_id, value: current_user.id
+          = f.text_field :id, class: "form-control", placeholder: "KeyID", autocomplete: "off"
+      .form-group
+        %label.col-lg-2.control-label vCode
+        .col-lg-10
+          = f.text_field :vcode, class: "form-control", placeholder: "Verification Code", autocomplete: "off"
+      .form-group
+        .col-lg-10.col-lg-offset-2
+          %button.btn.btn-primary{:type => "submit"} Submit

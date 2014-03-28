@@ -1,0 +1,76 @@
+.row
+  .col-lg-12
+    .well
+      .row
+        .col-lg-3{ style: "width: 235px"}
+          = eve_image(:char, @char.id, 64)
+          = eve_image(:corp, @char.corp_id, 64)
+          - if @char.alliance_id
+            = eve_image(:alliance, @char.alliance_id, 64)
+        .col-lg-9
+          .row
+            .col-lg-2
+              %b
+                Character
+            .col-lg-10
+              = @char.name
+          .row
+            .col-lg-2
+              %b Corporation
+            .col-lg-10
+              = @char.corp_name
+          - if @char.alliance_name
+            .row
+              .col-lg-2
+                %b Alliance
+              .col-lg-10
+                = @char.alliance_name
+.row
+  .col-lg-12
+    .well
+      %table.table.table-striped
+        %thead
+          %tr
+            %th.numeric
+            %th.numeric
+              Income
+            %th.numeric
+              Missions
+            %th.numeric
+              Bounty
+            %th.numeric
+              Incursions
+            %th.numeric
+              Best Ticks
+        %tbody
+          %tr
+            %th
+              Total
+            %td.numeric= number_to_isk @char.wallet_records.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.mission_all.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.bounty.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.incursion.sum(:amount)
+            %td.numeric= number_to_isk @char.top_tick
+          %tr
+            %th
+              This Month
+            %td.numeric= number_to_isk @char.wallet_records.this_month.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.mission_all.this_month.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.bounty.this_month.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.incursion.this_month.sum(:amount)
+            %td.numeric= number_to_isk @char.top_tick(:this_month)
+
+          %tr
+            %th
+              Last 10 Days
+            %td.numeric= number_to_isk @char.wallet_records.last_ten_days.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.last_ten_days.mission_all.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.last_ten_days.bounty.sum(:amount)
+            %td.numeric= number_to_isk @char.wallet_records.incursion.last_ten_days.sum(:amount)
+            %td.numeric= number_to_isk @char.top_tick(:last_ten_days)
+            
+            
+    
+
+= render 'log'
+= render :partial => 'layouts/disqus'

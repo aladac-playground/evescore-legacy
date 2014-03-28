@@ -1,0 +1,27 @@
+.well
+  %h3 Listing chars
+  %hr
+    %table.table.table-striped.vertical-middle
+      %tr
+        %th.small-img-col
+        %th Name
+        %th.right
+          Hidden
+          %i.glyphicon.glyphicon-question-sign.ttp{ title: "What does this field do? Click to find out!", "data-target" => "#hidden-help", "data-toggle" => "modal" }
+        %th
+
+      - @chars.each do |char|
+        %tr
+          %td
+            = link_to eve_image(:char, char.id), char
+          %td
+            = link_to char.name, char
+          = form_for char do |f|
+            %td.right
+              = f.check_box :anon
+            %td.right
+              = f.submit "Save", class: "btn btn-primary"
+              &nbsp;
+              = link_to 'Delete', char, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+
+= render :partial => 'help'

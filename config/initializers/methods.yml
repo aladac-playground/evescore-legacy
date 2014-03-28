@@ -1,0 +1,318 @@
+---
+:calllist:
+  :path: /api/calllist.xml.aspx
+  :access_mask: 0
+  :type: API
+  :name: CallList
+  :group_id: 3
+  :description: List API Calls
+:api_key_info:
+  :path: /account/APIKeyInfo.xml.aspx
+  :access_mask: 0
+  :type: API
+  :name: APIKeyInfo
+  :group_id: 3
+  :description: API Key Info
+:characters:
+  :path: /account/Characters.xml.aspx
+  :access_mask: 0
+  :type: Character
+  :name: Characters
+  :group_id: 3
+  :description: List Characters
+:locations:
+  :path: /corp/Locations.xml.aspx
+  :access_mask: 16777216
+  :type: Corporation
+  :name: Locations
+  :group_id: 3
+  :description: Allows the fetching of coordinate and name data for items owned by
+    the corporation.
+:contracts:
+  :path: /corp/Contracts.xml.aspx
+  :access_mask: 8388608
+  :type: Corporation
+  :name: Contracts
+  :group_id: 3
+  :description: List of recent Contracts the corporation is involved in.
+:account_status:
+  :path: /account/AccountStatus.xml.aspx
+  :access_mask: 33554432
+  :type: Character
+  :name: AccountStatus
+  :group_id: 3
+  :description: EVE player account status.
+:character_info:
+  :path: /eve/CharacterInfo.xml.aspx
+  :access_mask: 8388608
+  :type: Character
+  :name: CharacterInfo
+  :group_id: 4
+  :description: Character information, exposes skill points and current ship information
+    on top of'Show Info'information.
+:corp_wallet_transactions:
+  :path: /corp/WalletTransactions.xml.aspx
+  :access_mask: 2097152
+  :type: Corporation
+  :name: WalletTransactions
+  :group_id: 1
+  :description: Market transactions of all corporate accounts.
+:corp_wallet_journal:
+  :path: /corp/WalletJournal.xml.aspx
+  :access_mask: 1048576
+  :type: Corporation
+  :name: WalletJournal
+  :group_id: 1
+  :description: Wallet journal for all corporate accounts.
+:wallet_journal:
+  :path: /char/WalletJournal.xml.aspx
+  :access_mask: 2097152
+  :type: Character
+  :name: WalletJournal
+  :group_id: 1
+  :description: Wallet journal for all corporate accounts.
+:upcoming_calendar_events:
+  :path: /char/UpcomingCalendarEvents.xml.aspx
+  :access_mask: 1048576
+  :type: Character
+  :name: UpcomingCalendarEvents
+  :group_id: 3
+  :description: Upcoming events on characters calendar.
+:standings:
+  :path: /corp/Standings.xml.aspx
+  :access_mask: 262144
+  :type: Corporation
+  :name: Standings
+  :group_id: 4
+  :description: NPC Standings towards corporation.
+:skill_queue:
+  :path: /char/SkillQueue.xml.aspx
+  :access_mask: 262144
+  :type: Character
+  :name: SkillQueue
+  :group_id: 3
+  :description: Entire skill queue of character.
+:skill_in_training:
+  :path: /char/SkillInTraining.xml.aspx
+  :access_mask: 131072
+  :type: Character
+  :name: SkillInTraining
+  :group_id: 3
+  :description: Skill currently in training on the character. Subset of entire Skill
+    Queue.
+:research:
+  :path: /char/Research.xml.aspx
+  :access_mask: 65536
+  :type: Character
+  :name: Research
+  :group_id: 2
+  :description: List of all Research agents working for the character and the progress
+    of the research.
+:notification_texts:
+  :path: /char/NotificationTexts.xml.aspx
+  :access_mask: 32768
+  :type: Character
+  :name: NotificationTexts
+  :group_id: 7
+  :description: Actual body of notifications sent to the character. Requires Notification
+    access to function.
+:notifications:
+  :path: /char/Notifications.xml.aspx
+  :access_mask: 16384
+  :type: Character
+  :name: Notifications
+  :group_id: 7
+  :description: List of recent notifications sent to the character.
+:medals:
+  :path: /corp/Medals.xml.aspx
+  :access_mask: 8192
+  :type: Corporation
+  :name: Medals
+  :group_id: 4
+  :description: List of all medals created by the corporation.
+:market_orders:
+  :path: /corp/MarketOrders.xml.aspx
+  :access_mask: 4096
+  :type: Corporation
+  :name: MarketOrders
+  :group_id: 1
+  :description: List of all corporate market orders.
+:mail_messages:
+  :path: /char/MailMessages.xml.aspx
+  :access_mask: 2048
+  :type: Character
+  :name: MailMessages
+  :group_id: 7
+  :description: List of all messages in the characters EVE Mail Inbox.
+:mailing_lists:
+  :path: /char/MailingLists.xml.aspx
+  :access_mask: 1024
+  :type: Character
+  :name: MailingLists
+  :group_id: 7
+  :description: List of all Mailing Lists the character subscribes to.
+:mail_bodies:
+  :path: /char/MailBodies.xml.aspx
+  :access_mask: 512
+  :type: Character
+  :name: MailBodies
+  :group_id: 7
+  :description: EVE Mail bodies. Requires MailMessages as well to function.
+:kill_log:
+  :path: 
+  :access_mask: 256
+  :type: Corporation
+  :name: KillLog
+  :group_id: 4
+  :description: Corporation kill log.
+:industry_jobs:
+  :path: /corp/IndustryJobs.xml.aspx
+  :access_mask: 128
+  :type: Corporation
+  :name: IndustryJobs
+  :group_id: 2
+  :description: Corporation jobs, completed and active.
+:fac_war_stats:
+  :path: /eve/FacWarStats.xml.aspx
+  :access_mask: 64
+  :type: Corporation
+  :name: FacWarStats
+  :group_id: 4
+  :description: Corporations Factional Warfare Statistics.
+:contact_notifications:
+  :path: /char/ContactNotifications.xml.aspx
+  :access_mask: 32
+  :type: Character
+  :name: ContactNotifications
+  :group_id: 7
+  :description: Most recent contact notifications for the character.
+:contact_list:
+  :path: /corp/ContactList.xml.aspx
+  :access_mask: 16
+  :type: Corporation
+  :name: ContactList
+  :group_id: 7
+  :description: Corporate contact list and relationships.
+:character_sheet:
+  :path: /char/CharacterSheet.xml.aspx
+  :access_mask: 8
+  :type: Character
+  :name: CharacterSheet
+  :group_id: 3
+  :description: Character Sheet information. Contains basic'Show Info'information
+    along with clones, account balance, implants, attributes, skills, certificates
+    and corporation roles.
+:calendar_event_attendees:
+  :path: /char/CalendarEventAttendees.xml.aspx
+  :access_mask: 4
+  :type: Character
+  :name: CalendarEventAttendees
+  :group_id: 3
+  :description: Event attendee responses. Requires UpcomingCalendarEvents to function.
+:asset_list:
+  :path: /corp/AssetList.xml.aspx
+  :access_mask: 2
+  :type: Corporation
+  :name: AssetList
+  :group_id: 3
+  :description: List of all corporation assets.
+:account_balance:
+  :path: /corp/AccountBalance.xml.aspx
+  :access_mask: 1
+  :type: Corporation
+  :name: AccountBalance
+  :group_id: 1
+  :description: Current balance of all corporation accounts.
+:member_tracking_extended:
+  :path: 
+  :access_mask: 33554432
+  :type: Corporation
+  :name: MemberTrackingExtended
+  :group_id: 5
+  :description: Extensive Member information. Time of last logoff, last known location
+    and ship.
+:titles:
+  :path: /corp/Titles.xml.aspx
+  :access_mask: 4194304
+  :type: Corporation
+  :name: Titles
+  :group_id: 5
+  :description: Titles of corporation and the roles they grant.
+:starbase_list:
+  :path: /corp/StarbaseList.xml.aspx
+  :access_mask: 524288
+  :type: Corporation
+  :name: StarbaseList
+  :group_id: 6
+  :description: List of all corporate starbases.
+:starbase_detail:
+  :path: /corp/StarbaseDetail.xml.aspx
+  :access_mask: 131072
+  :type: Corporation
+  :name: StarbaseDetail
+  :group_id: 6
+  :description: List of all settings of corporate starbases.
+:shareholders:
+  :path: /corp/Shareholders.xml.aspx
+  :access_mask: 65536
+  :type: Corporation
+  :name: Shareholders
+  :group_id: 1
+  :description: Shareholders of the corporation.
+:outpost_service_detail:
+  :path: /corp/OutpostServiceDetail.xml.aspx
+  :access_mask: 32768
+  :type: Corporation
+  :name: OutpostServiceDetail
+  :group_id: 6
+  :description: List of all service settings of corporate outposts.
+:outpost_list:
+  :path: /corp/OutpostList.xml.aspx
+  :access_mask: 16384
+  :type: Corporation
+  :name: OutpostList
+  :group_id: 6
+  :description: List of all outposts controlled by the corporation.
+:member_tracking_limited:
+  :path: 
+  :access_mask: 2048
+  :type: Corporation
+  :name: MemberTrackingLimited
+  :group_id: 5
+  :description: Limited Member information.
+:member_security_log:
+  :path: /corp/MemberSecurityLog.xml.aspx
+  :access_mask: 1024
+  :type: Corporation
+  :name: MemberSecurityLog
+  :group_id: 5
+  :description: Member role and title change log.
+:member_security:
+  :path: /corp/MemberSecurity.xml.aspx
+  :access_mask: 512
+  :type: Corporation
+  :name: MemberSecurity
+  :group_id: 5
+  :description: Member roles and titles.
+:container_log:
+  :path: /corp/ContainerLog.xml.aspx
+  :access_mask: 32
+  :type: Corporation
+  :name: ContainerLog
+  :group_id: 3
+  :description: Corporate secure container acess log.
+:corporation_sheet:
+  :path: /corp/CorporationSheet.xml.aspx
+  :access_mask: 8
+  :type: Corporation
+  :name: CorporationSheet
+  :group_id: 3
+  :description: Exposes basic'Show Info'information as well as Member Limit and basic
+    division and wallet info.
+:member_medals:
+  :path: /corp/MemberMedals.xml.aspx
+  :access_mask: 4
+  :type: Corporation
+  :name: MemberMedals
+  :group_id: 5
+  :description: List of medals awarded to corporation members.

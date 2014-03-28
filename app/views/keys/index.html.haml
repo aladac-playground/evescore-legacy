@@ -1,0 +1,26 @@
+.well
+  %h3 Your API Keys
+  %hr
+  %table.table.keys-table.vertical-middle.table-striped
+    %tr
+      %th
+        KeyID
+      %th
+        Verification Code
+      %th.character-column
+        Characters
+      %th
+        Type
+      %th.action-column
+    - @keys.each do |key|
+      %tr
+        %td.tt= key.id
+        %td.tt= key.vcode
+        %td
+          - key.chars.each do |char|
+            = link_to eve_image(:char, char.id, 32, char.name ), char
+        %td= key.key_type
+        %td= link_to 'Delete', key, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+
+  %p
+    = link_to 'Add New', new_key_path, class: "btn btn-success"

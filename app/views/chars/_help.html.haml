@@ -1,0 +1,17 @@
+#hidden-help.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4.modal-title What does hidden mean?
+      .modal-body
+        %p
+          This field specifies if the character is visible to public.
+        %p
+          By defaut it is set to 
+          %i false 
+          (unchecked), which means a character is visible.
+          After checking this box, the character will become visible only to your user, after being logged in.
+        
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

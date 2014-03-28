@@ -1,0 +1,5 @@
+.well
+  = form_tag("/search/result", remote: true, id: "rat-search", class: "form-search navbar-form" ) do
+    %input.typeahead.form-control{ type: :text, name: "q[name_cont]", placeholder: "Search" }
+    / %button{ type: :submit} Go
+  

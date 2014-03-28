@@ -1,0 +1,40 @@
+.well
+  %h4 Recent Ticks
+  .row
+    .col-lg-12
+  %p
+  %table.table.vertical-middle.table-striped
+    %tr
+      %th.col-lg-2
+        Timestamp
+      %th
+        Character
+      %th
+        Details
+      %th.numeric
+        Amount
+    - @wallet.recent.each do |record|
+      %tr
+        %td= record.ts.strftime("%Y-%m-%d %H:%M:%S")
+        %td
+          = link_to eve_image(:char, record.char_id), char_path(record.char_id), class: :ttp, title: record.char_name
+          = link_to eve_image(:corp, record.corp_id), corp_path(record.corp_id), class: :ttp, title: Corp.find(record.corp_id).name
+          - if record.alliance_id
+            = eve_image(:alliance, record.alliance_id)
+        %td
+          - if record.ref_type_id == 99
+            = image_tag "http://image.eveonline.com/Alliance/500019_32.png", style: "display: inline"
+            %b Incursion Reward
+          - if record.ref_type_id == 34
+            = image_tag "http://image.eveonline.com/Corporation/1000125_32.png", style: "display: inline"
+            %b Agent Mission Time Bonus Reward
+          - if record.ref_type_id == 33
+            = image_tag "http://image.eveonline.com/Corporation/1000125_32.png", style: "display: inline"
+            %b Agent Mission Reward
+          - record.kills.each do |kill|
+            - ttp = "<b>#{kill.rat_name}</b><br><i>#{kill.rat_type}</i>".html_safe
+            = link_to eve_image(:rat, kill.rat_id, 32, ttp), rat_path(kill.rat_id)
+        %td.numeric= nice_number(record.amount / 100.0, "ISK")
+
+  .row
+    .col-lg-12

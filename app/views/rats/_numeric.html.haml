@@ -1,0 +1,68 @@
+.row
+  .col-lg-8.numeric
+    %b Cruise Speed
+    = image_tag 'icons/speed.png', style: "width: 32px; display: inline"
+  .col-lg-4.numeric
+    = nice_number @rat.attrib("entityCruiseSpeed")
+    m/s
+.row
+  .col-lg-8.numeric
+    %b Max Speed
+    = image_tag 'icons/max_speed.png', style: "width: 32px; display: inline"
+  .col-lg-4.numeric
+    = nice_number @rat.attrib("maxVelocity")
+    m/s
+.row
+  .col-lg-8.numeric
+    %b Orbit Range
+    = image_tag 'icons/orbit.png', style: "width: 32px; display: inline"
+  .col-lg-4.numeric
+    = nice_number @rat.attrib("entityFlyRange")
+    m
+.row
+  .col-lg-8.numeric
+    %b Attack Range
+    = image_tag 'icons/range.png', style: "width: 32px; display: inline"
+  .col-lg-4.numeric
+    = nice_number @rat.attrib("entityAttackRange")
+    m
+- if ( chance = scram_chance and scram_chance > 0 )
+  .row
+    .col-lg-8.numeric
+      %b Scram Chance
+      = image_tag 'icons/scramble.png', style: "width: 32px; display: inline"
+    .col-lg-4.numeric
+      = nice_number chance
+      \%
+- if ( chance = web_chance and web_chance > 0 )
+  .row
+    .col-lg-8.numeric
+      %b Web Chance
+      = image_tag 'icons/web.png', style: "width: 32px; display: inline"
+    .col-lg-4.numeric
+      = nice_number chance
+      \%
+- if ( chance = damp_chance and damp_chance > 0 )
+  .row
+    .col-lg-8.numeric
+      %b Damp Chance
+      = image_tag 'icons/damp.png', style: "width: 32px; display: inline"
+    .col-lg-4.numeric
+      = nice_number chance
+      \%
+- if ( chance = jam_chance and jam_chance > 0 )
+  .row
+    .col-lg-8.numeric
+      %b Jam Chance
+      = image_tag 'icons/jam.png', style: "width: 32px; display: inline"
+    .col-lg-4.numeric
+      = nice_number chance
+      \%
+- if ( chance = neut_chance and neut_chance > 0 )
+  .row
+    .col-lg-8.numeric
+      %b Neut Chance
+      = image_tag 'icons/neut.png', style: "width: 32px; display: inline"
+    .col-lg-4.numeric
+      = nice_number chance
+      \%          

@@ -1,0 +1,22 @@
+.well
+  %h4 Pirate Factions Top 5 Bodycount
+  %hr
+  .row
+    - factions = [ "gurista", "sansha", "blood", "serpentis" ]
+    - factions.each do |faction|
+      - @search = faction
+      .col-lg-2
+        = faction_image @search, 128
+      .col-lg-4
+        - @kills = Kill.type_like(@search).select("sum(rat_amount) as kills, rat_type").group(:rat_type).order("sum(rat_amount) desc").limit(5)
+        %table.table.table-striped
+          %tr
+            %th Type
+            %th.numeric Kills
+          - @kills.each do |row|
+            %tr
+              %td
+                = row.rat_type
+              %td.numeric
+                = nice_number row.kills
+  

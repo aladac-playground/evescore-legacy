@@ -1,0 +1,23 @@
+.well
+  %h4
+    Top
+    = params[:action].capitalize
+    
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Rank
+        %th NPC Name
+        %th.numeric Deaths
+    - i = 0
+    - @income.each do |rat|
+      - i+=1
+      - next if rat.name.nil?
+      %tr
+        %td= i
+        %td
+          = eve_image :type, rat.id, 32
+          = link_to rat.name, rat_path(rat.id)
+        %td.numeric
+          %i= nice_number rat.amount 
+  / =paginate @income

@@ -1,0 +1,25 @@
+.well
+  %h4
+    Top
+    = params[:action].capitalize
+    
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Rank
+        %th Alliance Name
+        %th.numeric ISK earned by Characters
+        %th.numeric ISK short
+    - i = 0
+    - @alliances.each do |alliance|
+      - i+=1
+      / - next if alliance.name.nil?
+      %tr
+        %td= i
+        %td
+          = eve_image :alliance, alliance.id, 32
+          %b= alliance.name
+        %td.numeric
+          %i= nice_number alliance.amount / 100
+        %td.numeric
+          %i= number_to_isk alliance.amount

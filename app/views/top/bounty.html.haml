@@ -1,0 +1,22 @@
+.well
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Rank
+        %th Character Name
+        %th.numeric ISK earned
+        %th.numeric ISK short
+    - i = 0
+    - @top_bounty.each do |char|
+      - i+=1
+      - next if char.name.nil?
+      %tr
+        %td= i
+        %td
+          = eve_image :char, char.id, 32
+          = link_to char.name, char_path(char.id)
+        %td.numeric
+          %i= nice_number char.amount / 100
+        %td.numeric
+          %i= number_to_isk char.amount
+  =paginate @top_bounty
