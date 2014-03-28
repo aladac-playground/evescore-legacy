@@ -1,6 +1,6 @@
 .well
-  %p.small-font
-    %i
+  .blockquote-reverse.small-font
+    %p
       - colonies = "<b class='yellow'>NPC Strongholds destroyed</b><br><i>#{nice_number(Kill.where(rat_type: "Deadspace Overseer's Sentry").count)}</i>"
       - headcounts = "<b class='yellow'>Characters on this site</b><br><i>#{nice_number(Char.count)}</i>"
       - ships = "<b class='yellow'>NPC Ships destroyed</b><br><i>#{ nice_number Kill.sum(:rat_amount) }</i>"
@@ -8,7 +8,7 @@
       - isk = ( nice_number WalletRecord.sum(:amount) /100 ) + " ISK"
       - money = "<b class='yellow'>Total money earned</b><br><i>#{isk}</i>"
 
-      "Progress... What is it?
+      Progress... What is it?
       Out here progress is numbers.
       Milimiters... Kilometers...
       %span.hand.ttp{ title: headcounts}
@@ -30,8 +30,8 @@
           Money earned...
       It all comes at a price...
       And if the price is right
-      I'll set the universe on fire"
-    .pull-right.small-font
-      From:
-      %a{ href: "http://www.youtube.com/watch?v=kED11aGobUk", target: "_blank" } EVE Online, Inferno Trailer, 2012
-      %br
+      I'll set the universe on fire
+    %footer
+      %cite{ title: "EVE Online, Inferno Trailer, 2012" }
+        %a{ href: "http://www.youtube.com/watch?v=kED11aGobUk", target: "_blank" } EVE Online, Inferno Trailer, 2012
+        / EVE Online, Inferno Trailer, 2012
