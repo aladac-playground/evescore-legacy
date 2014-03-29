@@ -1,4 +1,11 @@
 ---
+:alliance_list:
+  :path: /eve/AllianceList.xml.aspx
+  :access_mask: 0
+  :type: EVE
+  :name: AllianceList
+  :group_id: 3
+  :description: List Alliances and Members
 :calllist:
   :path: /api/calllist.xml.aspx
   :access_mask: 0
