@@ -11,56 +11,48 @@
 # puts 'user: ' << user.name
 # user.confirm!
 
-api = Eve::Api.new(1,1)
-puts "Importing Alliance to Corp mappings, this could take a while..."
-api.alliance_list
+api = Eve::Api.new
+puts "Downloading Alliance to Corp mappings, this could take a while..."
+allied = api.allied
 
-puts 
-puts "Importing Static Data"
+tmp=Tempfile.new("allied")
+tmp.puts allied
 
-rats = File.readlines("db/rats.tsv")
+puts "Loading Alliance to Corp mapping"
 
-records=rats.count
+path = tmp.path
+query = "LOAD DATA LOCAL INFILE '#{path}' into table allies ( alliance_id, corp_id );"
+ActiveRecord::Migration.execute query
 
-pb = ProgressBar.create(:title => "Seeding Rats", :starting_at => 0, :total => records, :format => '%a |%b>>%i| %p%% %t', length: 100 ) 
-rats.each do |line|
-  line.chomp!
-  line = line.split("\t")
-  tmp = {
-    id: line[0],
-    name: line[1],
-    rat_type: line[2],
-    description: line[3]
-  }
-  Rat.create(tmp)
-  pb.increment
-end
+puts "Loading Entity Details (Rats)"
 
-rat_images = YAML.load_file("db/rat_images.yml")
+file = "rats.tsv.gz"
+dir = Dir.pwd
+path = dir + "/db/" + file
+puts "Decompressing source file"
+gzip = File.read(path)
+tsv = ActiveSupport::Gzip.decompress(gzip)
 
-records=rat_images.count 
+tmp = Tempfile.new("rats")
+tmp.puts tsv
+path = tmp.path
 
-pb = ProgressBar.create(:title => "Seeding Rat Images", :starting_at => 0, :total => records, :format => '%a |%b>>%i| %p%% %t', length: 100 )
+query = "LOAD DATA LOCAL INFILE '#{path}' into table rats ( id, name, rat_type, description );"
+ActiveRecord::Migration.execute query
 
-rat_images.each do |image|
-  r=RatImage.new(image)
-  r.save
-  pb.increment
-end
+puts "Loading Type Attributes"
 
-attribs = File.readlines("db/type_attribs.tsv")
+file = "type_attribs.tsv.gz"
+dir = Dir.pwd
+path = dir + "/db/" + file
+puts "Decompressing source file"
+gzip = File.read(path)
+tsv = ActiveSupport::Gzip.decompress(gzip)
 
-records=attribs.count
+tmp = Tempfile.new("rats")
+tmp.puts tsv
+path = tmp.path
 
-pb = ProgressBar.create(:title => "Seeding Type Attribs", :starting_at => 0, :total => records, :format => '%a |%b>>%i| %p%% %t', length: 100 ) 
-attribs.each do |line|
-  line.chomp!
-  line = line.split("\t")
-  tmp = {
-    type_id: line[0],
-    name: line[1].strip,
-    value: line[2]
-  }
-  TypeAttrib.create(tmp)
-  pb.increment
-end
+query = "LOAD DATA LOCAL INFILE '#{path}' into table type_attribs ( type_id, name, value );"
+ActiveRecord::Migration.execute query
+
