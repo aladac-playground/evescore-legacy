@@ -53,6 +53,25 @@ module Eve
     attr_accessor :ids
     attr_accessor :debug
     attr_accessor :row_count
+    def allied
+      a=self.alliance_list
+
+      result = a["eveapi"]["result"]["rowset"]["row"]
+
+      output = ""
+
+      result.each do |alliance|
+        corps = alliance["rowset"]["row"]
+        if corps.class == Array
+          corps.each do |corp|
+            output << alliance['allianceID'] + "\t" + corp['corporationID'] + "\n"
+          end
+        else
+          output << alliance['allianceID'] + "\t" + corps['corporationID'] + "\n"
+        end
+      end
+      output
+    end
     def method_missing(meth, *args)
       if METHODS[meth.to_sym]
         vars = instance_variables_hash
