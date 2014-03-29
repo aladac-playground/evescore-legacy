@@ -4,6 +4,10 @@ worker_processes Integer(ENV['WEB_CONCURRENCY'] || 3)
 timeout Integer(ENV['WEB_TIMEOUT'] || 15)
 preload_app true
 
+if ENV['UNICORN_SOCKET']
+	listen Dir.pwd + "/tmp/sockets/unicorn.sock", backlog: ( ENV['UNICORN_SOCKET_BACKLOG'] ? ENV['UNICORN_SOCKET_BACKLOG'] : 64 )
+end
+
 before_fork do |server, worker|
 
   Signal.trap 'TERM' do
