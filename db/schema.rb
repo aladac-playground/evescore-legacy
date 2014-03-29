@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140227115607) do
     t.string   "short_name"
   end
 
-  create_table "allieds", force: true do |t|
+  create_table "allies", force: true do |t|
     t.integer  "corp_id"
     t.integer  "alliance_id"
     t.datetime "created_at"
