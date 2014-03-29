@@ -1,10 +1,10 @@
-EVEScore - EVE Online PvE Scoreboard
+### EVEScore - EVE Online PvE Scoreboard
 ========
 EVEScore is a Player vs Environment scoreboard for the MMO Game EVE Online.
 It relies on [EVE API Wallet Journal method](https://wiki.eveonline.com/en/wiki/EVE_API_Character_Wallet_Journal), and keeps track of *mission and incursion rewards, bounties, NPC kills*
 It is an extension of the idea originally spawned as http://www.evescore.com
 
-Work in progress
+### Work in progress
 ========
 EVEScore is still work in progress. You are welcome to help if you want. You are welcome to fork it and modify it.
 
@@ -12,7 +12,7 @@ If something doesn't work for you. Report an issue [here](https://github.com/qua
 
 PLEASE DO NOT REPORT ISSUES ASKING HOW TO INSTALL ruby, rails 
 
-Setup
+### Setup
 ========
 Minimal setup requires having `ruby` and `bundler`.
 If you are using Ubuntu or Mac OS and have the default system Ruby it will probably be outdated (1.8.6, 1.8.7).
@@ -41,7 +41,7 @@ It would be nice to modify/create the `.env` file which is used by `foreman` whi
 `.env.example` shows how the file should look.
 
 
-Preview
+### Preview
 ========
 The BETA version is running on http://beta.evescore.com
 
