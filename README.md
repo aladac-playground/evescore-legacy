@@ -24,7 +24,7 @@ Darwin szarlotka 12.5.0 Darwin Kernel Version 12.5.0: Sun Sep 29 13:33:47 PDT 20
 ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin12.0]
 ```
 
-If you are planning to install Ruby I highly recommend using [RVM](http://rvm.io/).
+If you are planning on installing Ruby I highly recommend using [RVM](http://rvm.io/).
 
 
 ```
