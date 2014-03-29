@@ -84,3 +84,6 @@ pickle-email-*.html
 # Environment files that may contain sensitive data
 .env
 .powenv
+
+# test scripts
+api_manual_test.rb
