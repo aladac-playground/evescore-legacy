@@ -1,4 +1,5 @@
 class Allied < ActiveRecord::Base
+  self.set_table_name "allies"
   validates_uniqueness_of :corp_id, scope: :alliance_id
   
   def self.alliance_name(id)
