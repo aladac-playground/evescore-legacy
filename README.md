@@ -17,7 +17,7 @@ Setup
 Minimal setup requires having `ruby` and `bundler`.
 If you are using Ubuntu or Mac OS and have the default system Ruby it will probably be outdated (1.8.6, 1.8.7).
 
-```bash
+```
 # uname -a
 Darwin szarlotka 12.5.0 Darwin Kernel Version 12.5.0: Sun Sep 29 13:33:47 PDT 2013; root:xnu-2050.48.12~1/RELEASE_X86_64 x86_64
 # ruby -v
@@ -27,7 +27,7 @@ ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin12.0]
 If you are planning to install Ruby I highly recommend using [RVM](http://rvm.io/).
 
 
-```bash
+```
 # git clone https://github.com/quanchi/evescore.git
 # cd evescore
 # bundle
@@ -35,9 +35,10 @@ If you are planning to install Ruby I highly recommend using [RVM](http://rvm.io
 # foreman start
 
 ```
-All of the ubove under the assumption that you have `ruby` and the `bundler` gem installed.
 
-It would be nice to modify/create the `.env` file which is used by `foreman` which contains the credentials for the email account used for registration confirmation messages, password recovery etc.
+It would be nice to modify/create the `.env` file which is used by `foreman` which contains the credentials for the email account used for registration confirmation messages, password recovery etc. 
+
+`.env.example` shows how the file should look.
 
 
 Preview
