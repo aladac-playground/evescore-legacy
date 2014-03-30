@@ -49,10 +49,37 @@ puts "Decompressing source file"
 gzip = File.read(path)
 tsv = ActiveSupport::Gzip.decompress(gzip)
 
-tmp = Tempfile.new("rats")
+tmp = Tempfile.new("type_attribs")
 tmp.puts tsv
 path = tmp.path
 
 query = "LOAD DATA LOCAL INFILE '#{path}' into table type_attribs ( type_id, name, value );"
+ActiveRecord::Migration.execute query
+
+puts "Loading Regions"
+
+file = "regions.tsv"
+dir = Dir.pwd
+path = dir + "/db/" + file
+
+query = "LOAD DATA LOCAL INFILE '#{path}' into table regions ( id, name );"
+ActiveRecord::Migration.execute query
+
+puts "Loading Solar Systems"
+
+file = "solar_systems.tsv"
+dir = Dir.pwd
+path = dir + "/db/" + file
+
+query = "LOAD DATA LOCAL INFILE '#{path}' into table solar_systems ( id, cons_id, region_id, name );"
+ActiveRecord::Migration.execute query
+
+puts "Loading Constellations"
+
+file = "constellations.tsv"
+dir = Dir.pwd
+path = dir + "/db/" + file
+
+query = "LOAD DATA LOCAL INFILE '#{path}' into table cons ( id, region_id, name );"
 ActiveRecord::Migration.execute query
 

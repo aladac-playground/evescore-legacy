@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227115607) do
+ActiveRecord::Schema.define(version: 20140330230516) do
 
   create_table "alliances", force: true do |t|
     t.string   "name"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20140227115607) do
   end
 
   add_index "chars", ["alliance_name"], name: "index_chars_on_alliance_name", using: :btree
+
+  create_table "cons", force: true do |t|
+    t.string   "name"
+    t.integer  "region_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cons", ["region_id"], name: "index_cons_on_region_id", using: :btree
 
   create_table "corps", force: true do |t|
     t.string   "name"
@@ -119,6 +128,12 @@ ActiveRecord::Schema.define(version: 20140227115607) do
     t.integer  "site_id"
   end
 
+  create_table "regions", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sites", force: true do |t|
     t.string   "name"
     t.integer  "rating"
@@ -126,6 +141,17 @@ ActiveRecord::Schema.define(version: 20140227115607) do
     t.datetime "updated_at"
     t.string   "faction"
   end
+
+  create_table "solar_systems", force: true do |t|
+    t.string   "name"
+    t.integer  "region_id"
+    t.integer  "cons_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "solar_systems", ["cons_id"], name: "index_solar_systems_on_cons_id", using: :btree
+  add_index "solar_systems", ["region_id"], name: "index_solar_systems_on_region_id", using: :btree
 
   create_table "type_attribs", force: true do |t|
     t.integer  "type_id"

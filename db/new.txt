@@ -1,0 +1,10 @@
+10000001	Derelik
+10000002	The Forge
+10000003	Vale of the Silent
+10000004	UUA-F4
+10000005	Detorid
+10000006	Wicked Creek
+10000007	Cache
+10000008	Scalding Pass
+10000009	Insmother
+10000010	Tribute
