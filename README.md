@@ -1,11 +1,11 @@
 ### EVEScore - EVE Online PvE Scoreboard
-========
 EVEScore is a Player vs Environment scoreboard for the MMO Game EVE Online.
 It relies on [EVE API Wallet Journal method](https://wiki.eveonline.com/en/wiki/EVE_API_Character_Wallet_Journal), and keeps track of *mission and incursion rewards, bounties, NPC kills*
 It is an extension of the idea originally spawned as http://www.evescore.com
 
+---
+
 ### Work in progress
-========
 EVEScore is still work in progress. 
 
 You are welcome to help if you want. 
@@ -16,8 +16,9 @@ If something doesn't work for you. Report an issue [here](https://github.com/qua
 
 PLEASE DO NOT REPORT ISSUES ASKING HOW TO INSTALL ruby, rails 
 
+---
+
 ### Setup
-========
 Minimal setup requires having `ruby` and `bundler`. EVEScore uses a *MySQL ActiveRecord* adapter.
 It is probably possible to use a different DB driver, but some parts rely on MySQL specific syntax:
 
@@ -56,14 +57,16 @@ It would be nice to modify/create the `.env` file which is used by `foreman` whi
 
 `.env.example` shows how the file should look.
 
+---
 
 ### Preview
-========
 The BETA version is running on http://beta.evescore.com
+
+---
 
 ### Legal
 All [EVE Online](http://www.eveonline.com) related content and materials used in this project are subject to the below copyright notice
 
-#### EVE Online copyright notice
+##### EVE Online copyright notice
 
 [EVE Online](http://www.eveonline.com) and the EVE logo are the registered trademarks of CCP hf. All rights are reserved worldwide. All other trademarks are the property of their respective owners. [EVE Online](http://www.eveonline.com), the EVE logo, EVE and all associated logos and designs are the intellectual property of CCP hf. All artwork, screenshots, characters, vehicles, storylines, world facts or other recognizable features of the intellectual property relating to these trademarks are likewise the intellectual property of CCP hf. CCP hf. has granted permission to EVE Score to use [EVE Online](http://www.eveonline.com) and all associated logos and designs for promotional and information purposes on its website but does not endorse, and is not in any way affiliated with, EVE Score. CCP is in no way responsible for the content on or functioning of this website, nor can it be liable for any damage arising from the use of this website.
