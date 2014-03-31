@@ -1,20 +1,27 @@
 .well
-  %h1 Listing scans
+  -if @scans.count == 0
+    %p.text-warn
+      You don't seem to have any scans. Add a new one below!
+  -else
+    %h4 Listing scans
+    %hr
 
-  %table.table.table-striped.table-condensed
-    %tr
-      %th ID
-      %th
-      %th
-      %th
-
-    - @scans.each do |scan|
+    %table.table.table-striped.table-condensed
       %tr
-        %td= scan.id
-        %td= link_to 'Show', scan
-        %td= link_to 'Edit', edit_scan_path(scan)
-        %td= link_to 'Destroy', scan, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th ID
+        %th Created
+        %th
+        %th
+        %th
+
+      - @scans.each do |scan|
+        %tr
+          %td= scan.id
+          %td= scan.created_at.strftime("%Y-%m-%d %H:%M EVE")
+          %td= link_to 'Show', scan
+          %td= link_to 'Edit', edit_scan_path(scan)
+          %td= link_to 'Destroy', scan, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
   %br
 
-  = link_to 'New Scan', new_scan_path
+  = link_to 'New Scan', new_scan_path, class: "btn btn-success"

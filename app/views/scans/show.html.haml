@@ -1,23 +1,17 @@
 .well
   .row
     .col-sm-12
-      = form_for @search, url: "/scans/#{@scan.id}", method: :get, html: { class: "form-inline" } do |f|
+      = form_for @search, url: scan_path, method: :get, html: { class: "form-inline" } do |f|
         .form-group
-          %a.btn.btn-success{ href: "/scans/#{@scan.id}/edit" } Add Signatures
+          %a.btn.btn-success{ href: edit_scan_path } Add Signatures
         .form-group
           %select.form-control{ name: "q[solar_system_id_eq]"}
             %option{ value: "" } All Systems
             - if request.headers["HTTP_EVE_TRUSTED"] == "Yes"
               %option{ value: request.headers["HTTP_EVE_SOLARSYSTEMID"] } Current System
-            - @scan.sigs.select(:system_id).distinct.each do |system|
+            - @scan.sigs.joins(:solar_system).select(:name, :system_id).distinct.each do |system|
               %option{ value: system.system_id, selected: selected_system(system.system_id.to_s) }= system.solar_system.name
         = f.submit "Filter", class: "btn btn-main"
-        / /.row
-        / .col-sm-5
-        /   .input-group
-        /     .input-group-btn
-        /       = f.button "Current System", class: "btn btn-main", name: :solar_system_name_eq
-        /       = f.text_field :sig_type_name_eq, class: "form-control"
         %br
         %p
         %label Group filter
@@ -36,6 +30,8 @@
           = sort_link @search, :sig_group_name, "Group"
         %th
           = sort_link @search, :sig_type_name, "Type"
+        %th
+          = sort_link @search, :created_at, "Scan Time"
     %tbody
       - @sigs.each do |sig|
         %tr
@@ -47,5 +43,7 @@
             = type_to_color sig.sig_group.name
           %td
             = sig.sig_type.name
+          %td
+            = sig.created_at.strftime("%Y-%m-%d %H:%M EVE")
   
   = paginate @sigs

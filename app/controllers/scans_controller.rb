@@ -134,6 +134,7 @@ class ScansController < ApplicationController
         redirect_to root_path
       end
     end
+    # TODO refactor check_write and check_read into something less sucky
     def check_write_access
       case @scan.security
         # %option{ value: 1, selected: @scan.security == 1 } Private - Accesible only to the owner
@@ -143,17 +144,21 @@ class ScansController < ApplicationController
         # %option{ value: 5, selected: @scan.security == 5 } Alliance Only - Accessible to everyone in your Alliance
         # 
       when 1
-        return true if igb_headers[:char_id].to_i == @scan.char_id
+        auth = true if igb_headers[:char_id].to_i == @scan.char_id
       when 2
-        return true
+        auth = true
       when 3
-        return false
+        auth = false
       when 4
-        return true if igb_headers[:corp_id].to_i == @scan.corp_id
+        auth = true if igb_headers[:corp_id].to_i == @scan.corp_id
       when 5 
-        return true if igb_headers[:alliance_id].to_i == @scan.alliance_id
+        auth = true if igb_headers[:alliance_id].to_i == @scan.alliance_id
       else
-        flash[:warn] = "Permission denied"
+        auth = false
+      end
+      if auth != true
+        flash[:error] = "Permission Denied"
+        redirect_to new_scan_path
       end
     end
     def check_read_access
@@ -165,17 +170,21 @@ class ScansController < ApplicationController
         # %option{ value: 5, selected: @scan.security == 5 } Alliance Only - Accessible to everyone in your Alliance
         # 
       when 1
-        return true if igb_headers[:char_id].to_i == @scan.char_id
+        auth = true if igb_headers[:char_id].to_i == @scan.char_id
       when 2
-        return true
+        auth = true
       when 3
-        return true
+        auth = true
       when 4
-        return true if igb_headers[:corp_id].to_i == @scan.corp_id
+        auth = true if igb_headers[:corp_id].to_i == @scan.corp_id
       when 5 
-        return true if igb_headers[:alliance_id].to_i == @scan.alliance_id
+        auth = true if igb_headers[:alliance_id].to_i == @scan.alliance_id
       else
-        flash[:warn] = "Permission denied"
+        auth = false
+      end
+      if auth != true
+        flash[:error] = "Permission Denied"
+        redirect_to new_scan_path
       end
     end
 end
