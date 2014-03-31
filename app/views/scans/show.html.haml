@@ -1,0 +1,21 @@
+.well
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th
+          = sort_link @search, :sid, "ID"
+        %th
+          = sort_link @search, :sig_group_name, "Group"
+        %th
+          = sort_link @search, :sig_type_name, "Type"
+    %tbody
+      - @sigs.each do |sig|
+        %tr
+          %td
+            = sig.sid
+          %td
+            = type_to_color sig.sig_group.name
+          %td
+            = sig.sig_type.name
+  
+  = paginate @sigs

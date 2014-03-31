@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330230516) do
+ActiveRecord::Schema.define(version: 20140331100034) do
 
   create_table "alliances", force: true do |t|
     t.string   "name"
@@ -133,6 +133,61 @@ ActiveRecord::Schema.define(version: 20140330230516) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "scans", force: true do |t|
+    t.string   "secure_id"
+    t.integer  "char_id"
+    t.integer  "corp_id"
+    t.boolean  "public"
+    t.boolean  "private"
+    t.boolean  "secure"
+    t.integer  "alliance_id"
+    t.boolean  "corp_only"
+    t.boolean  "alliance_only"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scans", ["alliance_id"], name: "index_scans_on_alliance_id", using: :btree
+  add_index "scans", ["char_id"], name: "index_scans_on_char_id", using: :btree
+  add_index "scans", ["corp_id"], name: "index_scans_on_corp_id", using: :btree
+
+  create_table "sig_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sig_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sigs", force: true do |t|
+    t.integer  "scan_id"
+    t.integer  "char_id"
+    t.integer  "corp_id"
+    t.integer  "system_id"
+    t.integer  "cons_id"
+    t.integer  "region_id"
+    t.integer  "alliance_id"
+    t.integer  "sig_type_id"
+    t.integer  "sig_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "sid"
+  end
+
+  add_index "sigs", ["alliance_id"], name: "index_sigs_on_alliance_id", using: :btree
+  add_index "sigs", ["char_id"], name: "index_sigs_on_char_id", using: :btree
+  add_index "sigs", ["cons_id"], name: "index_sigs_on_cons_id", using: :btree
+  add_index "sigs", ["corp_id"], name: "index_sigs_on_corp_id", using: :btree
+  add_index "sigs", ["region_id"], name: "index_sigs_on_region_id", using: :btree
+  add_index "sigs", ["scan_id"], name: "index_sigs_on_scan_id", using: :btree
+  add_index "sigs", ["sig_group_id"], name: "index_sigs_on_sig_group_id", using: :btree
+  add_index "sigs", ["sig_type_id"], name: "index_sigs_on_sig_type_id", using: :btree
+  add_index "sigs", ["system_id"], name: "index_sigs_on_system_id", using: :btree
 
   create_table "sites", force: true do |t|
     t.string   "name"

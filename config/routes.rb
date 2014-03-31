@@ -1,4 +1,8 @@
 Evescore::Application.routes.draw do
+  resources :scans
+  
+  get "scan/:secure_id", to: "scans#show"
+  get "scan/:secure_id/edit", to: "scans#edit"
   get "tools/dps"
   get "stats/factions"
   get "stats/progress"

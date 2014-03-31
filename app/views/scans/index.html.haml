@@ -1,0 +1,17 @@
+%h1 Listing scans
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @scans.each do |scan|
+    %tr
+      %td= link_to 'Show', scan
+      %td= link_to 'Edit', edit_scan_path(scan)
+      %td= link_to 'Destroy', scan, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Scan', new_scan_path

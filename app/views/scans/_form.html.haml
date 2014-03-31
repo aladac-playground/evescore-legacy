@@ -1,0 +1,36 @@
+= form_for @scan do |f|
+  - if @scan.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@scan.errors.count, "error")} prohibited this scan from being saved:"
+      %ul
+        - @scan.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    %p.help-block
+      This tool allows you to store probe scanning results. It uses the IGB trust for location reference. Can be used to share scan results, track already scanned signatures. To use just copy
+      %code CTRL+A 
+      or
+      %code ⌘+A
+      
+      then paste
+      %code CTRL+V
+      or
+      %code ⌘+V
+      scan results from the probe scanner window in the EVE Client
+      
+      
+  .form-group
+    %label Scan
+    %textarea.form-control{ rows: 10, name: :paste }
+  .form-group
+    %label Security
+    %select.form-control{ name: :scan_security }
+      %option{ value: 1} Private - Visible only to the character creating the scan
+      %option{ value: 2} Public - Visible to everyone
+      %option{ value: 3} Secure - Visible to everyone who has the permalink
+      %option{ value: 4} Corp Only - Visible to everyone in your Corp
+      %option{ value: 5} Alliance Only - Visible to everyone in your Alliance
+
+  .form-group
+    = f.submit 'Save', class: "btn btn-primary"
+  

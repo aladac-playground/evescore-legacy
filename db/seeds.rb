@@ -83,3 +83,17 @@ path = dir + "/db/" + file
 query = "LOAD DATA LOCAL INFILE '#{path}' into table cons ( id, region_id, name );"
 ActiveRecord::Migration.execute query
 
+puts "Creating Signature Groups"
+[
+  "Data Site",
+  "Ore Site",
+  "Gas Site",
+  "Relic Site",
+  "Wormhole",
+  "Combat Site"
+].each do |site_group|
+  SigGroup.create(name: site_group)
+end
+
+puts "Creating Empty Signature Type"
+SigType.create(name: "-")
