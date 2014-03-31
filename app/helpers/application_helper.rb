@@ -147,7 +147,7 @@ module ApplicationHelper
     Time.now.at_beginning_of_month.strftime("%Y-%m")
   end
   def top_table(title, collection, type, numeric_type=:isk, width=3)
-    content_tag(:div, class: "col-lg-#{width}") do
+    content_tag(:div, class: "col-sm-#{width}") do
       concat content_tag(:h4, title, class: "top-title")
       concat(
       content_tag(:table, class: "table table-striped smaller-text vertical-middle") do
