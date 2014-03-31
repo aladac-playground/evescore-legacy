@@ -1,0 +1,2 @@
+module TrustHelper
+end

@@ -1,0 +1,14 @@
+.well
+  %p.text-muted
+    %pre
+      = request.headers["HTTP_EVE_TRUSTED"]
+    In order to be able to get the your details needed to store the scan results: HTTP_EVE_CHARID, HTTP_EVE_CORPID, HTTP_EVE_ALLIANCEID, HTTP_EVE_SOLARSYSTEMID, IGB trust is needed
+  %h4
+    Grant trust?
+  %hr
+  %a.btn.btn-large.btn-success{ :onclick => "CCPEVE.requestTrust('#{request.protocol + request.host_with_port}');"}
+    Fah shizzle!
+  %a.btn.btn-large.btn-danger{ href: root_path }
+    Hell naw!
+  %a.btn.btn-large.btn-default{  href: session[:return_to]  }
+    Return were you came from

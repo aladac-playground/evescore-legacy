@@ -1,4 +1,9 @@
 = form_for @scan do |f|
+  %input{ type: :hidden, name: :system_id, value: request.headers["HTTP_EVE_SOLARSYSTEMID"]}
+  %input{ type: :hidden, name: 'scan[char_id]', value: request.headers["HTTP_EVE_CHARID"]}
+  %input{ type: :hidden, name: 'scan[corp_id]', value: request.headers["HTTP_EVE_CORPID"]}
+  %input{ type: :hidden, name: 'scan[alliance_id]', value: request.headers["HTTP_EVE_ALLIANCEID"]}
+  
   - if @scan.errors.any?
     #error_explanation
       %h2= "#{pluralize(@scan.errors.count, "error")} prohibited this scan from being saved:"
@@ -24,12 +29,12 @@
     %textarea.form-control{ rows: 10, name: :paste }
   .form-group
     %label Security
-    %select.form-control{ name: :scan_security }
-      %option{ value: 1} Private - Visible only to the character creating the scan
-      %option{ value: 2} Public - Visible to everyone
-      %option{ value: 3} Secure - Visible to everyone who has the permalink
-      %option{ value: 4} Corp Only - Visible to everyone in your Corp
-      %option{ value: 5} Alliance Only - Visible to everyone in your Alliance
+    %select.form-control{ name: "scan[security]" }
+      %option{ value: 1, selected: @scan.security == 1 } Private - Accesible only to the owner
+      %option{ value: 2, selected: @scan.security == 2 } Public - Accesible to anyone with permalink
+      %option{ value: 3, selected: @scan.security == 3 } Secure - Read-only access to anyone with permalink
+      %option{ value: 4, selected: @scan.security == 4 } Corp Only - Accesible to everyone in your Corp
+      %option{ value: 5, selected: @scan.security == 5 } Alliance Only - Accessible to everyone in your Alliance
 
   .form-group
     = f.submit 'Save', class: "btn btn-primary"

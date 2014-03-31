@@ -1,11 +1,14 @@
 class ScansController < ApplicationController
   before_action :set_scan, only: [:show, :edit, :update, :destroy]
   before_filter :parse_paste, only: [:update, :create ]
+  before_filter :check_trust
+  before_filter :check_read_access, only: [:show ]
+  before_filter :check_write_access, only: [:edit, :update, :destroy]
 
   # GET /scans
   # GET /scans.json
   def index
-    @scans = Scan.all
+    @scans = Scan.where(char_id: igb_headers[:char_id] )
   end
 
   # GET /scans/1
@@ -36,7 +39,7 @@ class ScansController < ApplicationController
             @scan.sigs.create(sig)
           end
         end
-        format.html { redirect_to "/scan/#{@scan.secure_id}", notice: 'Scan was successfully created.' }
+        format.html { redirect_to @scan, notice: 'Scan was successfully created.' }
         format.json { render action: 'show', status: :created, location: @scan }
       else
         format.html { render action: 'new' }
@@ -55,7 +58,7 @@ class ScansController < ApplicationController
             @scan.sigs.create(sig)
           end
         end
-        format.html { redirect_to "/scan/#{@scan.secure_id}", notice: 'Scan was successfully updated.' }
+        format.html { redirect_to @scan, notice: 'Scan was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -79,14 +82,13 @@ class ScansController < ApplicationController
     def set_scan
       if params[:id]
         @scan = Scan.find(params[:id])
-      else
-        @scan = Scan.where(secure_id: params[:secure_id]).first
       end
+      redirect_to new_scan_path if @scan.nil?
     end
-
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def scan_params
-      params[:scan]
+      params[:scan].permit(:security, :system_id, :char_id, :corp_id, :alliance_id, :paste)
     end
     def parse_paste
       if params[:paste]
@@ -108,13 +110,72 @@ class ScansController < ApplicationController
             sig_type = SigType.create(name: $3)
           end
           # Sig(id: integer, scan_id: integer, char_id: integer, corp_id: integer, system_id: integer, cons_id: integer, region_id: integer, alliance_id: integer, sig_type_id: integer, sig_group_id: integer, created_at: datetime, updated_at: datetime)
-          sig={ sid: sid, sig_type_id: sig_type.id, sig_group_id: sig_group.id }
+          solar_system = SolarSystem.find(params[:system_id])
+          sig={ sid: sid, sig_type_id: sig_type.id, sig_group_id: sig_group.id, system_id: solar_system.id, region_id: solar_system.region_id, cons_id: solar_system.cons_id }
           @sigs.push sig
         end
       end
       if @sigs.length == 0 
         flash[:error] = "Paste unparsable"
         redirect_to new_scan_path
+      end
+    end
+    def igb_headers
+      { char_id: request.headers["HTTP_EVE_CHARID"], corp_id: request.headers["HTTP_EVE_CORPID"], alliance_id: request.headers["HTTP_EVE_ALLIANCEID"] }
+    end
+    def check_trust
+      if request.headers['HTTP_EVE_TRUSTED'] == "Yes" and request.user_agent =~ /EVE-IGB$/
+        return true
+      elsif request.user_agent =~ /EVE-IGB$/
+        session[:return_to] = request.url
+        redirect_to trust_grant_path
+      else
+        flash[:warn] = "This portion of the site requires IGB access with trust enabled"
+        redirect_to root_path
+      end
+    end
+    def check_write_access
+      case @scan.security
+        # %option{ value: 1, selected: @scan.security == 1 } Private - Accesible only to the owner
+        # %option{ value: 2, selected: @scan.security == 2 } Public - Accesible to anyone with permalink
+        # %option{ value: 3, selected: @scan.security == 3 } Secure - Read-only access to anyone with permalink
+        # %option{ value: 4, selected: @scan.security == 4 } Corp Only - Accesible to everyone in your Corp
+        # %option{ value: 5, selected: @scan.security == 5 } Alliance Only - Accessible to everyone in your Alliance
+        # 
+      when 1
+        return true if igb_headers[:char_id].to_i == @scan.char_id
+      when 2
+        return true
+      when 3
+        return false
+      when 4
+        return true if igb_headers[:corp_id].to_i == @scan.corp_id
+      when 5 
+        return true if igb_headers[:alliance_id].to_i == @scan.alliance_id
+      else
+        flash[:warn] = "Permission denied"
+      end
+    end
+    def check_read_access
+      case @scan.security
+        # %option{ value: 1, selected: @scan.security == 1 } Private - Accesible only to the owner
+        # %option{ value: 2, selected: @scan.security == 2 } Public - Accesible to anyone with permalink
+        # %option{ value: 3, selected: @scan.security == 3 } Secure - Read-only access to anyone with permalink
+        # %option{ value: 4, selected: @scan.security == 4 } Corp Only - Accesible to everyone in your Corp
+        # %option{ value: 5, selected: @scan.security == 5 } Alliance Only - Accessible to everyone in your Alliance
+        # 
+      when 1
+        return true if igb_headers[:char_id].to_i == @scan.char_id
+      when 2
+        return true
+      when 3
+        return true
+      when 4
+        return true if igb_headers[:corp_id].to_i == @scan.corp_id
+      when 5 
+        return true if igb_headers[:alliance_id].to_i == @scan.alliance_id
+      else
+        flash[:warn] = "Permission denied"
       end
     end
 end

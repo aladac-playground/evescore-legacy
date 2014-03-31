@@ -16,4 +16,18 @@ module ScansHelper
     end
     "<p class=\"text-#{html_class}\">#{sig_type}</p>".html_safe
   end
+  def selected_system(system_id)
+    if params[:q]
+      if params[:q][:solar_system_id_eq] and  params[:q][:solar_system_id_eq] == system_id
+        return true
+      end
+    end
+  end
+  def checked_group(group_id)
+    if params[:q]
+      if params[:q][:sig_group_id_in] and params[:q][:sig_group_id_in].include?(group_id.to_s) 
+        return true
+      end
+    end
+  end
 end

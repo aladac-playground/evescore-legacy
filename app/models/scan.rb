@@ -5,8 +5,8 @@ class Scan < ActiveRecord::Base
   before_create :assign_secure_id
   has_many :sigs
   
-  private
-  def assign_secure_id
-    self.secure_id = SecureRandom.hex
-  end
+  # private
+  # def assign_secure_id
+  #   self.secure_id = SecureRandom.hex
+  # end
 end

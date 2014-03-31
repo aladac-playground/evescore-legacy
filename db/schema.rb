@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331100034) do
+ActiveRecord::Schema.define(version: 20140331110830) do
 
   create_table "alliances", force: true do |t|
     t.string   "name"
@@ -138,14 +138,10 @@ ActiveRecord::Schema.define(version: 20140331100034) do
     t.string   "secure_id"
     t.integer  "char_id"
     t.integer  "corp_id"
-    t.boolean  "public"
-    t.boolean  "private"
-    t.boolean  "secure"
     t.integer  "alliance_id"
-    t.boolean  "corp_only"
-    t.boolean  "alliance_only"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "security"
   end
 
   add_index "scans", ["alliance_id"], name: "index_scans_on_alliance_id", using: :btree

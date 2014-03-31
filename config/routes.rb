@@ -1,4 +1,5 @@
 Evescore::Application.routes.draw do
+  get "trust/grant"
   resources :scans
   
   get "scan/:secure_id", to: "scans#show"
