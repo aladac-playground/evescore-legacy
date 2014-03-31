@@ -1,9 +1,9 @@
 .well
   .row
     .col-sm-12
-      = form_for @search, url: "/scan/#{@scan.secure_id}", method: :get, html: { class: "form-inline" } do |f|
+      = form_for @search, url: "/scans/#{@scan.id}", method: :get, html: { class: "form-inline" } do |f|
         .form-group
-          %a.btn.btn-success{ href: "/scan/#{@scan.secure_id}/edit" } Add Signatures
+          %a.btn.btn-success{ href: "/scans/#{@scan.id}/edit" } Add Signatures
         .form-group
           %select.form-control{ name: "q[solar_system_id_eq]"}
             %option{ value: "" } All Systems
