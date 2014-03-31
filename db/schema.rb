@@ -263,4 +263,29 @@ ActiveRecord::Schema.define(version: 20140331110830) do
   add_index "wallet_records", ["corp_name"], name: "index_wallet_records_on_corp_name", using: :btree
   add_index "wallet_records", ["ts"], name: "index_wallet_records_on_ts", using: :btree
 
+  create_table "work", force: true do |t|
+    t.datetime "ts"
+    t.string   "char_name"
+    t.string   "corp_name"
+    t.string   "alliance_name"
+    t.integer  "ref_type_id"
+    t.integer  "amount",        limit: 8
+    t.integer  "tax",           limit: 8
+    t.integer  "char_id"
+    t.integer  "corp_id"
+    t.integer  "alliance_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.boolean  "anon"
+  end
+
+  add_index "work", ["alliance_id"], name: "index_wallet_records_on_alliance_id", using: :btree
+  add_index "work", ["alliance_name"], name: "index_wallet_records_on_alliance_name", using: :btree
+  add_index "work", ["char_id"], name: "index_wallet_records_on_char_id", using: :btree
+  add_index "work", ["char_name"], name: "index_wallet_records_on_char_name", using: :btree
+  add_index "work", ["corp_id"], name: "index_wallet_records_on_corp_id", using: :btree
+  add_index "work", ["corp_name"], name: "index_wallet_records_on_corp_name", using: :btree
+  add_index "work", ["ts"], name: "index_wallet_records_on_ts", using: :btree
+
 end

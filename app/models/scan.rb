@@ -2,7 +2,7 @@ class Scan < ActiveRecord::Base
   belongs_to :char
   belongs_to :corp
   belongs_to :alliance
-  before_create :assign_secure_id
+  # before_create :assign_secure_id
   has_many :sigs
   
   # private
