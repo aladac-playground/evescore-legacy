@@ -30,4 +30,23 @@ module ScansHelper
       end
     end
   end
+  def current_system
+    if request.headers["HTTP_EVE_SOLARSYSTEMNAME"]
+      request.headers["HTTP_EVE_SOLARSYSTEMNAME"]
+    end
+  end
+  def current_system?
+    if params[:q]
+      if params[:q][:system_id_eq] == "current"
+        puts "current1"
+        return true
+      end
+    elsif
+      session[:q]
+      if session[:q][:system_id_eq] == "current"
+        puts "current1"
+        return true
+      end
+    end
+  end
 end

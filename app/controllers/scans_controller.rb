@@ -1,9 +1,12 @@
 class ScansController < ApplicationController
   before_action :set_scan, only: [:show, :edit, :update, :destroy]
   before_filter :parse_paste, only: [:update, :create ]
-  before_filter :check_trust
+  before_filter :check_trust, except: [ :show ]
   before_filter :check_read_access, only: [:show ]
   before_filter :check_write_access, only: [:edit, :update, :destroy]
+  before_filter :current_system, only: [:show]
+  before_filter :restore_search, only: [:show]
+  before_filter :store_search, only: [:show]
 
   # GET /scans
   # GET /scans.json
@@ -148,7 +151,7 @@ class ScansController < ApplicationController
       when 2
         auth = true
       when 3
-        auth = false
+        auth = true if igb_headers[:char_id].to_i == @scan.char_id
       when 4
         auth = true if igb_headers[:corp_id].to_i == @scan.corp_id
       when 5 
@@ -185,6 +188,26 @@ class ScansController < ApplicationController
       if auth != true
         flash[:error] = "Permission Denied"
         redirect_to new_scan_path
+      end
+    end
+    def current_system
+      if params[:q] and request.headers["HTTP_EVE_TRUSTED"] == "Yes"
+        if params[:q][:system_id_eq] == "current"
+          @current = true
+          params[:q][:system_id_eq] = request.headers["HTTP_EVE_SOLARSYSTEMID"]
+        else
+          @current = false
+        end
+      end
+    end
+    def store_search
+      if params[:q] 
+        session[:q] = params[:q]
+      end
+    end
+    def restore_search
+      if session[:q] and ! params[:q]
+        params[:q] = session[:q]
       end
     end
 end

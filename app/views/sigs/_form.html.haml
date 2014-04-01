@@ -1,0 +1,10 @@
+= form_for @sig do |f|
+  - if @sig.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@sig.errors.count, "error")} prohibited this sig from being saved:"
+      %ul
+        - @sig.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'
