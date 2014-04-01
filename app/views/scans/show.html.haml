@@ -36,6 +36,7 @@
           = sort_link @search, :sig_type_name, "Type"
         %th
           = sort_link @search, :created_at, "Scan Time"
+        %th
     %tbody
       - @sigs.each do |sig|
         %tr
@@ -49,5 +50,8 @@
             = sig.sig_type.name
           %td
             = sig.created_at.strftime("%Y-%m-%d %H:%M EVE")
+          %td
+            - if ( user_signed_in? and current_user.chars.ids.include?(sig.char_id) ) or request.headers["HTTP_EVE_CHARID"].to_i == sig.scan.char_id
+              = button_to "x", sig_path(id: sig.id), method: :delete, class: "btn btn-xs btn-danger"
   
   = paginate @sigs

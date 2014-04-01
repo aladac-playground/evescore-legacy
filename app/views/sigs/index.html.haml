@@ -1,0 +1,17 @@
+%h1 Listing sigs
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @sigs.each do |sig|
+    %tr
+      %td= link_to 'Show', sig
+      %td= link_to 'Edit', edit_sig_path(sig)
+      %td= link_to 'Destroy', sig, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Sig', new_sig_path
