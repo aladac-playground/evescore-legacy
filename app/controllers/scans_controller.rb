@@ -225,7 +225,7 @@ class ScansController < ApplicationController
     def store_params
       session[:p] = {}
       session_storables.each do |param|
-        session[:p][param] = params[param]
+        session[:p][param] = params[param] if params[param].blank? == false
       end
     end
 end
