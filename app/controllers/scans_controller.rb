@@ -5,7 +5,6 @@ class ScansController < ApplicationController
   before_filter :check_read_access, only: [:show ]
   before_filter :check_write_access, only: [:edit, :update, :destroy]
   before_filter :current_system, only: [:show]
-  before_filter :restore_params, only: [:show]
   before_filter :store_params, only: [:show]
 
   # GET /scans
@@ -80,7 +79,7 @@ class ScansController < ApplicationController
             @scan.sigs.create(sig)
           end
         end
-        format.html { redirect_to @scan, notice: 'Scan was successfully updated.' }
+        format.html { redirect_to scan_path + "?" + session[:p].to_query, notice: 'Scan was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -112,6 +111,7 @@ class ScansController < ApplicationController
     def scan_params
       params[:scan].permit(:security, :system_id, :char_id, :corp_id, :alliance_id, :paste)
     end
+    
     def parse_paste
       if params[:paste]
         paste = params[:paste].split("\n")
@@ -223,13 +223,9 @@ class ScansController < ApplicationController
       [ :past, :current_only, :q ]
     end
     def store_params
+      session[:p] = {}
       session_storables.each do |param|
-        session[param] = params[param]
-      end
-    end
-    def restore_params
-      session_storables.each do |param|
-        session[param] and params[param].blank? ? params[param] = session[param] : false
+        session[:p][param] = params[param]
       end
     end
 end
