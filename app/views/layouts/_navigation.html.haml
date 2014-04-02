@@ -62,11 +62,7 @@
           - logout_link = ( icon + " Logout" ).html_safe
           %li= link_to logout_link, destroy_user_session_path, :method=>'delete'
         - else
-          - icon = content_tag(:i, "", class: "glyphicon glyphicon-plus")
-          - signup_link = ( icon + " Register" ).html_safe
-          %li= link_to signup_link, new_user_registration_path
-          - icon = content_tag(:i, "", class: "glyphicon glyphicon-log-in")
-          - login_link = ( icon + " Login" ).html_safe
-          %li= link_to login_link, new_user_session_path
+          %li= link_to glyph(:user), new_user_registration_path
+          %li= link_to glyph(:log_in), new_user_session_path
         
           
