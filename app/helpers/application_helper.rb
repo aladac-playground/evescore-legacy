@@ -1,4 +1,7 @@
 module ApplicationHelper
+  def glyph(name)
+    content_tag :i, nil, class: "glyphicon glyphicon-#{name.to_s.gsub('_','-')}" 
+  end
   def section_title(title)
     content_tag(:table, class: "table table-striped section-title") do 
       content_tag(:tr) do
