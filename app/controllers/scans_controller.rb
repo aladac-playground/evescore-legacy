@@ -5,8 +5,8 @@ class ScansController < ApplicationController
   before_filter :check_read_access, only: [:show ]
   before_filter :check_write_access, only: [:edit, :update, :destroy]
   before_filter :current_system, only: [:show]
-  before_filter :restore_search, only: [:show]
-  before_filter :store_search, only: [:show]
+  before_filter :restore_params, only: [:show]
+  before_filter :store_params, only: [:show]
 
   # GET /scans
   # GET /scans.json
@@ -17,8 +17,27 @@ class ScansController < ApplicationController
   # GET /scans/1
   # GET /scans/1.json
   def show
-    @search = @scan.sigs.page(params[:page]).per(10).search(params[:q])
+		if params[:current_only] == "true"
+			params[:q][:system_id_eq] = request.headers["HTTP_EVE_SOLARSYSTEMID"]
+		end
+    
+    dt = Time.parse("11:00 UTC")
+    last_dt = Time.parse("11:00 UTC") - 1.day
+    
+		if params[:past] == "true"
+			dt = dt - 1.day
+			last_dt = last_dt - 1.day
+		end
+
+    if Time.now.utc > dt 
+      @sigs = @scan.sigs.where "sigs.created_at > '#{dt}'"
+    else
+      @sigs = @scan.sigs.where "sigs.created_at > '#{last_dt}'"
+    end
+        
+    @search = @sigs.page(params[:page]).per(10).search(params[:q])
     @sigs = @search.result
+    
   end
 
   # GET /scans/new
@@ -200,14 +219,17 @@ class ScansController < ApplicationController
         end
       end
     end
-    def store_search
-      if params[:q] 
-        session[:q] = params[:q]
+    def session_storables
+      [ :past, :current_only, :q ]
+    end
+    def store_params
+      session_storables.each do |param|
+        session[param] = params[param]
       end
     end
-    def restore_search
-      if session[:q] and ! params[:q]
-        params[:q] = session[:q]
+    def restore_params
+      session_storables.each do |param|
+        session[param] and params[param].blank? ? params[param] = session[param] : false
       end
     end
 end
