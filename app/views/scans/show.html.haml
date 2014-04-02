@@ -1,57 +1,57 @@
 .well
   .row
-    .col-sm-12
-      = form_for @search, url: scan_path, method: :get, html: { class: "form-inline" } do |f|
+    = form_for @search, url: scan_path, method: :get, html: { class: "form-inline" } do |f|
+      .col-sm-4
         .form-group
           %a.btn.btn-success{ href: edit_scan_path } Add Signatures
         .form-group
           %select.form-control{ name: "q[system_id_eq]"}
             %option{ value: "" } All Systems
-            - if request.headers["HTTP_EVE_TRUSTED"] == "Yes"
-              %option{ value: :current, selected: @current } Current System
             - @scan.sigs.joins(:solar_system).select(:name, :system_id).distinct.each do |system|
               %option{ value: system.system_id, selected: selected_system(system.system_id.to_s) }= system.solar_system.name
         = f.submit "Filter", class: "btn btn-main"
-        .pull-right
-          %b Current System: 
-          = current_system
+      .col-sm-8
+        .row
+          .col-sm-1
+            %label Filters
+          .col-sm-8
+            - if params[:past]
+              = check_box_tag :past, true,  params[:past] == "true" ? true : false
+              Resuts from before DT?
+            - else
+              = check_box_tag :past, true
+              Resuts from before DT?
+            - if params[:current_only]
+              = check_box_tag :current_only, true,  params[:current_only] == "true" ? true : false 
+              Current system?
+            - else
+              = check_box_tag :current_only, true
+              Current system?
+          .col-sm-3
+            %b Current System: 
+            = current_system
+        .row
+          .col-sm-1
+            %label Groups
+          .col-sm-11
+            - SigGroup.all.each do |group|
+              = check_box_tag "q[sig_group_id_in][]", group.id, checked_group(group.id)
+              = type_to_color group.name
+    
+        
+
+      
           
-        %br
-        %p
-        %label Group filter
-        - SigGroup.all.each do |group|
-          = check_box_tag "q[sig_group_id_in][]", group.id, checked_group(group.id)
-          %label= type_to_color group.name
   %p
-  %table.table.table-striped.table-condensed
-    %thead
-      %tr
-        %th
-          = sort_link @search, :solar_system_name, "System"
-        %th
-          = sort_link @search, :sid, "ID"
-        %th
-          = sort_link @search, :sig_group_name, "Group"
-        %th
-          = sort_link @search, :sig_type_name, "Type"
-        %th
-          = sort_link @search, :created_at, "Scan Time"
-        %th
-    %tbody
-      - @sigs.each do |sig|
-        %tr
-          %td
-            = sig.solar_system.name
-          %td
-            = sig.sid
-          %td
-            = type_to_color sig.sig_group.name
-          %td
-            = sig.sig_type.name
-          %td
-            = sig.created_at.strftime("%Y-%m-%d %H:%M EVE")
-          %td
-            - if ( user_signed_in? and current_user.chars.ids.include?(sig.char_id) ) or request.headers["HTTP_EVE_CHARID"].to_i == sig.scan.char_id
-              = button_to "x", sig_path(id: sig.id), method: :delete, class: "btn btn-xs btn-danger"
-  
-  = paginate @sigs
+  - if @sigs.count == 0
+    %hr
+    .text-info
+      %h4 Looks like there are no signatures in this Scan 
+      Play around with the 
+      %b Filters 
+      or 
+      %b Groups
+      or select a differnt system from the systems dropdown?
+      %p Or maybe... just maybe you shoud add new signatures?
+  - else
+    = render :partial => 'sigs_table'

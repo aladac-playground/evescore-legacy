@@ -2,23 +2,26 @@ module ScansHelper
   def type_to_color(sig_type)
     case sig_type 
     when /Combat/
-      html_class="danger"
+      color="danger"
     when /Data/
-      html_class="primary"
+      color="success"
     when /Relic/
-      html_class="success"
+      color="info"
     when /Ore/
-      html_class="warning"
+      color="warn"
     when /Gas/
-      html_class="info"
+      color="white"
     when /Wormhole/
-      html_class="yellow"
+      color="yellow"
     end
-    "<p class=\"text-#{html_class}\">#{sig_type}</p>".html_safe
+    "<span class='text-#{color}'>#{sig_type}</span>".html_safe
   end
   def selected_system(system_id)
     if params[:q]
-      if params[:q][:solar_system_id_eq] and  params[:q][:solar_system_id_eq] == system_id
+      if params[:q][:solar_system_id_eq] and params[:q][:solar_system_id_eq] == system_id
+        return true
+      end
+      if params[:current_only] and request.headers["HTTP_EVE_SOLARSYSTEMID"] == system_id
         return true
       end
     end

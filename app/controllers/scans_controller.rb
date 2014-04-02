@@ -5,8 +5,7 @@ class ScansController < ApplicationController
   before_filter :check_read_access, only: [:show ]
   before_filter :check_write_access, only: [:edit, :update, :destroy]
   before_filter :current_system, only: [:show]
-  before_filter :restore_search, only: [:show]
-  before_filter :store_search, only: [:show]
+  before_filter :store_params, only: [:show]
 
   # GET /scans
   # GET /scans.json
@@ -17,8 +16,27 @@ class ScansController < ApplicationController
   # GET /scans/1
   # GET /scans/1.json
   def show
-    @search = @scan.sigs.page(params[:page]).per(10).search(params[:q])
+		if params[:current_only] == "true"
+			params[:q][:system_id_eq] = request.headers["HTTP_EVE_SOLARSYSTEMID"]
+		end
+    
+    dt = Time.parse("11:00 UTC")
+    last_dt = Time.parse("11:00 UTC") - 1.day
+    
+		if params[:past] == "true"
+			dt = dt - 1.day
+			last_dt = last_dt - 1.day
+		end
+
+    if Time.now.utc > dt 
+      @sigs = @scan.sigs.where "sigs.created_at > '#{dt}'"
+    else
+      @sigs = @scan.sigs.where "sigs.created_at > '#{last_dt}'"
+    end
+        
+    @search = @sigs.page(params[:page]).per(10).search(params[:q])
     @sigs = @search.result
+    
   end
 
   # GET /scans/new
@@ -61,7 +79,7 @@ class ScansController < ApplicationController
             @scan.sigs.create(sig)
           end
         end
-        format.html { redirect_to @scan, notice: 'Scan was successfully updated.' }
+        format.html { redirect_to scan_path + "?" + session[:p].to_query, notice: 'Scan was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -93,6 +111,7 @@ class ScansController < ApplicationController
     def scan_params
       params[:scan].permit(:security, :system_id, :char_id, :corp_id, :alliance_id, :paste)
     end
+    
     def parse_paste
       if params[:paste]
         paste = params[:paste].split("\n")
@@ -200,14 +219,13 @@ class ScansController < ApplicationController
         end
       end
     end
-    def store_search
-      if params[:q] 
-        session[:q] = params[:q]
-      end
+    def session_storables
+      [ :past, :current_only, :q ]
     end
-    def restore_search
-      if session[:q] and ! params[:q]
-        params[:q] = session[:q]
+    def store_params
+      session[:p] = {}
+      session_storables.each do |param|
+        session[:p][param] = params[param]
       end
     end
 end
