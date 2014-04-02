@@ -79,7 +79,7 @@ class ScansController < ApplicationController
             @scan.sigs.create(sig)
           end
         end
-        format.html { redirect_to scan_path + "?" + session[:p].to_query, notice: 'Scan was successfully updated.' }
+        format.html { redirect_to scan_path + query_string(session[:p]) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -227,5 +227,8 @@ class ScansController < ApplicationController
       session_storables.each do |param|
         session[:p][param] = params[param] if params[param].blank? == false
       end
+    end
+    def query_string(query)
+      ! query.to_query.blank? ? "?" + query.to_query : ""
     end
 end
