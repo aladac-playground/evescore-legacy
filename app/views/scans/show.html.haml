@@ -1,42 +1,33 @@
 .well
   .row
-    = form_for @search, url: scan_path, method: :get, html: { class: "form-inline" } do |f|
-      .col-sm-4
+    .col-sm-12
+      = form_for @search, url: scan_path, method: :get, html: { class: "form-inline" } do |f|
         .form-group
-          %a.btn.btn-success{ href: edit_scan_path } Add Signatures
+          %a.btn.btn-success{ href: edit_scan_path } Add Scan
         .form-group
           %select.form-control{ name: "q[system_id_eq]"}
             %option{ value: "" } All Systems
             - @scan.sigs.joins(:solar_system).select(:name, :system_id).distinct.each do |system|
               %option{ value: system.system_id, selected: selected_system(system.system_id.to_s) }= system.solar_system.name
-        = f.submit "Filter", class: "btn btn-main"
-      .col-sm-8
-        .row
-          .col-sm-1
-            %label Filters
-          .col-sm-8
-            - if params[:past]
-              = check_box_tag :past, true,  params[:past] == "true" ? true : false
-              Resuts from before DT?
-            - else
-              = check_box_tag :past, true
-              Resuts from before DT?
-            - if params[:current_only]
-              = check_box_tag :current_only, true,  params[:current_only] == "true" ? true : false 
-              Current system?
-            - else
-              = check_box_tag :current_only, true
-              Current system?
-          .col-sm-3
-            %b Current System: 
-            = current_system
-        .row
-          .col-sm-1
-            %label Groups
-          .col-sm-11
-            - SigGroup.all.each do |group|
-              = check_box_tag "q[sig_group_id_in][]", group.id, checked_group(group.id)
-              = type_to_color group.name
+        .form-group
+          = f.submit "Filter", class: "btn btn-main"
+        .form-group
+          - if params[:past]
+            = check_box_tag :past, true,  params[:past] == "true" ? true : false
+            Resuts from before DT?
+          - else
+            = check_box_tag :past, true
+            Resuts from before DT?
+          - if params[:current_only]
+            = check_box_tag :current_only, true,  params[:current_only] == "true" ? true : false 
+            Current system?
+          - else
+            = check_box_tag :current_only, true
+            Current system?
+        .form-group
+          - SigGroup.all.each do |group|
+            = check_box_tag "q[sig_group_id_in][]", group.id, checked_group(group.id)
+            = type_to_color group.name
     
         
 
