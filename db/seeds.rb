@@ -97,3 +97,13 @@ end
 
 puts "Creating Empty Signature Type"
 SigType.create(name: "-")
+
+puts "Loading Signature Types"
+
+file = "sig_types.tsv"
+dir = Dir.pwd
+path = dir + "/db/" + file
+
+query = "LOAD DATA LOCAL INFILE '#{path}' into table sig_types ( name, sig_group_id, ded_rating );"
+ActiveRecord::Migration.execute query
+

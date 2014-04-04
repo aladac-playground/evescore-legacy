@@ -11,20 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331110830) do
+ActiveRecord::Schema.define(version: 20140404171053) do
 
   create_table "alliances", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "short_name"
-  end
-
-  create_table "allieds", force: true do |t|
-    t.integer  "corp_id"
-    t.integer  "alliance_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "allies", force: true do |t|
@@ -118,14 +111,6 @@ ActiveRecord::Schema.define(version: 20140331110830) do
   add_index "kills", ["ts"], name: "index_kills_on_ts", using: :btree
   add_index "kills", ["wallet_record_id"], name: "index_kills_on_wallet_record_id", using: :btree
 
-  create_table "rat_images", force: true do |t|
-    t.integer  "rat_id"
-    t.string   "md5"
-    t.integer  "size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "rats", force: true do |t|
     t.string   "name"
     t.string   "rat_type"
@@ -165,6 +150,8 @@ ActiveRecord::Schema.define(version: 20140331110830) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sig_group_id"
+    t.integer  "ded_rating"
   end
 
   create_table "sigs", force: true do |t|
@@ -269,30 +256,5 @@ ActiveRecord::Schema.define(version: 20140331110830) do
   add_index "wallet_records", ["corp_id"], name: "index_wallet_records_on_corp_id", using: :btree
   add_index "wallet_records", ["corp_name"], name: "index_wallet_records_on_corp_name", using: :btree
   add_index "wallet_records", ["ts"], name: "index_wallet_records_on_ts", using: :btree
-
-  create_table "work", force: true do |t|
-    t.datetime "ts"
-    t.string   "char_name"
-    t.string   "corp_name"
-    t.string   "alliance_name"
-    t.integer  "ref_type_id"
-    t.integer  "amount",        limit: 8
-    t.integer  "tax",           limit: 8
-    t.integer  "char_id"
-    t.integer  "corp_id"
-    t.integer  "alliance_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-    t.boolean  "anon"
-  end
-
-  add_index "work", ["alliance_id"], name: "index_wallet_records_on_alliance_id", using: :btree
-  add_index "work", ["alliance_name"], name: "index_wallet_records_on_alliance_name", using: :btree
-  add_index "work", ["char_id"], name: "index_wallet_records_on_char_id", using: :btree
-  add_index "work", ["char_name"], name: "index_wallet_records_on_char_name", using: :btree
-  add_index "work", ["corp_id"], name: "index_wallet_records_on_corp_id", using: :btree
-  add_index "work", ["corp_name"], name: "index_wallet_records_on_corp_name", using: :btree
-  add_index "work", ["ts"], name: "index_wallet_records_on_ts", using: :btree
 
 end
