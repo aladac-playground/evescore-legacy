@@ -51,7 +51,7 @@ cd evescore
 bundle
 ```
 ##### Create the `.env` file
-...which is used by `foreman` which contains the credentials for the email account used for registration confirmation messages, password recovery etc. 
+...which is used by `foreman` and contains the configuration environment variables (credentials for the email account used for registration confirmation messages, password recovery etc. )
 
 `.env.example` shows how the file should look.
 
@@ -64,6 +64,16 @@ You can use `config/database.yml.example` as a template
 RAILS_ENV=production rake db:setup
 foreman start
 ```
+
+##### Consider using nginx or Apache as a proxy
+How? Why? Just google "Rails *WEB_SERVER_PLACEHOLDER* and unicorn tutorial *YOUR_FAVOURITE_LINUX_DISTRO_PLACEHOLDER*"
+
+*Example*
+
+```
+rails nginx and unicorn tutorial ubuntu 12.04
+```
+
 
 ---
 
