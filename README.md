@@ -44,18 +44,26 @@ If you are planning on installing Ruby I highly recommend using [RVM](http://rvm
 
 *Install Tasks*
 
+##### Clone the source and bundle gems
 ```bash
 git clone https://github.com/quanchi/evescore.git
 cd evescore
 bundle
-rake db:setup
-foreman start
-
 ```
-
-It would be nice to modify/create the `.env` file which is used by `foreman` which contains the credentials for the email account used for registration confirmation messages, password recovery etc. 
+##### Create the `.env` file
+...which is used by `foreman` which contains the credentials for the email account used for registration confirmation messages, password recovery etc. 
 
 `.env.example` shows how the file should look.
+
+##### Create `config/database.yml`
+You can use `config/database.yml.example` as a template
+
+##### Seed the database and run the Rails App
+
+```
+RAILS_ENV=production rake db:setup
+foreman start
+```
 
 ---
 
