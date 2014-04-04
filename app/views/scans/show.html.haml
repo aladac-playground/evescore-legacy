@@ -7,7 +7,7 @@
         .form-group
           %select.form-control{ name: "q[system_id_eq]"}
             %option{ value: "" } All Systems
-            - @scan.sigs.joins(:solar_system).select(:name, :system_id).distinct.each do |system|
+            - @sigs.joins(:solar_system).select(:name, :system_id).distinct.order("solar_systems.name").each do |system|
               %option{ value: system.system_id, selected: selected_system(system.system_id.to_s) }= system.solar_system.name
         .form-group
           = f.submit "Filter", class: "btn btn-main"
