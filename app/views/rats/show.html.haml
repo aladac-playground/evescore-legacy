@@ -1,20 +1,20 @@
 .well
   .row
-    .col-lg-2
+    .col-sm-2
       = eve_image :type, @rat.id, 64
       - if type_to_faction @rat.rat_type
         = faction_image @rat.rat_type, 64
       - else
         - if @rat.site
           = faction_image @rat.site.faction, 64
-    .col-lg-4
+    .col-sm-4
       %b= @rat.name
       %br
       = @rat.rat_type
       %br
       = number_with_delimiter((@rat.attrib "entityKillBounty").to_i)
       ISK
-    .col-lg-6
+    .col-sm-6
       - if @desc.length >= 200
         .hand
           %b{ title: "Show full info", "data-target" => "#hidden-help", "data-toggle" => "modal", class: :ttp }
@@ -42,179 +42,179 @@
         
         
   .row
-    .col-lg-12
+    .col-sm-12
       / %h4
       /   Details
       / %hr
       = section_title("Details")
   .row.rat-details
-    .col-lg-12
+    .col-sm-12
       .row
-        .col-lg-3
+        .col-sm-3
           = render :partial => 'numeric'
-        .col-lg-9
+        .col-sm-9
           .row.pseudo-header
-            .col-lg-8.col-lg-offset-4
-              .col-lg-3
+            .col-sm-8.col-sm-offset-4
+              .col-sm-3
                 = image_tag("icons/em.png", class: :ttp, title: "EM")
-              .col-lg-3
+              .col-sm-3
                 = image_tag("icons/thermal.png", class: :ttp, title: "Thermal")
-              .col-lg-3
+              .col-sm-3
                 = image_tag("icons/kinetic.png", class: :ttp, title: "Kinetic")
-              .col-lg-3
+              .col-sm-3
                 = image_tag("icons/explosive.png", class: :ttp, title: "Explosive")
           .row
-            .col-lg-4
-              .col-lg-8.numeric.ttp.hand{ "data-target" => ".dps-details", "data-toggle" => "collapse" }
+            .col-sm-4
+              .col-sm-8.numeric.ttp.hand{ "data-target" => ".dps-details", "data-toggle" => "collapse" }
                 %b Total DPS
                 %i.glyphicon.glyphicon-collapse-down#dps-details
                 = image_tag 'icons/dps.png'
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number @rat.total_dps
-            .col-lg-8
-              .col-lg-3
+            .col-sm-8
+              .col-sm-3
                 = dps_percent "emDamage"
-              .col-lg-3
+              .col-sm-3
                 = dps_percent "thermalDamage" 
-              .col-lg-3
+              .col-sm-3
                 = dps_percent "kineticDamage" 
-              .col-lg-3
+              .col-sm-3
                 = dps_percent "explosiveDamage" 
           .row.dps-details.collapse{ "data-icon" => "#dps-details"}
-            .col-lg-4
-              .col-lg-8.numeric
+            .col-sm-4
+              .col-sm-8.numeric
                 %i Gun DPS
                 = image_tag 'icons/turret.png'
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number @rat.gun_dps.sum
-            .col-lg-8
-              .col-lg-3
+            .col-sm-8
+              .col-sm-3
                 = gun_percent "emDamage"
-              .col-lg-3
+              .col-sm-3
                 = gun_percent "thermalDamage" 
-              .col-lg-3
+              .col-sm-3
                 = gun_percent "kineticDamage" 
-              .col-lg-3
+              .col-sm-3
                 = gun_percent "explosiveDamage" 
           .row.dps-details.collapse
-            .col-lg-4
-              .col-lg-8.numeric
+            .col-sm-4
+              .col-sm-8.numeric
                 %i Missile DPS
                 = image_tag 'icons/missiles.png'
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number @rat.missile_dps.sum
-            .col-lg-8
-              .col-lg-3
+            .col-sm-8
+              .col-sm-3
                 = missile_percent "emDamage"
-              .col-lg-3
+              .col-sm-3
                 = missile_percent "thermalDamage" 
-              .col-lg-3
+              .col-sm-3
                 = missile_percent "kineticDamage" 
-              .col-lg-3
+              .col-sm-3
                 = missile_percent "explosiveDamage" 
           .row
-            .col-lg-4
-              .col-lg-8.numeric.ttp.hand{ "data-target" => ".hp-details", "data-toggle" => "collapse"}
+            .col-sm-4
+              .col-sm-8.numeric.ttp.hand{ "data-target" => ".hp-details", "data-toggle" => "collapse"}
                 %b Total HP
                 %i.glyphicon.glyphicon-collapse-down#hp-details
                 = image_tag 'icons/shield.png'
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number @rat.total_hp
-            .col-lg-8
-              .col-lg-3
+            .col-sm-8
+              .col-sm-3
                 = progress @rat.avg_res[:em].round, damage_to_class(:em)
-              .col-lg-3
+              .col-sm-3
                 = progress @rat.avg_res[:thermal].round, damage_to_class(:thermal)
-              .col-lg-3
+              .col-sm-3
                 = progress @rat.avg_res[:kinetic].round, damage_to_class(:kinetic)
-              .col-lg-3
+              .col-sm-3
                 = progress @rat.avg_res[:explosive].round, damage_to_class(:explosive)
           .row.collapse.hp-details{ "data-icon" => "#hp-details" }
-            .col-lg-4
-              .col-lg-8.numeric
+            .col-sm-4
+              .col-sm-8.numeric
                 %i Shield
                 = image_tag 'icons/shield.png'
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number @rat.attrib "shieldCapacity"
-            .col-lg-8
-              .col-lg-3
+            .col-sm-8
+              .col-sm-3
                 = shield_percent_bar "shieldEmDamageResonance" 
-              .col-lg-3
+              .col-sm-3
                 = shield_percent_bar "shieldThermalDamageResonance"
-              .col-lg-3
+              .col-sm-3
                 = shield_percent_bar "shieldKineticDamageResonance"
-              .col-lg-3
+              .col-sm-3
                 = shield_percent_bar "shieldExplosiveDamageResonance"
           .row.collapse.hp-details
-            .col-lg-4
-              .col-lg-8.numeric
+            .col-sm-4
+              .col-sm-8.numeric
                 %i Armor
                 = image_tag 'icons/armor.png'
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number @rat.attrib "armorHP"
-            .col-lg-8
-              .col-lg-3
+            .col-sm-8
+              .col-sm-3
                 = armor_percent_bar "armorEmDamageResonance" 
-              .col-lg-3
+              .col-sm-3
                 = armor_percent_bar "armorThermalDamageResonance"
-              .col-lg-3
+              .col-sm-3
                 = armor_percent_bar "armorKineticDamageResonance"
-              .col-lg-3
+              .col-sm-3
                 = armor_percent_bar "armorExplosiveDamageResonance" 
           .row.collapse.hp-details
-            .col-lg-4
-              .col-lg-8.numeric
+            .col-sm-4
+              .col-sm-8.numeric
                 %i Structure
                 = image_tag("icons/structure.png")
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number @rat.attrib "hp"
-            .col-lg-8
-              .col-lg-3
+            .col-sm-8
+              .col-sm-3
                 = progress(0)
-              .col-lg-3
+              .col-sm-3
                 = progress(0)
-              .col-lg-3
+              .col-sm-3
                 = progress(0)
-              .col-lg-3
+              .col-sm-3
                 = progress(0)
           .row
-            .col-lg-4
-              .col-lg-8.numeric.ttp.hand{ "data-target" => ".rep-details", "data-toggle" => "collapse"}
+            .col-sm-4
+              .col-sm-8.numeric.ttp.hand{ "data-target" => ".rep-details", "data-toggle" => "collapse"}
                 %b Total Repair
                 %i.glyphicon.glyphicon-collapse-down#rep-details
                 = image_tag("icons/repair.png")
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number @rat.total_repair, "HP/s"
           .row.collapse.rep-details{ "data-icon" => "#rep-details"}
-            .col-lg-4
-              .col-lg-8.numeric
+            .col-sm-4
+              .col-sm-8.numeric
                 %i Shield Boost
                 = image_tag("icons/shield_boost.png")
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number shield_boost, "HP/s"
           .row.collapse.rep-details{ "data-icon" => "#rep-details"}
-            .col-lg-4
-              .col-lg-8.numeric
+            .col-sm-4
+              .col-sm-8.numeric
                 %i Armor Repair
                 = image_tag("icons/armor_repair.png")
-              .col-lg-4.numeric
+              .col-sm-4.numeric
                 = nice_number armor_repair, "HP/s"
 
 
   - if @rat.site_id
     .row
-      .col-lg-12
+      .col-sm-12
         = section_title("Site Info")
-        .col-lg-12
+        .col-sm-12
           / .row
-          /   .col-lg-4
+          /   .col-sm-4
           /     %b Name
-          /   .col-lg-4
+          /   .col-sm-4
           /     %b Faction
-          /   .col-lg-4
+          /   .col-sm-4
           /     %b Rating
           .row
-            .col-lg-6{ style: "line-height: 32px"}
+            .col-sm-6{ style: "line-height: 32px"}
               - name = us @rat.site.name
               - url = "https://wiki.eveonline.com/en/wiki/#{name}"
               = eve_image(:corp, 1000137, 32)      
@@ -224,7 +224,7 @@
               = "( #{@rat.site.rating}/10 )"
               
               
-            .col-lg-6
+            .col-sm-6
               - faction = @rat.site.faction            
               %a{ href: "/rats/faction/" + type_to_faction(faction) }
                 = faction_image faction, 32
@@ -233,10 +233,10 @@
             
   - if @rat.drops.count > 0            
     .row
-      .col-lg-12
+      .col-sm-12
         = section_title("Drops")
         - @rat.drops.order("guaranteed desc").each do |drop|
-          .col-lg-6
+          .col-sm-6
             - if drop.market
               - url = "http://eve-central.com/home/quicklook.html?typeid=#{drop.id}"
             - else
