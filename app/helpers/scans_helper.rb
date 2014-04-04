@@ -1,4 +1,12 @@
 module ScansHelper
+  def system_info?
+    if request.headers["HTTP_EVE_SOLARSYSTEMID"]
+      return true
+    end
+  end
+  def ded_logo
+    image_tag asset_path("icons/ded.png")
+  end
   def type_to_color(sig_type)
     case sig_type 
     when /Combat/

@@ -298,6 +298,10 @@ tr.collapse.in {
   display: inline;
 }
 
+td > img {
+  display: inline;
+}
+
 .pseudo-header > div {
   text-align: center;
 }
@@ -340,4 +344,16 @@ body {
 
 .text-yellow {
 	color: yellow;
+}
+
+.auto-pilot {
+  color: black;
+  cursor: hand;
+  cursor: pointer;
+}
+.badge-info {
+  cursor: hand;
+  cursor: pointer;
+  color: black;
+  font-family: monospace;
 }

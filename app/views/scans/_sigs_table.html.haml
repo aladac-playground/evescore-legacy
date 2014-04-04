@@ -1,6 +1,8 @@
 %table.table.table-striped.table-condensed
   %thead
     %tr
+      - if system_info?
+        %th
       %th
         = sort_link @search, :solar_system_name, "System"
       %th
@@ -8,21 +10,35 @@
       %th
         = sort_link @search, :sig_group_name, "Group"
       %th
+      %th
         = sort_link @search, :sig_type_name, "Type"
       %th
         = sort_link @search, :created_at, "Scan Time"
       %th
   %tbody
     - @sigs.each do |sig|
+      - type = sig.sig_type
       %tr
+        - if system_info?
+          %td
+            .label.label-default.auto-pilot.ttp{ onclick: "CCPEVE.addWaypoint(#{sig.system_id})", title: "Add Waypoint" }
+              W
         %td
           = sig.solar_system.name
+          - if system_info?
+            .badge.badge-info.ttp{ onclick: "CCPEVE.showInfo(5, #{sig.system_id})", title: "Show Info" }
+              i
         %td
           = sig.sid
         %td
           = type_to_color sig.sig_group.name
         %td
-          = sig.sig_type.name
+          - if type.ded_rating 
+            .label.label-danger
+              DED
+              = type.ded_rating
+        %td
+          = type.name
         %td
           = sig.created_at.strftime("%Y-%m-%d %H:%M EVE")
         %td
