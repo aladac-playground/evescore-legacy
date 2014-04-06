@@ -28,7 +28,7 @@
             = check_box_tag :current_only, true
             Current system?
         .form-group
-          - SigGroup.all.each do |group|
+          - SigGroup.all.order(:name).each do |group|
             = check_box_tag "q[sig_group_id_in][]", group.id, checked_group(group.id)
             = type_to_color group.name
     
