@@ -21,13 +21,13 @@
       %tr
         - if system_info?
           %td
-            .label.label-default.auto-pilot.ttp{ onclick: "CCPEVE.addWaypoint(#{sig.system_id})", title: "Add Waypoint" }
-              W
+            %span.ttp{ onclick: "CCPEVE.addWaypoint(#{sig.system_id})", title: "Add Waypoint" }
+              = eve_icon(:waypoint)
         %td
           = sig.solar_system.name
           - if system_info?
-            .badge.badge-info.ttp{ onclick: "CCPEVE.showInfo(5, #{sig.system_id})", title: "Show Info" }
-              i
+            %span.ttp{ onclick: "CCPEVE.showInfo(5, #{sig.system_id})", title: "Show Info" }
+              = eve_icon(:info)
         %td
           = sig.sid
         %td
@@ -43,6 +43,7 @@
           = sig.created_at.strftime("%Y-%m-%d %H:%M EVE")
         %td
           - if ( user_signed_in? and current_user.chars.ids.include?(sig.char_id) ) or request.headers["HTTP_EVE_CHARID"].to_i == sig.scan.char_id
-            = button_to "x", sig_path(id: sig.id), method: :delete, class: "btn btn-xs btn-danger"
+            / = button_to "x", sig_path(id: sig.id), method: :delete, class: "btn btn-xs btn-danger"
+            = link_to eve_icon(:remove), sig_path(id: sig.id), method: :delete, class: :ttp, title: "Delete"
 
 = paginate @sigs

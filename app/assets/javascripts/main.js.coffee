@@ -1,7 +1,7 @@
 # $(document).on 'page:change', ->
 ready = ->
   $("form").submit ->
-    $("form :input[type=text]").each ->
+    $("form :input").each ->
       $(this).attr "disabled", "disabled"  if $(this).val() is ""
       return
     

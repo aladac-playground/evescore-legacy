@@ -1,4 +1,7 @@
 module ApplicationHelper
+  def eve_icon(name)
+    image_tag asset_path("icons/#{name.to_s}.png"), style: "display: inline", class: "eve-icon-sm"
+  end
   def glyph(name)
     content_tag :i, nil, class: "glyphicon glyphicon-#{name.to_s.gsub('_','-')}" 
   end
