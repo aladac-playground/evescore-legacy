@@ -14,11 +14,11 @@ module ScansHelper
     when /Data/
       color="success"
     when /Relic/
-      color="info"
+      color="primary"
     when /Ore/
-      color="warn"
+      color="warning"
     when /Gas/
-      color="white"
+      color="info"
     when /Wormhole/
       color="yellow"
     end
