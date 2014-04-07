@@ -1,4 +1,15 @@
 module ScansHelper
+  def dotlan_link(system)
+    link_to system.name, "http://evemaps.dotlan.net/system/#{system.name}".gsub(/\ /,"_"), target: "_blank", class: :ttp, title: "Dotlan info in new window"
+  end
+  def site_info(sig)
+    if sig.url 
+      link_to sig.name, sig.url, target: "_blank", class: :ttp, title: "Site info in new window"
+    else
+      link_to sig.name, "https://wiki.eveonline.com/en/wiki/" + sig.name.gsub(/\ /,"_"), target: "_blank", class: :ttp, title: "Site info in new window"
+    end
+  end
+    
   def system_info?
     if request.headers["HTTP_EVE_SOLARSYSTEMID"]
       return true

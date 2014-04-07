@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404171053) do
+ActiveRecord::Schema.define(version: 20140407184023) do
 
   create_table "alliances", force: true do |t|
     t.string   "name"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 20140404171053) do
     t.datetime "updated_at"
     t.integer  "sig_group_id"
     t.integer  "ded_rating"
+    t.string   "url"
   end
 
   create_table "sigs", force: true do |t|

@@ -24,7 +24,7 @@
             %span.ttp{ onclick: "CCPEVE.addWaypoint(#{sig.system_id})", title: "Add Waypoint" }
               = eve_icon(:waypoint)
         %td
-          = sig.solar_system.name
+          = dotlan_link sig.solar_system
           - if system_info?
             %span.ttp{ onclick: "CCPEVE.showInfo(5, #{sig.system_id})", title: "Show Info" }
               = eve_icon(:info)
@@ -38,7 +38,7 @@
               DED
               = type.ded_rating
         %td
-          = type.name
+          = site_info(type)
         %td
           = sig.created_at.strftime("%Y-%m-%d %H:%M EVE")
         %td
