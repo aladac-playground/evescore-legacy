@@ -19,11 +19,12 @@
         %td
           = eve_image(:char, record.char_id)
           = eve_image(:corp, record.corp_id)
-          = eve_image(:alliance, record.alliance_id)
+          - if record.alliance_id
+            = eve_image(:alliance, record.alliance_id)
         %td
           - record.kills.each do |kill|
             - ttp = "<b>#{kill.rat_name}</b><br><i>#{kill.rat_type}</i>".html_safe
-            = eve_image(:rat, kill.rat_id, 32, ttp)
+            = link_to eve_image(:rat, kill.rat_id, 32, ttp), rat_path(kill.rat_id)
         %td.numeric= number_with_delimiter(number_with_precision(record.amount / 100.0, precision: 2))
 
   .row

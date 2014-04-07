@@ -4,7 +4,7 @@
       .row
         .col-lg-3{ style: "width: 235px"}
           = eve_image(:char, @char.id, 64)
-          = eve_image(:corp, @char.corp_id, 64)
+          = link_to eve_image(:corp, @char.corp_id, 64), corp_path(@char.corp_id)
           - if @char.alliance_id
             = eve_image(:alliance, @char.alliance_id, 64)
         .col-lg-9
