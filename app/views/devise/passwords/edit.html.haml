@@ -1,0 +1,13 @@
+.authform
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
+    = f.hidden_field :reset_password_token
+    %h3 Change Password
+    = devise_error_messages!
+    .form-group
+      = f.label :password, "New password"
+      = f.password_field :password, :autofocus => true 
+    .form-group
+      = f.label :password_confirmation, "New password_confirmation"
+      = f.password_field :password_confirmation, :autofocus => true 
+    .form-group
+    = f.submit 'Change my password', :class => 'button right'
