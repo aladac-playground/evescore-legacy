@@ -3,7 +3,7 @@ class WalletController < ApplicationController
   before_filter :check_users_wallet, only: [ :index ]
   
   def index
-    @wallet = WalletRecord.where(char_id: current_user_chars).page(params[:page]).per(10)
+    @wallet = WalletRecord.where(char_id: current_user_chars).order("created_at desc").page(params[:page]).per(10)
   end
   
   private
