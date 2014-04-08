@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
   def ajax
     @q1 = Rat.search(params[:q])
-    @q2 = Char.where("anon <> 1").search(params[:q])
+    @q2 = Char.where("anon <> 1 or anon is null").search(params[:q])
     rats = @q1.result
     chars = @q2.result
     
