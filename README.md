@@ -1,3 +1,5 @@
+![TravisCI](https://travis-ci.org/aladac/evescore.svg)
+
 ### EVEScore - EVE Online PvE Scoreboard
 EVEScore is a Player vs Environment scoreboard for the MMO Game EVE Online.
 It relies on [EVE API Wallet Journal method](https://wiki.eveonline.com/en/wiki/EVE_API_Character_Wallet_Journal), and keeps track of *mission and incursion rewards, bounties, NPC kills*
