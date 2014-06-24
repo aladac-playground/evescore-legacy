@@ -1,26 +1,25 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
-gem 'rails', '4.0.2'
+ruby '2.1.2'
+gem 'rails', '4.1.1'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
-# gem 'turbolinks'
-# gem 'jbuilder', '~> 1.2'
+gem 'turbolinks'
 gem 'bootstrap-sass', '>= 3.0.0.0'
+gem 'bootstrap-datepicker-rails'
 gem 'devise'
 gem 'haml-rails'
 gem 'mysql2'
 gem 'unicorn'
 gem 'unicorn-rails'
 gem 'crack'
-# gem 'ruby-progressbar'
 gem 'kaminari'
 gem 'ransack'
-gem 'bootstrap-datepicker-rails'
 gem 'clockwork'
 
 group :development do
+  gem 'ruby-progressbar'
   gem 'erb2haml'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
@@ -28,5 +27,11 @@ group :development do
   gem 'html2haml'
   gem 'quiet_assets'
   gem 'rails_layout'
-  gem 'moped' # For migrating data from classic EveScore
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl'
+  gem 'database_cleaner'
+  gem 'capybara'
 end
