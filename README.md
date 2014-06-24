@@ -1,4 +1,4 @@
-![TravisCI](https://travis-ci.org/aladac/evescore.svg)
+[![Build Status](https://travis-ci.org/aladac/evescore.svg?branch=master)](https://travis-ci.org/aladac/evescore)
 
 ### EVEScore - EVE Online PvE Scoreboard
 EVEScore is a Player vs Environment scoreboard for the MMO Game EVE Online.
