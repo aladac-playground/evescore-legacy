@@ -17,6 +17,7 @@ class ScansController < ApplicationController
   # GET /scans/1.json
   def show
 		if params[:current_only] == "true"
+			params[:q]={} if params[:q].blank?
 			params[:q][:system_id_eq] = request.headers["HTTP_EVE_SOLARSYSTEMID"]
 		end
     
