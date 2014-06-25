@@ -19,6 +19,7 @@ gem 'ransack'
 gem 'clockwork'
 
 group :development do
+  gem 'spring'
   gem 'ruby-progressbar'
   gem 'erb2haml'
   gem 'better_errors'
