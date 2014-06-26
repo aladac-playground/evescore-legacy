@@ -147,7 +147,6 @@ class ScansController < ApplicationController
     end
     def check_trust
       if request.headers['HTTP_EVE_TRUSTED'] == "Yes" and request.user_agent =~ /EVE-IGB$/
-        p "Trusted and IGB"
         return true
       elsif request.user_agent =~ /EVE-IGB$/
         session[:return_to] = request.url
