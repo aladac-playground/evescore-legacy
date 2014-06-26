@@ -17,6 +17,7 @@ gem 'crack'
 gem 'kaminari'
 gem 'ransack'
 gem 'clockwork'
+gem 'therubyracer'
 
 group :development do
   gem 'spring'
@@ -32,7 +33,7 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'
 end
