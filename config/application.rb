@@ -13,6 +13,7 @@ module Evescore
       g.test_framework  false, :fixture => false
       g.view_specs      false
       g.helper_specs    false
+      g.factory_girl dir: 'spec/factories'
     end
     config.generators.stylesheets = false
     config.generators.javascripts = false
