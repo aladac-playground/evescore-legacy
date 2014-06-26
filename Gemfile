@@ -19,7 +19,7 @@ gem 'ransack'
 gem 'clockwork'
 gem 'therubyracer'
 
-group :development do
+group :development, :test do
   gem 'spring'
   gem 'ruby-progressbar'
   gem 'erb2haml'
@@ -29,9 +29,6 @@ group :development do
   gem 'html2haml'
   gem 'quiet_assets'
   gem 'rails_layout'
-end
-
-group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
