@@ -21,7 +21,6 @@ gem 'therubyracer'
 
 group :development, :test do
   gem 'spring'
-  gem 'ruby-progressbar'
   gem 'erb2haml'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]

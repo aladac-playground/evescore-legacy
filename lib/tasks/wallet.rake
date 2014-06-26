@@ -6,13 +6,15 @@ namespace :wallet do
     chars=Char.all
     records=chars.count
     
+    log = Logger.new(STDOUT)
+    
     exit if records == 0
 
-    pb = ProgressBar.create(:title => "Importing WalletJournals", :starting_at => 0, :total => records, :format => '%a |%b>>%i| %p%% %t', length: 100 )
-
+    i = 0
     chars.each do |char|
+      i += 1
+      log.info "Importing [#{i} if #{records}]"
       char.wallet_import(3000)
-      pb.increment
     end
   end
 end
