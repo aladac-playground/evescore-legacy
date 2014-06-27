@@ -20,6 +20,8 @@ gem 'clockwork'
 gem 'therubyracer'
 
 group :development, :test do
+  gem 'capistrano'
+  gem 'travis'
   gem 'spring'
   gem 'erb2haml'
   gem 'better_errors'

@@ -3,3 +3,5 @@ before_script:
   - mysql -e 'create database evescore_test;'
 rvm:
   - 2.1.2
+after_success: 
+  - bundle exec cap production deploy
