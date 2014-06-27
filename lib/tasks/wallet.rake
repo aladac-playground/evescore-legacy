@@ -1,4 +1,5 @@
 namespace :wallet do
+  # TODO add character info update (corp_id, alliance_id etc)
   desc 'Import WalletRecords for all Chars from the WalletJournal API' 
   task :import do
     require "#{Rails.root}/config/boot"
