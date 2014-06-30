@@ -14,6 +14,7 @@ class Char < ActiveRecord::Base
     api.character_id = self.id
     chars = api.characters
     char = ( chars["eveapi"]["result"]["rowset"]["row"].select { |char| char["name"] == self.name } ).first
+    return false if ! char
     char = char.rubify
     self.corp_id = char[:corporation_id]
     self.corp_name = char[:corporation_name]
