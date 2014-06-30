@@ -9,6 +9,21 @@ class Char < ActiveRecord::Base
     url = "https://zkillboard.com/api/losses/no-items/no-attackers/characterID/#{self.id}/"
   end
   
+  def check
+    api = self.key.api
+    api.character_id = self.id
+    chars = api.characters
+    char = ( chars["eveapi"]["result"]["rowset"]["row"].select { |char| char["name"] == self.name } ).first
+    char = char.rubify
+    self.corp_id = char[:corporation_id]
+    self.corp_name = char[:corporation_name]
+    if char["alliance_id"].blank? == false
+      self.alliance_id = char[:alliance_id]
+      self.alliance_name = char[:alliance_name]
+    end
+    self.save
+  end
+  
   def self.import(data)
     data=data.inject({}){|row,(k,v)| row[k.to_sym] = v; row}
     

@@ -14,7 +14,10 @@ namespace :wallet do
     i = 0
     chars.each do |char|
       i += 1
-      log.info "Importing [#{i} if #{records}]"
+      log.info "== Processing [#{i} of #{records}]"
+      log.info "* Updating Character data"
+      char.check
+      log.info "* Importing Wallet Journal"
       char.wallet_import(3000)
     end
   end
