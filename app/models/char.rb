@@ -10,7 +10,13 @@ class Char < ActiveRecord::Base
   end
   
   def check
-    api = self.key.api
+    key = self.key
+    if ! key
+      self.working = false
+      self.save
+      return false
+    end
+    api = key.api
     api.character_id = self.id
     chars = api.characters
     begin
@@ -24,6 +30,8 @@ class Char < ActiveRecord::Base
       end
       self.save
     rescue 
+      self.working = false
+      self.save
       return false 
     end
   end
