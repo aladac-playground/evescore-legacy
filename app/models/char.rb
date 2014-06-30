@@ -15,17 +15,17 @@ class Char < ActiveRecord::Base
     chars = api.characters
     begin
       char = ( chars["eveapi"]["result"]["rowset"]["row"].select { |char| char["name"] == self.name } ).first
+      char = char.rubify
+      self.corp_id = char[:corporation_id]
+      self.corp_name = char[:corporation_name]
+      if char["alliance_id"].blank? == false
+        self.alliance_id = char[:alliance_id]
+        self.alliance_name = char[:alliance_name]
+      end
+      self.save
     rescue 
       return false 
     end
-    char = char.rubify
-    self.corp_id = char[:corporation_id]
-    self.corp_name = char[:corporation_name]
-    if char["alliance_id"].blank? == false
-      self.alliance_id = char[:alliance_id]
-      self.alliance_name = char[:alliance_name]
-    end
-    self.save
   end
   
   def self.import(data)
