@@ -36,6 +36,5 @@
             - ttp = "<b>#{kill.rat_name}</b><br><i>#{kill.rat_type}</i>".html_safe
             = link_to eve_image(:rat, kill.rat_id, 32, ttp), rat_path(kill.rat_id)
         %td.numeric
-          = number_with_delimiter(number_with_precision(record.amount / 100.0, precision: 0))
-          ISK
+          = number_to_isk record.amount
 
