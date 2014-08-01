@@ -21,6 +21,8 @@ gem 'therubyracer'
 
 group :development, :test do
   gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'travis'
   gem 'spring'
   gem 'erb2haml'
