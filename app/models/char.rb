@@ -28,6 +28,7 @@ class Char < ActiveRecord::Base
         self.alliance_id = char[:alliance_id]
         self.alliance_name = char[:alliance_name]
       end
+      self.working = true
       self.save
     rescue 
       self.working = false
